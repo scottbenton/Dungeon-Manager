@@ -15,9 +15,9 @@ export function Header(props: PropsWithChildren) {
           <Link href={"/images"}>
             <a className={"nav-link"}>Images</a>
           </Link>
-          <Link href={"/music"}>
+          {/* <Link href={"/music"}>
             <a className={"nav-link"}>Music</a>
-          </Link>
+          </Link> */}
           {user && (
             <button className={"nav-link"} onClick={() => signOut()}>
               Logout
