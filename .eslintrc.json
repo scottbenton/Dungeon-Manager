@@ -1,0 +1,62 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "prettier",
+    "plugin:node/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "ignorePatterns": ["vite.config.ts"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["prettier", "@typescript-eslint"],
+  "root": true,
+  "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars": "off",
+    "no-console": "warn",
+    "func-names": "off",
+    "object-shorthand": "off",
+    "class-methods-use-this": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-curly-brace-presence": "off",
+    "react/react-in-jsx-scope": "off",
+    "node/no-missing-import": "off",
+    "import/extensions": "off",
+    "node/no-unsupported-features/es-syntax": "off",
+    "react/no-unused-prop-types": "warn",
+    "react/require-default-props": "warn",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "no-param-reassign": ["error", { "props": false }],
+    "react/function-component-definition": "off",
+    "no-bitwise": "off",
+    "no-plusplus": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-nested-ternary": "off",
+    "react/jsx-no-useless-fragment": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {}
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    }
+  }
+}
