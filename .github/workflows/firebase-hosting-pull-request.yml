@@ -7,17 +7,18 @@ jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
+    env:
+      VITE_FIREBASE_APIKEY: '${{secrets.FIREBASE_APIKEY}}'
+      VITE_FIREBASE_AUTHDOMAIN: '${{secrets.FIREBASE_AUTHDOMAIN}}'
+      VITE_FIREBASE_PROJECTID: '${{secrets.FIREBASE_PROJECTID}}'
+      VITE_FIREBASE_STORAGEBUCKET: '${{secrets.FIREBASE_STORAGEBUCKET}}'
+      VITE_FIREBASE_MESSAGINGID: '${{secrets.FIREBASE_MESSAGINGID}}'
+      VITE_FIREBASE_APPID: '${{secrets.FIREBASE_APPID}}'
+      VITE_LOGGER_KEY: '${{secrets.LOGGER_KEY}}'
     steps:
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
-        env:
-          VITE_FIREBASE_APIKEY: '${{secrets.FIREBASE_APIKEY}}'
-          VITE_FIREBASE_AUTHDOMAIN: '${{secrets.FIREBASE_AUTHDOMAIN}}'
-          VITE_FIREBASE_PROJECTID: '${{secrets.FIREBASE_PROJECTID}}'
-          VITE_FIREBASE_STORAGEBUCKET: '${{secrets.FIREBASE_STORAGEBUCKET}}'
-          VITE_FIREBASE_MESSAGINGID: '${{secrets.FIREBASE_MESSAGINGID}}'
-          VITE_FIREBASE_APPID: '${{secrets.FIREBASE_APPID}}'
-          VITE_LOGGER_KEY: '${{secrets.LOGGER_KEY}}'
+      - run: echo ${{VITE_FIREBASE_APIKEY}}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
