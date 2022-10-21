@@ -18,3 +18,11 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DND_HELPER_28999 }}'
           channelId: live
           projectId: dnd-helper-28999
+        env:
+          VITE_FIREBASE_APIKEY: '${{secrets.FIREBASE_APIKEY}}'
+          VITE_FIREBASE_AUTHDOMAIN: '${{secrets.FIREBASE_AUTHDOMAIN}}'
+          VITE_FIREBASE_PROJECTID: '${{secrets.FIREBASE_PROJECTID}}'
+          VITE_FIREBASE_STORAGEBUCKET: '${{secrets.FIREBASE_STORAGEBUCKET}}'
+          VITE_FIREBASE_MESSAGINGID: '${{secrets.FIREBASE_MESSAGINGID}}'
+          VITE_FIREBASE_APPID: '${{secrets.FIREBASE_APPID}}'
+          VITE_LOGGER_KEY: '${{secrets.LOGGER_KEY}}'
