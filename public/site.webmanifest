@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Dungeon Manager",
+    "short_name": "Dungeon Manager",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
