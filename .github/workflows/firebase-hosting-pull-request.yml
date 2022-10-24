@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
-      - run: echo "APIKEY: $VITE_FIREBASE_APIKEY"
+      - run: echo 'API KEY - $VITE_FIREBASE_APIKEY'
       - run: echo ${{ secrets.FIREBASE_APIKEY }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
