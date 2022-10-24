@@ -11,5 +11,8 @@ export const ViewerLinkContainer = styled('div', {
       width: '$s-5',
       marginLeft: '$s-2',
     },
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
 });
