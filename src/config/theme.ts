@@ -88,6 +88,7 @@ export const { styled, css, createTheme, globalCss } = createStitches({
       'gray-800': '#1e293b',
       'gray-900': '#0f172a',
       'surface-gray-transparent': '#00001add',
+      'surface-gray-transparent-light': '#64748b60',
       'surface-background': '$gray-100',
       'surface-foreground': '$white',
       'border-neutral': '$gray-300',
@@ -295,6 +296,9 @@ export const { styled, css, createTheme, globalCss } = createStitches({
       30: 30,
       40: 40,
       50: 50,
+      overlay: 500,
+      menu: 800,
+      modal: 1000,
       auto: 'auto',
     },
     transitions: {

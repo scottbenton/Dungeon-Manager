@@ -1,5 +1,5 @@
 import { CSS } from '@stitches/react';
-import { Button, ButtonProps } from '../Button/Button';
+import { Button, ButtonProps } from '../Button';
 import { Text } from '../Text';
 import { EmptyStateContainer } from './EmptyState.styles';
 

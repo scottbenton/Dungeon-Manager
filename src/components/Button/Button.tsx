@@ -1,5 +1,11 @@
 import { CSS, VariantProps } from '@stitches/react';
-import { MouseEvent, MouseEventHandler, PropsWithChildren } from 'react';
+import {
+  MouseEvent,
+  MouseEventHandler,
+  PropsWithChildren,
+  MutableRefObject,
+  forwardRef,
+} from 'react';
 import { Link } from 'react-router-dom';
 import { Loader } from '../Loader';
 import { StyledButton } from './Button.styles';
@@ -17,7 +23,10 @@ export interface ButtonProps
   css?: CSS;
 }
 
-export function Button(props: ButtonProps): JSX.Element {
+export const Button = forwardRef<
+  HTMLAnchorElement | HTMLButtonElement,
+  ButtonProps
+>((props, ref) => {
   const {
     children,
     startIcon,
@@ -36,7 +45,13 @@ export function Button(props: ButtonProps): JSX.Element {
 
   if (href) {
     return (
-      <StyledButton as={Link} to={href} css={css} {...styleProps}>
+      <StyledButton
+        as={Link}
+        to={href}
+        css={css}
+        ref={ref as MutableRefObject<HTMLAnchorElement>}
+        {...styleProps}
+      >
         {SI && (
           <span className={'startIcon'}>
             <SI />
@@ -64,6 +79,7 @@ export function Button(props: ButtonProps): JSX.Element {
       disabled={disabled || loading}
       type={type}
       css={css}
+      ref={ref as MutableRefObject<HTMLButtonElement>}
     >
       {SI && (
         <span className={'startIcon'}>
@@ -79,7 +95,7 @@ export function Button(props: ButtonProps): JSX.Element {
       )}
     </StyledButton>
   );
-}
+});
 
 Button.defaultProps = {
   startIcon: undefined,

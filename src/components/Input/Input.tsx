@@ -30,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <Text
           as={'label'}
           variant={'label'}
-          color={'textSecondary'}
+          textColor={'textSecondary'}
           htmlFor={id}
           css={
             hideLabel

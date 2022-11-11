@@ -11,9 +11,9 @@ export const EmptyStateContainer = styled('div', {
   height: '$s-72',
   marginY: '$s-8',
 
-  '&>h2': {
+  '&>:not(svg)': {
     position: 'relative',
-    zIndex: 20,
+    zIndex: '$10',
   },
   '&>svg': {
     width: '$s-64',
@@ -23,5 +23,8 @@ export const EmptyStateContainer = styled('div', {
       color: '$brand-900',
       opacity: 0.5,
     },
+  },
+  '&>button, &>a': {
+    marginTop: '$s-4',
   },
 });

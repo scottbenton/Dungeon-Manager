@@ -6,7 +6,7 @@ import {
   ErrorPageContainer,
   CallToAction,
 } from './ErrorPage.styles';
-import { ButtonProps } from '../Button/Button';
+import { ButtonProps } from '../Button';
 
 export interface ErrorPageProps {
   title: string;
