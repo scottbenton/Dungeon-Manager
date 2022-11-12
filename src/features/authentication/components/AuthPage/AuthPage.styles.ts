@@ -49,7 +49,6 @@ export const DungeonManagerLogo = styled('div', {
   '&>img': {
     width: '$s-10',
     marginRight: '$s-4',
-    marginBottom: '$s-2',
   },
 });
 

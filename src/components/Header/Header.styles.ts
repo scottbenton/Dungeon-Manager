@@ -19,16 +19,17 @@ export const LogoContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
   '&>img': {
-    height: '$s-12',
-    width: '$s-12',
+    height: '$s-10',
+    width: '$s-10',
   },
   '&>span': {
     fontFamily: '$title',
     fontSize: '$text-xl',
-    letterSpacing: '$tracking-tighter',
+    letterSpacing: '$tracking-wide',
     color: '$text-brand-primary',
-    marginLeft: '$s-3',
+    marginLeft: '$s-2',
   },
+  paddingY: '$s-1',
 });
 
 export const Navigation = styled('nav', {

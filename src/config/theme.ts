@@ -196,7 +196,7 @@ export const { styled, css, createTheme, globalCss } = createStitches({
       'text-9xl': '8rem',
     },
     fonts: {
-      title: 'Neucha, Georgia, Cambria, "Times New Roman", Times, serif',
+      title: 'Staatliches, Georgia, Cambria, "Times New Roman", Times, serif',
       body: 'InterVariable, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
     },
     fontWeights: {

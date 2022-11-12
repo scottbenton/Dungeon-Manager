@@ -56,8 +56,8 @@ export function AuthPage(props: AuthPageProps): JSX.Element {
           <img src={dungeonManagerIconSrc} alt={'Dungeon Manager Icon'} />
           <Text
             textColor={'white'}
-            variant={'h4'}
-            css={{ fontFamily: '$title' }}
+            variant={'h3'}
+            css={{ fontFamily: '$title', letterSpacing: '$tracking-wide' }}
           >
             Dungeon Manager
           </Text>
@@ -95,11 +95,11 @@ export function AuthPage(props: AuthPageProps): JSX.Element {
             </FeatureIcon>
             <div>
               <Text textColor={'white'} variant={'h5'}>
-                Music Control (Coming Soon)
+                Music Control
               </Text>
               <Text textColor={'white'} variant={'caption'}>
-                Connect with Spotify or Youtube to control music from the
-                application.
+                Connect with Youtube or Spotify (coming soon) to control your
+                music.
               </Text>
             </div>
           </Feature>
