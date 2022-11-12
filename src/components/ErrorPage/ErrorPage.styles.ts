@@ -1,5 +1,5 @@
 import { styled } from '@/config/theme';
-import { Button } from '../Button/Button';
+import { Button } from '../Button';
 
 export const ErrorPageContainer = styled('div', {
   maxWidth: '$md',

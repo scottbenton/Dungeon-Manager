@@ -27,6 +27,7 @@ export const MenuContent = styled(DropdownMenuContent, {
   paddingY: '$s-2',
   borderWidth: '$1',
   marginRight: '$s-3',
+  zIndex: '$menu',
 });
 
 // flex items-center w-full p-2 text-sm text-gray-100 dark:text-gray-600 hover:bg-smoke-lightest

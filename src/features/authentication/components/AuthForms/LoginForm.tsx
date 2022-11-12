@@ -1,5 +1,5 @@
 import { Alert } from '@/components/Alert';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { PasswordInput } from '@/components/Input/PasswordInput';
 import { Logger } from '@/lib/logger';

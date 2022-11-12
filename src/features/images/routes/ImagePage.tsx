@@ -51,7 +51,7 @@ export default function ImagePage() {
 
   return (
     <>
-      <Text variant={'overline'} as={'h1'}>
+      <Text variant={'pageTitle'} as={'h1'}>
         Image Sharing
       </Text>
       <Text as={'p'} textColor={'textSecondary'} css={{ marginY: '$s-4' }}>

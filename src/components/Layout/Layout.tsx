@@ -3,6 +3,7 @@ import { useReduxSelector } from '@/hooks/reduxHooks';
 import { THEMES } from '@/stores/SettingsState';
 import { PropsWithChildren } from 'react';
 import { VariantProps } from '@stitches/react';
+import { HeaderMusicPlayer } from '@/features/music/components/HeaderMusicPlayer';
 
 import { Header } from '../Header';
 import { Page, PageContent } from './Layout.styles';
@@ -22,6 +23,7 @@ export function Layout(props: LayoutProps): JSX.Element {
     >
       <ErrorBoundary>
         {!fullscreen && <Header />}
+        <HeaderMusicPlayer />
         <PageContent {...layoutProps}>{children}</PageContent>
       </ErrorBoundary>
     </Page>

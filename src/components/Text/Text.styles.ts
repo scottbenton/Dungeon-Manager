@@ -57,6 +57,13 @@ export const Text = styled('p', {
         lineHeight: '1.25rem',
         fontWeight: '$medium',
       },
+      pageTitle: {
+        fontSize: '$text-base',
+        lineHeight: '1.5rem',
+        fontWeight: '$semibold',
+        textTransform: 'uppercase',
+        letterSpacing: '$tracking-wide',
+      },
     },
     textColor: {
       textPrimary: {

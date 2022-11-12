@@ -13,6 +13,7 @@ export const PageContent = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   flexGrow: 1,
+  position: 'relative',
   variants: {
     fullscreen: {
       false: {

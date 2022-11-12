@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Button';
 import { Text } from '@/components/Text';
 import { useReduxSelector } from '@/hooks/reduxHooks';
 import { useEffect, useRef, useState } from 'react';

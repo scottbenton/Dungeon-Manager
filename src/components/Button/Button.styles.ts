@@ -9,10 +9,6 @@ export const StyledButton = styled('button', {
   transitionDuration: '$transitions$duration-150',
   transitionTimingFunction: '$transitions$ease-in-out',
 
-  '&>span>svg': {
-    width: '$s-5',
-  },
-
   '&>span.label': {
     position: 'relative',
   },
@@ -24,21 +20,28 @@ export const StyledButton = styled('button', {
         paddingY: '$s-1',
         fontSize: '$text-sm',
         '&>span>svg': {
-          width: '$s-4',
+          width: '$s-5',
         },
         $$iconSpace: '$space$s-1',
+        $$iconSize: '$space$s-5',
       },
       md: {
         paddingX: '$s-4',
         paddingY: '$s-2',
         fontSize: '$text-base',
         $$iconSpace: '$space$s-2',
+        '&>span>svg': {
+          width: '$s-5',
+        },
       },
       lg: {
-        paddingX: '$s-7',
-        paddingY: '$s-4',
+        paddingX: '$s-6',
+        paddingY: '$s-3',
         fontSize: '$text-lg',
         $$iconSpace: '$space$s-3',
+        '&>span>svg': {
+          width: '$s-6',
+        },
       },
     },
     color: {
@@ -104,33 +107,14 @@ export const StyledButton = styled('button', {
         },
       },
       secondary: {
-        color: '$$textColor',
-        position: 'relative',
-        borderColor: '$$surfaceDarkHover',
-        '&::before': {
-          content: '',
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
-          left: 0,
-          borderWidth: '$1',
-          borderRadius: '$xl',
-          borderColor: '$$focusColor',
-          opacity: 0.5,
-          transitionProperty: '$transitions$transition-opacity',
-          transitionDuration: '$transitions$duration-150',
-          transitionTimingFunction: '$transitions$ease-in-out',
+        backgroundColor: '$$surfaceLight',
+        color: '$$surfaceDark',
+        '&:hover:enabled': {
+          backgroundColor: '$$surfaceLightHover',
         },
-
-        '&:hover:enabled::before': {
-          opacity: 1,
-        },
-
         '&:disabled': {
-          color: '$text-gray-tertiary',
-          '&::before': {
-            borderColor: '$gray-400',
-          },
+          backgroundColor: '$gray-200',
+          color: '$gray-500',
         },
       },
       tertiary: {
@@ -183,6 +167,101 @@ export const StyledButton = styled('button', {
     marginLeft: '$$iconSpace',
   },
 
+  '&:focus': {
+    outline: 'none',
+    boxShadow:
+      '$$focusColor 0px 0px 0px 4px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px',
+  },
+});
+
+export const StyledIconButton = styled('button', {
+  display: 'flex',
+  alignItems: 'center',
+
+  borderRadius: '$full',
+
+  transitionProperty: '$transitions$transition-color',
+  transitionDuration: '$transitions$duration-150',
+  transitionTimingFunction: '$transitions$ease-in-out',
+
+  variants: {
+    size: {
+      md: {
+        padding: '$s-2',
+        '&>svg': {
+          width: '$s-5',
+          height: '$s-5',
+        },
+      },
+      lg: {
+        padding: '$s-2',
+        '&>svg': {
+          width: '$s-6',
+          height: '$s-6',
+        },
+      },
+    },
+    color: {
+      brand: {
+        $$textColor: '$colors$text-brand-secondary',
+        $$surfaceDark: '$colors$brand-700',
+        $$surfaceDarkHover: '$colors$brand-800',
+        $$surfaceLight: '$colors$brand-200',
+        $$surfaceLightHover: '$colors$brand-300',
+        $$focusColor: '$colors$brand-400',
+      },
+      neutral: {
+        $$textColor: '$colors$text-gray-secondary',
+        $$surfaceDark: '$colors$gray-700',
+        $$surfaceDarkHover: '$colors$gray-800',
+        $$surfaceLight: '$colors$gray-200',
+        $$surfaceLightHover: '$colors$gray-300',
+        $$focusColor: '$colors$gray-400',
+      },
+      error: {
+        $$textColor: '$colors$text-error-secondary',
+        $$surfaceDark: '$colors$error-700',
+        $$surfaceDarkHover: '$colors$error-800',
+        $$surfaceLight: '$colors$error-200',
+        $$surfaceLightHover: '$colors$error-300',
+        $$focusColor: '$colors$error-400',
+      },
+      warning: {
+        $$textColor: '$colors$text-warning-secondary',
+        $$surfaceDark: '$colors$warning-700',
+        $$surfaceDarkHover: '$colors$warning-800',
+        $$surfaceLight: '$colors$warning-200',
+        $$surfaceLightHover: '$colors$warning-300',
+        $$focusColor: '$colors$warning-400',
+      },
+      info: {
+        $$textColor: '$colors$text-info-secondary',
+        $$surfaceDark: '$colors$info-700',
+        $$surfaceDarkHover: '$colors$info-800',
+        $$surfaceLight: '$colors$info-200',
+        $$surfaceLightHover: '$colors$info-300',
+        $$focusColor: '$colors$info-400',
+      },
+      success: {
+        $$textColor: '$colors$text-success-secondary',
+        $$surfaceDark: '$colors$success-700',
+        $$surfaceDarkHover: '$colors$success-800',
+        $$surfaceLight: '$colors$success-200',
+        $$surfaceLightHover: '$colors$success-300',
+        $$focusColor: '$colors$success-400',
+      },
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+    color: 'neutral',
+  },
+
+  color: '$$surfaceDark',
+  backgroundColor: '$$surfaceLight',
+  '&:hover': {
+    backgroundColor: '$$surfaceLightHover',
+  },
   '&:focus': {
     outline: 'none',
     boxShadow:

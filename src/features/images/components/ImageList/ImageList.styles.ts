@@ -1,7 +1,5 @@
-import { Card } from '@/components/Card';
 import { styled } from '@/config/theme';
 
-// "gap-5 mt-5"}
 export const ImageGrid = styled('div', {
   display: 'grid',
   gap: '$s-5',

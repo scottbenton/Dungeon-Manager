@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { PasswordInput } from '@/components/Input/PasswordInput';
 import { useForm } from 'react-hook-form';

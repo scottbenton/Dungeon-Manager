@@ -25,6 +25,11 @@ export const routeConfig: { [path in ROUTES]: IRouteConfig } = {
       fullscreen: true,
     },
   },
+  [ROUTES.MUSIC]: {
+    path: routePaths[ROUTES.MUSIC],
+    Component: React.lazy(() => import('@/features/music/routes/MusicPage')),
+    requiresAuth: true,
+  },
   [ROUTES.LOGIN]: {
     path: routePaths[ROUTES.LOGIN],
     Component: React.lazy(

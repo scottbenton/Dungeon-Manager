@@ -1,4 +1,3 @@
-import { ImageItemObject } from '../../types/ImageItemObject';
 import { ImageCard } from '../ImageCard';
 import { ImageGrid } from './ImageList.styles';
 

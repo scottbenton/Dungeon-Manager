@@ -1,6 +1,7 @@
 import DungeonManagerIcon from '@/assets/DungeonManagerIcon.svg';
 import { NavLink } from 'react-router-dom';
 import ImagesIcon from '@heroicons/react/20/solid/PhotoIcon';
+import MusicIcon from '@heroicons/react/20/solid/MusicalNoteIcon';
 
 import { Container, LogoContainer, Navigation, Surface } from './Header.styles';
 import { AvatarMenu } from './AvatarMenu';
@@ -20,6 +21,13 @@ export function Header(): JSX.Element {
           >
             <ImagesIcon />
             Images
+          </NavLink>
+          <NavLink
+            to={'/music'}
+            className={({ isActive }) => (isActive ? 'active' : undefined)}
+          >
+            <MusicIcon />
+            Music
           </NavLink>
         </Navigation>
         <AvatarMenu />
