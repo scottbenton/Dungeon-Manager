@@ -1,6 +1,6 @@
 import { https, logger, config } from 'firebase-functions';
 import { randomBytes } from 'node:crypto';
-import { encryptRefreshToken } from './helpers';
+import { decryptRefreshToken, encryptRefreshToken } from './helpers';
 import fetch from 'node-fetch';
 
 // // Start writing Firebase Functions
@@ -11,7 +11,7 @@ import fetch from 'node-fetch';
 //   response.send("Hello from Firebase!");
 // });
 
-exports.getRedirectUrl = https.onCall((data, context) => {
+exports.getRedirectUrl = https.onCall((data) => {
   const state = randomBytes(20).toString('hex');
   logger.log('Setting verification state:', state);
   const authUrl = new URL('https://accounts.spotify.com/authorize');
@@ -31,7 +31,7 @@ exports.getRedirectUrl = https.onCall((data, context) => {
   };
 });
 
-exports.completeLogin = https.onCall(async (data, context) => {
+exports.completeLogin = https.onCall(async (data) => {
   const { code, redirectUri } = data;
 
   if (!code) {
@@ -70,5 +70,45 @@ exports.completeLogin = https.onCall(async (data, context) => {
     logger.error(response);
     const text = await response.text();
     throw new https.HttpsError('internal', text);
+  }
+});
+
+exports.getAccessToken = https.onCall(async (data) => {
+  const encryptedRefreshToken = data.refreshToken;
+
+  if (!encryptedRefreshToken) {
+    throw new https.HttpsError('invalid-argument', 'Refresh token not present');
+  }
+
+  const refreshToken = decryptRefreshToken(
+    encryptedRefreshToken,
+    config().spotify.refresh_token_passphrase
+  );
+
+  const params = new URLSearchParams();
+  params.append('grant_type', 'refresh_token');
+  params.append('refresh_token', refreshToken);
+  params.append('client_id', config().spotify.client_id);
+  params.append('client_secret', config().spotify.client_secret);
+
+  const response = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    body: params,
+  });
+
+  if (response.ok) {
+    const body = await response.json();
+    if (body.access_token) {
+      return { accessToken: body.access_token };
+    } else {
+      logger.error(body);
+      throw new https.HttpsError(
+        'internal',
+        'Access token not present in response'
+      );
+    }
+  } else {
+    const errorText = await response.text();
+    throw new https.HttpsError('internal', errorText);
   }
 });
