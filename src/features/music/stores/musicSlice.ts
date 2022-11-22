@@ -13,6 +13,17 @@ import { SpotifyMusicDocument } from '../types/SpotifyMusicDocument';
 import { YoutubeMusicDocument } from '../types/YoutubeMusicDocument';
 import { MusicState } from './MusicState';
 
+function updateLocalRefreshToken(refreshToken?: string) {
+  if (refreshToken) {
+    localStorage.setItem('spotify.refresh_token', refreshToken);
+  } else {
+    localStorage.removeItem('spotify.refresh_token');
+  }
+}
+function getLocalRefreshToken() {
+  return localStorage.getItem('spotify.refresh_token');
+}
+
 const initialState: MusicState = {
   musicItems: {
     spotify: {},
@@ -22,6 +33,10 @@ const initialState: MusicState = {
   isLoading: true,
   playbackState: {
     status: PlaybackStatus.NotSelected,
+  },
+  spotifyAuth: {
+    isLoading: false,
+    refreshToken: getLocalRefreshToken() || undefined,
   },
 };
 
@@ -111,6 +126,36 @@ export const musicSlice = createSlice({
       const status = action.payload;
       state.playbackState.status = status;
     },
+    addSpotifyTokens(
+      state,
+      action: PayloadAction<{ refreshToken: string; accessToken: string }>
+    ) {
+      const { refreshToken, accessToken } = action.payload;
+      updateLocalRefreshToken(refreshToken);
+
+      state.spotifyAuth = {
+        isLoading: false,
+        refreshToken,
+        accessToken,
+      };
+    },
+    clearSpotifyTokens(state) {
+      updateLocalRefreshToken(undefined);
+      state.spotifyAuth.accessToken = undefined;
+      state.spotifyAuth.refreshToken = undefined;
+      state.spotifyAuth.isLoading = false;
+    },
+    updateSpotifyAccessToken(state, action: PayloadAction<string | undefined>) {
+      const accessToken = action.payload;
+      state.spotifyAuth.isLoading = !!accessToken;
+      state.spotifyAuth.accessToken = accessToken;
+    },
+    updateSpotifyError(state, action: PayloadAction<string | undefined>) {
+      state.spotifyAuth.errorMessage = action.payload;
+    },
+    updateSpotifyLoading(state, action: PayloadAction<boolean>) {
+      state.spotifyAuth.isLoading = action.payload;
+    },
   },
 });
 
@@ -123,6 +168,11 @@ export const {
   updateError,
   startPlayback,
   updatePlaybackStatus,
+  addSpotifyTokens,
+  clearSpotifyTokens,
+  updateSpotifyAccessToken,
+  updateSpotifyError,
+  updateSpotifyLoading,
 } = musicSlice.actions;
 
 export const createMusicListener: ThunkAction<

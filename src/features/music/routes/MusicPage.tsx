@@ -6,6 +6,7 @@ import AddIcon from '@heroicons/react/24/outline/PlusIcon';
 import { createMusicListener } from '../stores/musicSlice';
 import { MusicCardList } from '../components/MusicCardList';
 import { AddMusicDialog } from '../components/AddMusicDialog';
+import { SpotifyAuthSection } from '../components/SpotifyAuthSection';
 
 export default function MusicPage() {
   const dispatch = useReduxDispatch();
@@ -31,6 +32,7 @@ export default function MusicPage() {
         {/* Organize your music using tags to quickly find the right music for the
         moment. */}
       </Text>
+      <SpotifyAuthSection />
       <MusicCardList openAddMusicDialog={() => setAddDialogOpen(true)} />
       <Button
         rounded

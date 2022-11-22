@@ -19,4 +19,10 @@ export interface MusicState {
     item?: SpotifyMusicItem | YoutubeMusicItem;
     status: PlaybackStatus;
   };
+  spotifyAuth: {
+    isLoading: boolean;
+    refreshToken?: string;
+    accessToken?: string;
+    errorMessage?: string;
+  };
 }
