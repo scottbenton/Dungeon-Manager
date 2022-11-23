@@ -5,6 +5,7 @@ import {
   PayloadAction,
   ThunkAction,
 } from '@reduxjs/toolkit';
+import { getSpotifyItemDetails } from '../api/getSpotifyItemDetails';
 import { subscribeToMusicItems } from '../api/subscribeToMusicItems';
 import { BaseMusicItem } from '../types/BaseMusicItem';
 import { MusicSource } from '../types/MusicSource';
@@ -92,16 +93,18 @@ export const musicSlice = createSlice({
       const { source, id } = action.payload;
       delete state.musicItems[source][id];
     },
-    updateMusicItemImage(
+    updateMusicItemLabelAndImage(
       state,
       action: PayloadAction<{
         id: string;
-        item: SpotifyMusicDocument | YoutubeMusicDocument;
+        item: SpotifyMusicDocument;
+        label: string;
         url: string;
       }>
     ) {
-      const { id, item, url } = action.payload;
+      const { id, item, url, label } = action.payload;
       state.musicItems[item.source][id].imageUrl = url;
+      state.musicItems[item.source][id].label = label;
     },
     updateError(state, action: PayloadAction<string | undefined>) {
       state.error = action.payload;
@@ -164,7 +167,7 @@ export const {
   setMusicItems,
   addOrUpdateMusicItem,
   deleteMusicItem,
-  updateMusicItemImage,
+  updateMusicItemLabelAndImage,
   updateError,
   startPlayback,
   updatePlaybackStatus,
@@ -197,6 +200,16 @@ export const createMusicListener: ThunkAction<
       dispatch(deleteMusicItem({ id, source: MusicSource.Spotify }));
     },
     loadImage: (id: string, doc: SpotifyMusicDocument) => {
+      getSpotifyItemDetails(doc).then(({ url, label }) => {
+        dispatch(
+          updateMusicItemLabelAndImage({
+            id,
+            item: doc,
+            label,
+            url,
+          })
+        );
+      });
       console.debug(id);
     },
   });

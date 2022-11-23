@@ -8,10 +8,10 @@ import * as yup from 'yup';
 import CreatePlaylistIcon from '@heroicons/react/20/solid/PlusIcon';
 import { useReduxSelector } from '@/hooks/reduxHooks';
 import { FormButtonContainer, StyledForm } from './AddMusicDialog.styles';
-import { addMusicItem } from '../api/addMusicItem';
-import { MusicSource } from '../types/MusicSource';
-import { YoutubeMusicDocument } from '../types/YoutubeMusicDocument';
-import { parseYoutubeURL } from '../utils/parseYoutubeURL';
+import { addMusicItem } from '../../api/addMusicItem';
+import { MusicSource } from '../../types/MusicSource';
+import { YoutubeMusicDocument } from '../../types/YoutubeMusicDocument';
+import { parseYoutubeURL } from '../../utils/parseYoutubeURL';
 
 export interface AddYoutubePlaylistFormProps {
   onCompletion: () => void;

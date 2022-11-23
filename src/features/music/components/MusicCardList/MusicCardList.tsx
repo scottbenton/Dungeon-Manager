@@ -68,6 +68,28 @@ export function MusicCardList(props: MusicCardListProps) {
           />
         ))}
       </CardGrid>
+      <Text
+        textColor={'textSecondary'}
+        variant={'overline'}
+        css={{ marginTop: '$s-8' }}
+      >
+        Spotify Music
+      </Text>
+      <CardGrid
+        columns={{
+          '@sm': 2,
+          '@md': 3,
+        }}
+      >
+        {Object.keys(items.spotify).map((key) => (
+          <MusicCard
+            key={key}
+            item={items.spotify[key]}
+            isPlaying={currentMusicId === items.spotify[key].id}
+            handlePlay={() => handlePlay(key, MusicSource.Spotify)}
+          />
+        ))}
+      </CardGrid>
     </>
   );
 }
