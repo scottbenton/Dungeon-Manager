@@ -32,9 +32,7 @@ export function getSpotifyItemDetails(item: SpotifyMusicDocument): Promise<{
         break;
       case SpotifyMusicTypes.Song:
         spotifyApi.get(`/tracks/${item.id}`).then((response) => {
-          console.debug(response.data.name, response.data.album.images[0]?.url);
           if (response.data && response.data.name) {
-            console.debug('RESOLVING');
             resolve({
               label: response.data.name,
               url: response.data.album.images[0]?.url,

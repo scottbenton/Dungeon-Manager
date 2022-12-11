@@ -200,10 +200,8 @@ export const createMusicListener: ThunkAction<
       dispatch(deleteMusicItem({ id, source: MusicSource.Spotify }));
     },
     loadImage: (id: string, doc: SpotifyMusicDocument) => {
-      console.debug('LOADING: ', id);
       getSpotifyItemDetails(doc)
         .then(({ url, label }) => {
-          console.debug('ADDING:', url, label);
           dispatch(
             updateMusicItemLabelAndImage({
               id,
@@ -237,9 +235,6 @@ export const createMusicListener: ThunkAction<
     },
     deleteMusicItem: (id: string) => {
       dispatch(deleteMusicItem({ id, source: MusicSource.Youtube }));
-    },
-    loadImage: (id: string, doc: YoutubeMusicDocument) => {
-      console.debug(id);
     },
   });
 

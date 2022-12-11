@@ -7,6 +7,7 @@ import { MusicCard } from './MusicCard';
 import { CardGrid } from './MusicCardList.styles';
 import { MusicSource } from '../../types/MusicSource';
 import { startPlayback } from '../../stores/musicSlice';
+import { SpotifyAuthSection } from '../SpotifyAuthSection';
 
 export interface MusicCardListProps {
   openAddMusicDialog: () => void;
@@ -15,10 +16,12 @@ export interface MusicCardListProps {
 export function MusicCardList(props: MusicCardListProps) {
   const { openAddMusicDialog } = props;
 
-  const { items, currentMusicId } = useReduxSelector((state) => ({
-    items: state.music.musicItems,
-    currentMusicId: state.music.playbackState.item?.id,
-  }));
+  const { items, currentMusicId, isAuthenticatedWithSpotify } =
+    useReduxSelector((state) => ({
+      items: state.music.musicItems,
+      currentMusicId: state.music.playbackState.item?.id,
+      isAuthenticatedWithSpotify: !!state.music.spotifyAuth.refreshToken,
+    }));
   const dispatch = useReduxDispatch();
 
   const handlePlay = (id: string, source: MusicSource) => {
@@ -75,21 +78,25 @@ export function MusicCardList(props: MusicCardListProps) {
       >
         Spotify Music
       </Text>
-      <CardGrid
-        columns={{
-          '@sm': 2,
-          '@md': 3,
-        }}
-      >
-        {Object.keys(items.spotify).map((key) => (
-          <MusicCard
-            key={key}
-            item={items.spotify[key]}
-            isPlaying={currentMusicId === items.spotify[key].id}
-            handlePlay={() => handlePlay(key, MusicSource.Spotify)}
-          />
-        ))}
-      </CardGrid>
+      {isAuthenticatedWithSpotify ? (
+        <CardGrid
+          columns={{
+            '@sm': 2,
+            '@md': 3,
+          }}
+        >
+          {Object.keys(items.spotify).map((key) => (
+            <MusicCard
+              key={key}
+              item={items.spotify[key]}
+              isPlaying={currentMusicId === items.spotify[key].id}
+              handlePlay={() => handlePlay(key, MusicSource.Spotify)}
+            />
+          ))}
+        </CardGrid>
+      ) : (
+        <SpotifyAuthSection />
+      )}
     </>
   );
 }
