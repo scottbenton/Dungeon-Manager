@@ -200,16 +200,27 @@ export const createMusicListener: ThunkAction<
       dispatch(deleteMusicItem({ id, source: MusicSource.Spotify }));
     },
     loadImage: (id: string, doc: SpotifyMusicDocument) => {
-      getSpotifyItemDetails(doc).then(({ url, label }) => {
-        dispatch(
-          updateMusicItemLabelAndImage({
-            id,
-            item: doc,
-            label,
-            url,
-          })
-        );
-      });
+      console.debug('LOADING: ', id);
+      getSpotifyItemDetails(doc)
+        .then(({ url, label }) => {
+          console.debug('ADDING:', url, label);
+          dispatch(
+            updateMusicItemLabelAndImage({
+              id,
+              item: doc,
+              label,
+              url,
+            })
+          );
+        })
+        .catch((error) => {
+          console.debug('ERROR:', error);
+          if (error.message) {
+            dispatch(updateError(error.message));
+          } else {
+            dispatch(updateError('Error fetching spotify item details'));
+          }
+        });
       console.debug(id);
     },
   });

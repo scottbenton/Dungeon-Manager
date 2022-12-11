@@ -3,7 +3,7 @@ import { useReduxDispatch } from '@/hooks/reduxHooks';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/Button';
 import AddIcon from '@heroicons/react/24/outline/PlusIcon';
-import { useSpotifyAuthInterceptor } from '@/features/hooks/useSpotifyAuthInterceptor';
+import { useSpotifyAuthInterceptor } from '@/features/music/hooks/useSpotifyAuthInterceptor';
 import { createMusicListener } from '../stores/musicSlice';
 import { MusicCardList } from '../components/MusicCardList';
 import { AddMusicDialog } from '../components/AddMusicDialog';

@@ -32,18 +32,20 @@ export function getSpotifyItemDetails(item: SpotifyMusicDocument): Promise<{
         break;
       case SpotifyMusicTypes.Song:
         spotifyApi.get(`/tracks/${item.id}`).then((response) => {
+          console.debug(response.data.name, response.data.album.images[0]?.url);
           if (response.data && response.data.name) {
+            console.debug('RESOLVING');
             resolve({
               label: response.data.name,
-              url: response.data.images[0]?.url,
+              url: response.data.album.images[0]?.url,
             });
+          } else {
+            reject(new Error(`No data: ${response.status}`));
           }
-          reject(new Error(`No data: ${response.status}`));
         });
         break;
       default:
         reject(new Error(`Invalid Type: ${item.type}`));
     }
-    reject(new Error('Failed to get item details'));
   });
 }
