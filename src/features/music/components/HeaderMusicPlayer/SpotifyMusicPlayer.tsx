@@ -95,33 +95,41 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
         </div>
       </SpotifyPlayingText>
       <ControlsSection>
-        <IconButton
-          color={'brand'}
-          disabled={!enabledControls.previous}
-          onClick={() => spotifyPlayerRef.current?.previousTrack()}
-          iconName={'play-skip-back'}
-        />
-        {status === PlaybackStatus.Playing ? (
+        {enabledControls.previous && (
           <IconButton
             color={'brand'}
-            disabled={!enabledControls.pause}
-            onClick={() => spotifyPlayerRef.current?.togglePlay()}
-            iconName={'pause'}
-          />
-        ) : (
-          <IconButton
-            color={'brand'}
-            disabled={!enabledControls.play}
-            onClick={() => spotifyPlayerRef.current?.togglePlay()}
-            iconName={'play'}
+            onClick={() => spotifyPlayerRef.current?.previousTrack()}
+            iconName={'play-skip-back'}
           />
         )}
-        <IconButton
-          color={'brand'}
-          disabled={!enabledControls.next}
-          onClick={() => spotifyPlayerRef.current?.nextTrack()}
-          iconName={'play-skip-forward'}
-        />
+        {status === PlaybackStatus.Playing ? (
+          <>
+            {enabledControls.pause && (
+              <IconButton
+                color={'brand'}
+                onClick={() => spotifyPlayerRef.current?.togglePlay()}
+                iconName={'pause'}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            {enabledControls.play && (
+              <IconButton
+                color={'brand'}
+                onClick={() => spotifyPlayerRef.current?.togglePlay()}
+                iconName={'play'}
+              />
+            )}
+          </>
+        )}
+        {enabledControls.next && (
+          <IconButton
+            color={'brand'}
+            onClick={() => spotifyPlayerRef.current?.nextTrack()}
+            iconName={'play-skip-forward'}
+          />
+        )}
       </ControlsSection>
     </StickyMusicControls>
   );
