@@ -1,8 +1,6 @@
 import { EmptyState } from '@/components/EmptyState';
 import { Text } from '@/components/Text';
 import { useReduxDispatch, useReduxSelector } from '@/hooks/reduxHooks';
-import MusicIcon from '@heroicons/react/24/outline/MusicalNoteIcon';
-import AddIcon from '@heroicons/react/20/solid/PlusIcon';
 import { MusicCard } from './MusicCard';
 import { CardGrid } from './MusicCardList.styles';
 import { MusicSource } from '../../types/MusicSource';
@@ -35,12 +33,12 @@ export function MusicCardList(props: MusicCardListProps) {
     return (
       <EmptyState
         message={'Add music to get started'}
-        Icon={MusicIcon}
+        IconEntry={'musical-notes-outline'}
         callToAction={{
           children: 'Add Music',
           color: 'brand',
           variant: 'primary',
-          endIcon: AddIcon,
+          endIcon: 'add',
           onClick: () => openAddMusicDialog(),
         }}
       />

@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import CreatePlaylistIcon from '@heroicons/react/20/solid/PlusIcon';
 import { useReduxSelector } from '@/hooks/reduxHooks';
 import { FormButtonContainer, StyledForm } from './AddMusicDialog.styles';
 import { addMusicItem } from '../../api/addMusicItem';
@@ -105,7 +104,7 @@ export function AddYoutubePlaylistForm(props: AddYoutubePlaylistFormProps) {
           color={'brand'}
           type={'submit'}
           loading={loading}
-          endIcon={CreatePlaylistIcon}
+          endIcon={'add'}
         >
           Add Music
         </Button>

@@ -1,11 +1,5 @@
 import { IconButton } from '@/components/Button/IconButton';
 import { useCallback, useEffect, useRef } from 'react';
-import {
-  PlayIcon,
-  PauseIcon,
-  ForwardIcon,
-  BackwardIcon,
-} from '@heroicons/react/20/solid';
 import { Text } from '@/components/Text';
 import { useReduxDispatch } from '@/hooks/reduxHooks';
 import { PlaybackStatus } from '../../types/PlaybackStatus';
@@ -89,17 +83,23 @@ export function YoutubeMusicPlayer(props: YoutubeMusicPlayerProps) {
         </div>
         <ControlsSection>
           {showPreviousAndNextButtons && (
-            <IconButton onClick={() => handlePrevious()} color={'brand'}>
-              <BackwardIcon />
-            </IconButton>
+            <IconButton
+              onClick={() => handlePrevious()}
+              color={'brand'}
+              iconName={'play-skip-back'}
+            />
           )}
-          <IconButton onClick={() => handlePlayPause()} color={'brand'}>
-            {status === PlaybackStatus.Playing ? <PauseIcon /> : <PlayIcon />}
-          </IconButton>
+          <IconButton
+            onClick={() => handlePlayPause()}
+            color={'brand'}
+            iconName={status === PlaybackStatus.Playing ? 'pause' : 'play'}
+          />
           {showPreviousAndNextButtons && (
-            <IconButton onClick={() => handleNext()} color={'brand'}>
-              <ForwardIcon />
-            </IconButton>
+            <IconButton
+              onClick={() => handleNext()}
+              color={'brand'}
+              iconName={'play-skip-forward'}
+            />
           )}
         </ControlsSection>
       </StickyMusicControls>

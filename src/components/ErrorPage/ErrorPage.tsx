@@ -1,4 +1,3 @@
-import ExclamationCircle from '@heroicons/react/24/outline/ExclamationCircleIcon';
 import { PageContent } from '../Layout/Layout.styles';
 import {
   ErrorPageMessage,
@@ -7,6 +6,7 @@ import {
   CallToAction,
 } from './ErrorPage.styles';
 import { ButtonProps } from '../Button';
+import { Icon } from '../Icon';
 
 export interface ErrorPageProps {
   title: string;
@@ -22,7 +22,7 @@ export function ErrorPage(props: ErrorPageProps): JSX.Element {
     <PageContent centerContent fullscreen={fullscreen}>
       <ErrorPageContainer>
         <ErrorPageTitle>
-          <ExclamationCircle />
+          <Icon name={'alert-circle'} />
           {title}
         </ErrorPageTitle>
         <ErrorPageMessage>{message}</ErrorPageMessage>

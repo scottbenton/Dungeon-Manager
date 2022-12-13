@@ -19,8 +19,8 @@ export const StyledButton = styled('button', {
         paddingX: '$s-2',
         paddingY: '$s-1',
         fontSize: '$text-sm',
-        '&>span>svg': {
-          width: '$s-5',
+        '&>span>svg, &>span>span': {
+          width: '$s-5 !important',
         },
         $$iconSpace: '$space$s-1',
         $$iconSize: '$space$s-5',
@@ -30,8 +30,8 @@ export const StyledButton = styled('button', {
         paddingY: '$s-2',
         fontSize: '$text-base',
         $$iconSpace: '$space$s-2',
-        '&>span>svg': {
-          width: '$s-5',
+        '&>span>svg, &>span>span': {
+          width: '$s-5 !important',
         },
       },
       lg: {
@@ -39,8 +39,8 @@ export const StyledButton = styled('button', {
         paddingY: '$s-3',
         fontSize: '$text-lg',
         $$iconSpace: '$space$s-3',
-        '&>span>svg': {
-          width: '$s-6',
+        '&>span>svg, &>span>span': {
+          width: '$s-6 !important',
         },
       },
     },
@@ -188,16 +188,16 @@ export const StyledIconButton = styled('button', {
     size: {
       md: {
         padding: '$s-2',
-        '&>svg': {
-          width: '$s-5',
-          height: '$s-5',
+        '&>svg, &>span': {
+          width: '$s-5 !important',
+          height: '$s-5 !important',
         },
       },
       lg: {
         padding: '$s-2',
-        '&>svg': {
-          width: '$s-6',
-          height: '$s-6',
+        '&>svg, &>span': {
+          width: '$s-6 !important',
+          height: '$s-6 !important',
         },
       },
     },
@@ -266,5 +266,9 @@ export const StyledIconButton = styled('button', {
     outline: 'none',
     boxShadow:
       '$$focusColor 0px 0px 0px 4px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px',
+  },
+  '&:disabled': {
+    backgroundColor: '$gray-200',
+    color: '$gray-500',
   },
 });

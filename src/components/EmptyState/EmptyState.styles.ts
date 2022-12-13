@@ -11,12 +11,11 @@ export const EmptyStateContainer = styled('div', {
   height: '$s-72',
   marginY: '$s-8',
 
-  '&>:not(svg)': {
+  '&>:not(span.icon)': {
     position: 'relative',
     zIndex: '$10',
   },
-  '&>svg': {
-    width: '$s-64',
+  '&>span.icon': {
     position: 'absolute',
     color: '$brand-100',
     [`.${darkTheme} &`]: {

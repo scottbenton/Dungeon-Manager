@@ -1,5 +1,4 @@
-import AddIcon from '@heroicons/react/20/solid/PlusIcon';
-import { useState } from 'react';
+import { Icon } from '@/components/Icon';
 import { Tag } from './Tag';
 import { AddTagButton, TagList as StyledList } from './Tags.styles';
 
@@ -24,7 +23,7 @@ export function TagList(props: TagListProps): JSX.Element {
       ))}
       {handleAdd && (
         <AddTagButton type={'button'}>
-          <AddIcon />
+          <Icon name={'add'} />
         </AddTagButton>
       )}
     </StyledList>

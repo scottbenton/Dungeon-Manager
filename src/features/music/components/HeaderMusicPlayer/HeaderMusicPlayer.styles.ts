@@ -28,3 +28,17 @@ export const ControlsSection = styled('div', {
     marginLeft: '$s-1',
   },
 });
+
+export const SpotifyPlayingText = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  '&>div': {
+    display: 'flex',
+    alignItems: 'center',
+    '&>img': {
+      marginRight: '$s-4',
+      width: 32,
+      height: 32,
+    },
+  },
+});

@@ -2,10 +2,6 @@ import { Button } from '@/components/Button';
 import { Text } from '@/components/Text';
 import { useReduxSelector } from '@/hooks/reduxHooks';
 import { useEffect, useRef, useState } from 'react';
-import EditIcon from '@heroicons/react/20/solid/PencilIcon';
-import DeleteIcon from '@heroicons/react/20/solid/TrashIcon';
-import SaveIcon from '@heroicons/react/20/solid/CheckIcon';
-import CancelIcon from '@heroicons/react/20/solid/XMarkIcon';
 import {
   ButtonContainer,
   ImageContainer,
@@ -75,7 +71,9 @@ export function ImageCard(props: ImageCardProps): JSX.Element {
               : `url(${item.url})`,
           }}
         >
-          {isSelected && <SelectedCheckIcon />}
+          {isSelected && (
+            <SelectedCheckIcon name={'checkmark-circle'} size={'lg'} />
+          )}
         </ImageContainer>
         {isEditing ? (
           <StyledInput
@@ -106,14 +104,14 @@ export function ImageCard(props: ImageCardProps): JSX.Element {
         {isEditing ? (
           <>
             <Button
-              startIcon={SaveIcon}
+              startIcon={'checkmark'}
               color={'success'}
               onClick={() => saveNewName()}
             >
               Save
             </Button>
             <Button
-              startIcon={CancelIcon}
+              startIcon={'close'}
               color={'neutral'}
               onClick={() => {
                 setIsEditing(false);
@@ -125,14 +123,14 @@ export function ImageCard(props: ImageCardProps): JSX.Element {
         ) : (
           <>
             <Button
-              startIcon={EditIcon}
+              startIcon={'create-outline'}
               color={'brand'}
               onClick={() => setIsEditing(true)}
             >
               Edit
             </Button>
             <Button
-              startIcon={DeleteIcon}
+              startIcon={'trash'}
               color={'error'}
               onClick={() => {
                 if (uid) {

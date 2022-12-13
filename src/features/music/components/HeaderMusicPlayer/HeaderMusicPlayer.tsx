@@ -1,6 +1,7 @@
 import { useReduxSelector } from '@/hooks/reduxHooks';
 import { MusicSource } from '../../types/MusicSource';
 import { PlaybackStatus } from '../../types/PlaybackStatus';
+import { SpotifyMusicPlayer } from './SpotifyMusicPlayer';
 import { MusicPlayerContainer } from './HeaderMusicPlayer.styles';
 import { YoutubeMusicPlayer } from './YoutubeMusicPlayer';
 
@@ -19,6 +20,9 @@ export function HeaderMusicPlayer(): JSX.Element {
       <div>
         {item.source === MusicSource.Youtube && (
           <YoutubeMusicPlayer item={item} status={status} />
+        )}
+        {item.source === MusicSource.Spotify && (
+          <SpotifyMusicPlayer item={item} status={status} />
         )}
       </div>
     </MusicPlayerContainer>

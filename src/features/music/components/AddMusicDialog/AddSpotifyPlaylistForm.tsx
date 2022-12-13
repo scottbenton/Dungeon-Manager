@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import CreatePlaylistIcon from '@heroicons/react/20/solid/PlusIcon';
 import { useReduxSelector } from '@/hooks/reduxHooks';
 import { addMusicItem } from '../../api/addMusicItem';
 import { MusicSource } from '../../types/MusicSource';
@@ -95,7 +94,7 @@ export function AddSpotifyPlaylistForm(props: AddSpotifyPlaylistFormProps) {
           color={'brand'}
           type={'submit'}
           loading={loading}
-          endIcon={CreatePlaylistIcon}
+          endIcon={'add'}
         >
           Add Music
         </Button>

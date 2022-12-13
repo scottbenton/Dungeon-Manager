@@ -2,7 +2,6 @@ import { Text } from '@/components/Text';
 import { useReduxDispatch } from '@/hooks/reduxHooks';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/Button';
-import AddIcon from '@heroicons/react/24/outline/PlusIcon';
 import { useSpotifyAuthInterceptor } from '@/features/music/hooks/useSpotifyAuthInterceptor';
 import { createMusicListener } from '../stores/musicSlice';
 import { MusicCardList } from '../components/MusicCardList';
@@ -47,7 +46,7 @@ export default function MusicPage() {
           right: '$s-4',
           boxShadow: '$md',
         }}
-        endIcon={AddIcon}
+        endIcon={'add'}
         onClick={() => setAddDialogOpen(true)}
       >
         Add Music

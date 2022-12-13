@@ -4,9 +4,8 @@ import { Text } from '@/components/Text';
 import { createImageListener } from '@/features/images/stores/imageSlice';
 import { useReduxDispatch, useReduxSelector } from '@/hooks/reduxHooks';
 import { useEffect } from 'react';
-import EmptyStateIcon from '@heroicons/react/24/outline/IdentificationIcon';
-import ViewerLinkIcon from '@heroicons/react/20/solid/LinkIcon';
 import { useDropzone } from 'react-dropzone';
+import { Icon } from '@/components/Icon';
 import { constructImageViewerPath } from '@/config/routes';
 import { Link } from 'react-router-dom';
 import { createImageItem } from '../api/createImageItem';
@@ -63,7 +62,7 @@ export default function ImagePage() {
       <ViewerLinkContainer>
         <Link to={constructImageViewerPath(uid || '')} target={'_blank'}>
           Go to Viewer
-          <ViewerLinkIcon />
+          <Icon name={'open-outline'} />
         </Link>
       </ViewerLinkContainer>
       <FileDropzone
@@ -78,7 +77,7 @@ export default function ImagePage() {
       ) : imageOrder.length === 0 ? (
         <EmptyState
           message={'Upload an image to get started'}
-          Icon={EmptyStateIcon}
+          IconEntry={'people-circle-outline'}
         />
       ) : (
         <ImageList imageOrder={imageOrder} selectedImageId={selectedImageId} />

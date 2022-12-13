@@ -25,10 +25,6 @@ export const AddTagButton = styled('button', {
     outline: 'none',
     borderColor: '$border-brand',
   },
-  '&>svg': {
-    width: '$s-5',
-    height: '$s-5',
-  },
 });
 
 export const Tag = styled('div', {
@@ -57,10 +53,6 @@ export const Tag = styled('div', {
     color: '$$tertiaryShade',
     marginLeft: '$s-1',
     marginRight: -6,
-    '&>svg': {
-      width: '$s-5',
-      height: '$s-5',
-    },
     '&:hover': {
       color: '$$tertiaryShadeHover',
     },

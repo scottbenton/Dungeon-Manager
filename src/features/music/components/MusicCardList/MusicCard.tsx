@@ -1,8 +1,6 @@
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Text } from '@/components/Text';
-import PlayIcon from '@heroicons/react/20/solid/PlayIcon';
-import PlayingIcon from '@heroicons/react/20/solid/SpeakerWaveIcon';
 import { SpotifyMusicItem } from '../../types/SpotifyMusicItem';
 import { YoutubeMusicItem } from '../../types/YoutubeMusicItem';
 import { MusicCardFooter } from './MusicCardList.styles';
@@ -41,7 +39,7 @@ export function MusicCard(props: MusicCardProps) {
           color={'brand'}
           variant={'secondary'}
           rounded
-          endIcon={isPlaying ? PlayingIcon : PlayIcon}
+          endIcon={isPlaying ? 'volume-medium' : 'play'}
           disabled={isPlaying}
           onClick={() => handlePlay()}
         >

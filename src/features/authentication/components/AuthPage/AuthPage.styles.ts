@@ -129,7 +129,7 @@ export const CardHeader = styled('div', {
     padding: '$s-2',
     marginRight: '$s-2',
     borderRadius: '$xl',
-    '&>svg': {
+    '&>span.icon': {
       width: '$s-6',
       height: '$s-6',
       color: '$text-brand-secondary',
