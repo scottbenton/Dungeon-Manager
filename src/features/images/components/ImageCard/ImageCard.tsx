@@ -60,7 +60,7 @@ export function ImageCard(props: ImageCardProps): JSX.Element {
         onMouseLeave={() => setIsHovering(false)}
         onClick={() => {
           if (uid) {
-            selectImage(uid, id);
+            selectImage(uid, isSelected ? undefined : id);
           }
         }}
       >
