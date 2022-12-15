@@ -1,9 +1,7 @@
-import { useReduxDispatch } from '@/hooks/reduxHooks';
 import { useEffect } from 'react';
 import { useIsDarkMode } from '@/hooks/useDarkMode';
 import { Text } from '@/components/Text';
 import { IconButton } from '@/components/Button/IconButton';
-import { Icon } from '@/components/Icon';
 import { spotifyApi } from '../../lib/spotifyApi';
 import { PlaybackStatus } from '../../types/PlaybackStatus';
 import { SpotifyMusicItem } from '../../types/SpotifyMusicItem';
@@ -26,11 +24,16 @@ interface SpotifyMusicPlayerProps {
 export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
   const { item, status } = props;
 
-  const dispatch = useReduxDispatch();
   const isDarkMode = useIsDarkMode();
 
-  const { spotifyPlayerRef, enabledControls, deviceId, currentTrack } =
-    useSpotifyWebPlayer();
+  const {
+    spotifyPlayerRef,
+    enabledControls,
+    deviceId,
+    currentTrack,
+    shuffle,
+    repeat,
+  } = useSpotifyWebPlayer();
 
   useEffect(() => {
     console.debug('IN PLAY USEEFFECT');
@@ -61,14 +64,11 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item, deviceId]);
 
-  console.debug(currentTrack);
   const artists =
     currentTrack?.artists.reduce((collector, artist, index, arr) => {
       if (index === arr.length - 1) return collector + artist.name;
       return `${collector} ${artist.name}, `;
     }, '') || '';
-
-  console.debug(deviceId);
 
   return (
     <StickyMusicControls>
@@ -95,6 +95,15 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
         </div>
       </SpotifyPlayingText>
       <ControlsSection>
+        <IconButton
+          color={'brand'}
+          onClick={() => {
+            repeat.handleRepeatToggle(!repeat.enabled);
+          }}
+          disabled={repeat.repeatLoading}
+          iconName={'repeat'}
+        />
+
         {enabledControls.previous && (
           <IconButton
             color={'brand'}
@@ -130,6 +139,14 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
             iconName={'play-skip-forward'}
           />
         )}
+        <IconButton
+          color={'brand'}
+          onClick={() => {
+            shuffle.handleShuffleToggle(!shuffle.enabled);
+          }}
+          disabled={shuffle.shuffleLoading}
+          iconName={'shuffle'}
+        />
       </ControlsSection>
     </StickyMusicControls>
   );

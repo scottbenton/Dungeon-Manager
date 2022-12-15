@@ -1,6 +1,7 @@
 import { useReduxDispatch } from '@/hooks/reduxHooks';
 import { store } from '@/stores/store';
 import { useEffect, useRef, useState } from 'react';
+import { spotifyApi } from '../lib/spotifyApi';
 import { updatePlaybackStatus } from '../stores/musicSlice';
 import { PlaybackStatus } from '../types/PlaybackStatus';
 
@@ -23,6 +24,12 @@ export function useSpotifyWebPlayer() {
     previous: false,
     next: false,
   });
+
+  const [shuffleEnabled, setShuffleEnabled] = useState<boolean>(false);
+  const [shuffleLoading, setShuffleLoading] = useState<boolean>(false);
+
+  const [repeatEnabled, setRepeatEnabled] = useState<boolean>(false);
+  const [repeatLoading, setRepeatLoading] = useState<boolean>(false);
 
   useEffect(() => {
     console.debug('In spotify setup useEffect');
@@ -70,7 +77,13 @@ export function useSpotifyWebPlayer() {
 
       player.addListener(
         'player_state_changed',
-        ({ paused, disallows, track_window: trackWindow }) => {
+        ({
+          paused,
+          disallows,
+          track_window: trackWindow,
+          shuffle,
+          repeat_mode: repeatMode,
+        }) => {
           const { current_track: track } = trackWindow || {};
           setCurrentTrack(track);
 
@@ -80,6 +93,9 @@ export function useSpotifyWebPlayer() {
             previous: !disallows.skipping_prev,
             next: !disallows.skipping_next,
           });
+
+          setShuffleEnabled(shuffle);
+          setRepeatEnabled(repeatMode === 2);
 
           let status: PlaybackStatus = PlaybackStatus.Playing;
           // We are paused and cannot play
@@ -101,10 +117,44 @@ export function useSpotifyWebPlayer() {
     };
   }, [dispatch, sdkReady]);
 
+  const handleShuffleToggle = (shouldShuffle?: boolean) => {
+    setShuffleLoading(true);
+    spotifyApi
+      .put(`me/player/shuffle?state=${shouldShuffle}`)
+      .catch((e) => {
+        console.error(e);
+      })
+      .finally(() => {
+        setShuffleLoading(false);
+      });
+  };
+
+  const handleRepeatToggle = (shouldRepeat?: boolean) => {
+    setRepeatLoading(true);
+    spotifyApi
+      .put(`me/player/repeat?state=${shouldRepeat ? 'context' : 'off'}`)
+      .catch((e) => {
+        console.error(e);
+      })
+      .finally(() => {
+        setRepeatLoading(false);
+      });
+  };
+
   return {
     spotifyPlayerRef,
     enabledControls,
     currentTrack,
     deviceId,
+    shuffle: {
+      enabled: shuffleEnabled,
+      shuffleLoading,
+      handleShuffleToggle,
+    },
+    repeat: {
+      enabled: repeatEnabled,
+      repeatLoading,
+      handleRepeatToggle,
+    },
   };
 }
