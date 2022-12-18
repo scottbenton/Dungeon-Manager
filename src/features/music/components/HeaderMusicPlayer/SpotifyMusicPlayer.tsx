@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useIsDarkMode } from '@/hooks/useDarkMode';
 import { Text } from '@/components/Text';
-import { IconButton } from '@/components/Button/IconButton';
 import { spotifyApi } from '../../lib/spotifyApi';
 import { PlaybackStatus } from '../../types/PlaybackStatus';
 import { SpotifyMusicItem } from '../../types/SpotifyMusicItem';
@@ -15,6 +14,7 @@ import {
   StickyMusicControls,
 } from './HeaderMusicPlayer.styles';
 import { useSpotifyWebPlayer } from '../../hooks/useSpotifyWebPlayer';
+import { MusicControl } from './MusicControl';
 
 interface SpotifyMusicPlayerProps {
   item: SpotifyMusicItem;
@@ -70,6 +70,8 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
       return `${collector} ${artist.name}, `;
     }, '') || '';
 
+  console.debug(repeat);
+
   return (
     <StickyMusicControls>
       <SpotifyPlayingText>
@@ -95,57 +97,43 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
         </div>
       </SpotifyPlayingText>
       <ControlsSection>
-        <IconButton
-          color={'brand'}
-          onClick={() => {
-            repeat.handleRepeatToggle(!repeat.enabled);
-          }}
-          disabled={repeat.repeatLoading}
+        <MusicControl
+          label={'Repeat'}
           iconName={'repeat'}
+          onClick={() => repeat.handleRepeatToggle(!repeat.enabled)}
+          disabled={repeat.repeatLoading}
+          selected={repeat.enabled}
         />
-
-        {enabledControls.previous && (
-          <IconButton
-            color={'brand'}
-            onClick={() => spotifyPlayerRef.current?.previousTrack()}
-            iconName={'play-skip-back'}
-          />
-        )}
-        {status === PlaybackStatus.Playing ? (
-          <>
-            {enabledControls.pause && (
-              <IconButton
-                color={'brand'}
-                onClick={() => spotifyPlayerRef.current?.togglePlay()}
-                iconName={'pause'}
-              />
-            )}
-          </>
-        ) : (
-          <>
-            {enabledControls.play && (
-              <IconButton
-                color={'brand'}
-                onClick={() => spotifyPlayerRef.current?.togglePlay()}
-                iconName={'play'}
-              />
-            )}
-          </>
-        )}
-        {enabledControls.next && (
-          <IconButton
-            color={'brand'}
-            onClick={() => spotifyPlayerRef.current?.nextTrack()}
-            iconName={'play-skip-forward'}
-          />
-        )}
-        <IconButton
-          color={'brand'}
+        <MusicControl
+          label={'Previous'}
+          iconName={'play-skip-back'}
+          onClick={() => spotifyPlayerRef.current?.previousTrack()}
+          disabled={!enabledControls.previous}
+        />
+        <MusicControl
+          label={status === PlaybackStatus.Playing ? 'Pause' : 'Play'}
+          iconName={status === PlaybackStatus.Playing ? 'pause' : 'play'}
+          onClick={() => spotifyPlayerRef.current?.togglePlay()}
+          disabled={
+            status === PlaybackStatus.Playing
+              ? !enabledControls.pause
+              : !enabledControls.play
+          }
+        />
+        <MusicControl
+          label={'Next'}
+          onClick={() => spotifyPlayerRef.current?.nextTrack()}
+          iconName={'play-skip-forward'}
+          disabled={!enabledControls.next}
+        />
+        <MusicControl
+          label={'Shuffle'}
           onClick={() => {
             shuffle.handleShuffleToggle(!shuffle.enabled);
           }}
           disabled={shuffle.shuffleLoading}
           iconName={'shuffle'}
+          selected={shuffle.enabled}
         />
       </ControlsSection>
     </StickyMusicControls>

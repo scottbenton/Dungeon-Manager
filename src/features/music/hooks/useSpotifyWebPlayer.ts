@@ -95,7 +95,8 @@ export function useSpotifyWebPlayer() {
           });
 
           setShuffleEnabled(shuffle);
-          setRepeatEnabled(repeatMode === 2);
+          setRepeatEnabled(repeatMode === 1);
+          console.debug(repeatMode);
 
           let status: PlaybackStatus = PlaybackStatus.Playing;
           // We are paused and cannot play
@@ -133,6 +134,9 @@ export function useSpotifyWebPlayer() {
     setRepeatLoading(true);
     spotifyApi
       .put(`me/player/repeat?state=${shouldRepeat ? 'context' : 'off'}`)
+      .then(() => {
+        setRepeatEnabled(shouldRepeat || false);
+      })
       .catch((e) => {
         console.error(e);
       })

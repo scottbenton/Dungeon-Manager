@@ -11,6 +11,7 @@ import {
 } from './HeaderMusicPlayer.styles';
 import { YoutubeMusicTypes } from '../../types/YoutubeMusicTypes';
 import { updatePlaybackStatus } from '../../stores/musicSlice';
+import { MusicControl } from './MusicControl';
 
 export interface YoutubeMusicPlayerProps {
   item: YoutubeMusicItem;
@@ -83,22 +84,22 @@ export function YoutubeMusicPlayer(props: YoutubeMusicPlayerProps) {
         </div>
         <ControlsSection>
           {showPreviousAndNextButtons && (
-            <IconButton
-              onClick={() => handlePrevious()}
-              color={'brand'}
+            <MusicControl
+              label={'Previous'}
               iconName={'play-skip-back'}
+              onClick={() => handlePrevious()}
             />
           )}
-          <IconButton
-            onClick={() => handlePlayPause()}
-            color={'brand'}
+          <MusicControl
+            label={status === PlaybackStatus.Playing ? 'Pause' : 'Play'}
             iconName={status === PlaybackStatus.Playing ? 'pause' : 'play'}
+            onClick={() => handlePlayPause()}
           />
           {showPreviousAndNextButtons && (
-            <IconButton
-              onClick={() => handleNext()}
-              color={'brand'}
+            <MusicControl
+              label={'Next'}
               iconName={'play-skip-forward'}
+              onClick={() => handleNext()}
             />
           )}
         </ControlsSection>
