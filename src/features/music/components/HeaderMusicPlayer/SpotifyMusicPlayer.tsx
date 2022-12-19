@@ -70,8 +70,6 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
       return `${collector} ${artist.name}, `;
     }, '') || '';
 
-  console.debug(repeat);
-
   return (
     <StickyMusicControls>
       <SpotifyPlayingText>

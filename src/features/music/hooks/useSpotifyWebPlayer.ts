@@ -1,12 +1,16 @@
-import { useReduxDispatch } from '@/hooks/reduxHooks';
+import { useReduxDispatch, useReduxSelector } from '@/hooks/reduxHooks';
 import { store } from '@/stores/store';
 import { useEffect, useRef, useState } from 'react';
+import { getSpotifyAccessToken } from '../api/getSpotifyAccessToken';
 import { spotifyApi } from '../lib/spotifyApi';
 import { updatePlaybackStatus } from '../stores/musicSlice';
 import { PlaybackStatus } from '../types/PlaybackStatus';
 
 export function useSpotifyWebPlayer() {
   const dispatch = useReduxDispatch();
+  const refreshToken = useReduxSelector(
+    (state) => state.music.spotifyAuth.refreshToken
+  );
 
   const [sdkReady, setSDKReady] = useState<boolean>(false);
   const spotifyPlayerRef = useRef<Spotify.Player>();
@@ -57,7 +61,7 @@ export function useSpotifyWebPlayer() {
       sdkReady,
       spotifyPlayerRef.current
     );
-    if (sdkReady && !spotifyPlayerRef.current) {
+    if (sdkReady && !spotifyPlayerRef.current && refreshToken) {
       const player = new Spotify.Player({
         name: 'Dungeon Manager',
         getOAuthToken: (callback) =>
@@ -71,6 +75,9 @@ export function useSpotifyWebPlayer() {
       });
       player.addListener('not_ready', () => {
         dispatch(updatePlaybackStatus(PlaybackStatus.Finished));
+      });
+      player.addListener('authentication_error', () => {
+        getSpotifyAccessToken(refreshToken || '', dispatch);
       });
 
       spotifyPlayerRef.current = player;
@@ -116,7 +123,7 @@ export function useSpotifyWebPlayer() {
       spotifyPlayerRef.current = undefined;
       setDeviceId(undefined);
     };
-  }, [dispatch, sdkReady]);
+  }, [dispatch, sdkReady, refreshToken]);
 
   const handleShuffleToggle = (shouldShuffle?: boolean) => {
     setShuffleLoading(true);
