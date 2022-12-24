@@ -41,7 +41,7 @@ export default function MusicPage() {
         color={'brand'}
         size={'lg'}
         css={{
-          position: 'absolute',
+          position: 'fixed',
           bottom: '$s-4',
           right: '$s-4',
           boxShadow: '$md',

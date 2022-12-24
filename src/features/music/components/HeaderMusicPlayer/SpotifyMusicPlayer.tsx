@@ -71,7 +71,12 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
     }, '') || '';
 
   return (
-    <StickyMusicControls>
+    <StickyMusicControls
+      isMobile={{
+        '@initial': true,
+        '@md': false,
+      }}
+    >
       <SpotifyPlayingText>
         <div>
           <img
@@ -94,7 +99,12 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
           </div>
         </div>
       </SpotifyPlayingText>
-      <ControlsStack>
+      <ControlsStack
+        isMobile={{
+          '@initial': true,
+          '@md': false,
+        }}
+      >
         <ControlsSection>
           <MusicControl
             label={'Repeat'}

@@ -17,8 +17,32 @@ export const StickyMusicControls = styled('div', {
   top: 0,
   zIndex: '$overlay',
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
+
+  variants: {
+    isMobile: {
+      true: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+        '&>:not(:first-child)': {
+          marginTop: '$s-4',
+        },
+      },
+      false: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        '&>:not(:first-child)': {
+          marginTop: 0,
+        },
+      },
+    },
+  },
+});
+
+export const LabelsSection = styled('div', {
+  alignSelf: 'flex-start',
 });
 
 export const ControlsSection = styled('div', {
@@ -32,9 +56,19 @@ export const ControlsSection = styled('div', {
 export const ControlsStack = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'flex-end',
   '&>:not(:first-child)': {
     marginTop: '$s-2',
+  },
+
+  variants: {
+    isMobile: {
+      true: {
+        alignItems: 'center',
+      },
+      false: {
+        alignItems: 'flex-end',
+      },
+    },
   },
 });
 

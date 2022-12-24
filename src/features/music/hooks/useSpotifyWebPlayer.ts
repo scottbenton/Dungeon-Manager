@@ -109,6 +109,7 @@ export function useSpotifyWebPlayer() {
     }
 
     return () => {
+      spotifyPlayerRef.current?.pause();
       spotifyPlayerRef.current?.disconnect();
       spotifyPlayerRef.current = undefined;
       setDeviceId(undefined);

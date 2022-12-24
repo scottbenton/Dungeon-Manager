@@ -7,6 +7,7 @@ import { YoutubeMusicItem } from '../../types/YoutubeMusicItem';
 import { YouTubePlayerAPI, YoutubeVideoPlayer } from '../YoutubeVideoPlayer';
 import {
   ControlsSection,
+  LabelsSection,
   StickyMusicControls,
 } from './HeaderMusicPlayer.styles';
 import { YoutubeMusicTypes } from '../../types/YoutubeMusicTypes';
@@ -69,8 +70,13 @@ export function YoutubeMusicPlayer(props: YoutubeMusicPlayerProps) {
 
   return (
     <>
-      <StickyMusicControls>
-        <div>
+      <StickyMusicControls
+        isMobile={{
+          '@initial': true,
+          '@md': false,
+        }}
+      >
+        <LabelsSection>
           <Text
             textColor={'brandTertiary'}
             variant={'overline'}
@@ -81,7 +87,7 @@ export function YoutubeMusicPlayer(props: YoutubeMusicPlayerProps) {
           <Text textColor={'brandPrimary'} variant={'body'}>
             {item.label}
           </Text>
-        </div>
+        </LabelsSection>
         <ControlsSection>
           {showPreviousAndNextButtons && (
             <MusicControl

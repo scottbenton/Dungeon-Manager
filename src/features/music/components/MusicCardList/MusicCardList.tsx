@@ -82,6 +82,10 @@ export function MusicCardList(props: MusicCardListProps) {
             '@sm': 2,
             '@md': 3,
           }}
+          css={{
+            // Mobile View Fab doesn't overlap
+            marginBottom: '$s-16',
+          }}
         >
           {Object.keys(items.spotify).map((key) => (
             <MusicCard
