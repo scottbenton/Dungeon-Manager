@@ -4,7 +4,7 @@ import { useReduxDispatch, useReduxSelector } from '@/hooks/reduxHooks';
 import { MusicCard } from './MusicCard';
 import { CardGrid } from './MusicCardList.styles';
 import { MusicSource } from '../../types/MusicSource';
-import { startPlayback } from '../../stores/musicSlice';
+import { deleteMusicItem, startPlayback } from '../../stores/musicSlice';
 import { SpotifyAuthSection } from '../SpotifyAuthSection';
 
 export interface MusicCardListProps {
@@ -24,6 +24,10 @@ export function MusicCardList(props: MusicCardListProps) {
 
   const handlePlay = (id: string, source: MusicSource) => {
     dispatch(startPlayback({ id, source }));
+  };
+
+  const handleDelete = (id: string, source: MusicSource) => {
+    dispatch(deleteMusicItem({ id, source }));
   };
 
   if (
@@ -66,6 +70,7 @@ export function MusicCardList(props: MusicCardListProps) {
             item={items.youtube[key]}
             isPlaying={currentMusicId === items.youtube[key].id}
             handlePlay={() => handlePlay(key, MusicSource.Youtube)}
+            handleDelete={() => handleDelete(key, MusicSource.Youtube)}
           />
         ))}
       </CardGrid>
@@ -93,6 +98,7 @@ export function MusicCardList(props: MusicCardListProps) {
               item={items.spotify[key]}
               isPlaying={currentMusicId === items.spotify[key].id}
               handlePlay={() => handlePlay(key, MusicSource.Spotify)}
+              handleDelete={() => handleDelete(key, MusicSource.Spotify)}
             />
           ))}
         </CardGrid>
