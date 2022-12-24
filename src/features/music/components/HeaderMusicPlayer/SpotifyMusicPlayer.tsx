@@ -10,11 +10,13 @@ import spotifyIconLightThemeSRC from '../../assets/SpotifyIconBlack.png';
 import spotifyIconDarkThemeSRC from '../../assets/SpotifyIconWhite.png';
 import {
   ControlsSection,
+  ControlsStack,
   SpotifyPlayingText,
   StickyMusicControls,
 } from './HeaderMusicPlayer.styles';
 import { useSpotifyWebPlayer } from '../../hooks/useSpotifyWebPlayer';
 import { MusicControl } from './MusicControl';
+import { VolumeControl } from './VolumeControl';
 
 interface SpotifyMusicPlayerProps {
   item: SpotifyMusicItem;
@@ -36,11 +38,9 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
   } = useSpotifyWebPlayer();
 
   useEffect(() => {
-    console.debug('IN PLAY USEEFFECT');
     if (deviceId) {
       const uri = constructSpotifyURI(item.type, item.id);
 
-      console.debug('URI', uri);
       const body =
         item.type === SpotifyMusicTypes.Song
           ? {
@@ -94,46 +94,49 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
           </div>
         </div>
       </SpotifyPlayingText>
-      <ControlsSection>
-        <MusicControl
-          label={'Repeat'}
-          iconName={'repeat'}
-          onClick={() => repeat.handleRepeatToggle(!repeat.enabled)}
-          disabled={repeat.repeatLoading}
-          selected={repeat.enabled}
-        />
-        <MusicControl
-          label={'Previous'}
-          iconName={'play-skip-back'}
-          onClick={() => spotifyPlayerRef.current?.previousTrack()}
-          disabled={!enabledControls.previous}
-        />
-        <MusicControl
-          label={status === PlaybackStatus.Playing ? 'Pause' : 'Play'}
-          iconName={status === PlaybackStatus.Playing ? 'pause' : 'play'}
-          onClick={() => spotifyPlayerRef.current?.togglePlay()}
-          disabled={
-            status === PlaybackStatus.Playing
-              ? !enabledControls.pause
-              : !enabledControls.play
-          }
-        />
-        <MusicControl
-          label={'Next'}
-          onClick={() => spotifyPlayerRef.current?.nextTrack()}
-          iconName={'play-skip-forward'}
-          disabled={!enabledControls.next}
-        />
-        <MusicControl
-          label={'Shuffle'}
-          onClick={() => {
-            shuffle.handleShuffleToggle(!shuffle.enabled);
-          }}
-          disabled={shuffle.shuffleLoading}
-          iconName={'shuffle'}
-          selected={shuffle.enabled}
-        />
-      </ControlsSection>
+      <ControlsStack>
+        <ControlsSection>
+          <MusicControl
+            label={'Repeat'}
+            iconName={'repeat'}
+            onClick={() => repeat.handleRepeatToggle(!repeat.enabled)}
+            disabled={repeat.repeatLoading}
+            selected={repeat.enabled}
+          />
+          <MusicControl
+            label={'Previous'}
+            iconName={'play-skip-back'}
+            onClick={() => spotifyPlayerRef.current?.previousTrack()}
+            disabled={!enabledControls.previous}
+          />
+          <MusicControl
+            label={status === PlaybackStatus.Playing ? 'Pause' : 'Play'}
+            iconName={status === PlaybackStatus.Playing ? 'pause' : 'play'}
+            onClick={() => spotifyPlayerRef.current?.togglePlay()}
+            disabled={
+              status === PlaybackStatus.Playing
+                ? !enabledControls.pause
+                : !enabledControls.play
+            }
+          />
+          <MusicControl
+            label={'Next'}
+            onClick={() => spotifyPlayerRef.current?.nextTrack()}
+            iconName={'play-skip-forward'}
+            disabled={!enabledControls.next}
+          />
+          <MusicControl
+            label={'Shuffle'}
+            onClick={() => {
+              shuffle.handleShuffleToggle(!shuffle.enabled);
+            }}
+            disabled={shuffle.shuffleLoading}
+            iconName={'shuffle'}
+            selected={shuffle.enabled}
+          />
+        </ControlsSection>
+        <VolumeControl spotifyPlayerRef={spotifyPlayerRef} />
+      </ControlsStack>
     </StickyMusicControls>
   );
 }

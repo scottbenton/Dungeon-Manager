@@ -36,7 +36,6 @@ export function useSpotifyWebPlayer() {
   const [repeatLoading, setRepeatLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    console.debug('In spotify setup useEffect');
     if (!document.getElementById('spotify-player-script')) {
       const script = document.createElement('script');
       script.src = 'https://sdk.scdn.co/spotify-player.js';
@@ -46,7 +45,6 @@ export function useSpotifyWebPlayer() {
       document.body.appendChild(script);
     }
     window.onSpotifyWebPlaybackSDKReady = () => {
-      console.debug('SDK Ready');
       setSDKReady(true);
     };
 
@@ -56,11 +54,6 @@ export function useSpotifyWebPlayer() {
   }, []);
 
   useEffect(() => {
-    console.debug(
-      'In Create player useEffect',
-      sdkReady,
-      spotifyPlayerRef.current
-    );
     if (sdkReady && !spotifyPlayerRef.current && refreshToken) {
       const player = new Spotify.Player({
         name: 'Dungeon Manager',
@@ -68,7 +61,6 @@ export function useSpotifyWebPlayer() {
           callback(store.getState().music.spotifyAuth.accessToken ?? ''),
       });
       player.connect();
-      console.debug('Player Created');
       player.addListener('ready', (readyState) => {
         setDeviceId(readyState.device_id);
         dispatch(updatePlaybackStatus(PlaybackStatus.Ready));
@@ -76,7 +68,7 @@ export function useSpotifyWebPlayer() {
       player.addListener('not_ready', () => {
         dispatch(updatePlaybackStatus(PlaybackStatus.Finished));
       });
-      player.addListener('authentication_error', () => {
+      player.addListener('authentication_error', (test) => {
         getSpotifyAccessToken(refreshToken || '', dispatch);
       });
 
@@ -103,7 +95,6 @@ export function useSpotifyWebPlayer() {
 
           setShuffleEnabled(shuffle);
           setRepeatEnabled(repeatMode === 1);
-          console.debug(repeatMode);
 
           let status: PlaybackStatus = PlaybackStatus.Playing;
           // We are paused and cannot play
@@ -118,7 +109,6 @@ export function useSpotifyWebPlayer() {
     }
 
     return () => {
-      console.debug('Clearing Player');
       spotifyPlayerRef.current?.disconnect();
       spotifyPlayerRef.current = undefined;
       setDeviceId(undefined);

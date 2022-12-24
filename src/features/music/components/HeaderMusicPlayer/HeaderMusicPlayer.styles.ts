@@ -29,6 +29,15 @@ export const ControlsSection = styled('div', {
   },
 });
 
+export const ControlsStack = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-end',
+  '&>:not(:first-child)': {
+    marginTop: '$s-2',
+  },
+});
+
 export const SpotifyPlayingText = styled('div', {
   display: 'flex',
   flexDirection: 'column',

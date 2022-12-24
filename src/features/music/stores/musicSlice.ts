@@ -212,14 +212,12 @@ export const createMusicListener: ThunkAction<
           );
         })
         .catch((error) => {
-          console.debug('ERROR:', error);
           if (error.message) {
             dispatch(updateError(error.message));
           } else {
             dispatch(updateError('Error fetching spotify item details'));
           }
         });
-      console.debug(id);
     },
   });
 
