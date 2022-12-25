@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
 import { CSS } from '@stitches/react';
-import { PhotoIcon } from '@heroicons/react/24/outline';
 import {
   Dropzone,
   DropzoneContainer,
@@ -8,6 +7,7 @@ import {
   DropzoneText,
 } from './FileDropzone.styles';
 import { Text } from '../Text';
+import { Icon } from '../Icon';
 
 export interface FileDropzoneProps extends PropsWithChildren {
   getRootProps: () => any;
@@ -33,7 +33,7 @@ export function FileDropzone(props: FileDropzoneProps): JSX.Element {
       <Dropzone {...getRootProps()} isDragActive={isDragActive}>
         <input id={`${label}-file-upload`} {...getInputProps()} />
         <DropzoneIcon>
-          <PhotoIcon />
+          <Icon name={'image'} size={'lg'} />
         </DropzoneIcon>
         {isDragActive ? (
           <DropzoneText isDragActive>Drop the files here.</DropzoneText>

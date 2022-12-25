@@ -1,11 +1,5 @@
 import { IconButton } from '@/components/Button/IconButton';
 import { useCallback, useEffect, useRef } from 'react';
-import {
-  PlayIcon,
-  PauseIcon,
-  ForwardIcon,
-  BackwardIcon,
-} from '@heroicons/react/20/solid';
 import { Text } from '@/components/Text';
 import { useReduxDispatch } from '@/hooks/reduxHooks';
 import { PlaybackStatus } from '../../types/PlaybackStatus';
@@ -13,10 +7,12 @@ import { YoutubeMusicItem } from '../../types/YoutubeMusicItem';
 import { YouTubePlayerAPI, YoutubeVideoPlayer } from '../YoutubeVideoPlayer';
 import {
   ControlsSection,
+  LabelsSection,
   StickyMusicControls,
 } from './HeaderMusicPlayer.styles';
 import { YoutubeMusicTypes } from '../../types/YoutubeMusicTypes';
 import { updatePlaybackStatus } from '../../stores/musicSlice';
+import { MusicControl } from './MusicControl';
 
 export interface YoutubeMusicPlayerProps {
   item: YoutubeMusicItem;
@@ -74,8 +70,13 @@ export function YoutubeMusicPlayer(props: YoutubeMusicPlayerProps) {
 
   return (
     <>
-      <StickyMusicControls>
-        <div>
+      <StickyMusicControls
+        isMobile={{
+          '@initial': true,
+          '@md': false,
+        }}
+      >
+        <LabelsSection>
           <Text
             textColor={'brandTertiary'}
             variant={'overline'}
@@ -86,20 +87,26 @@ export function YoutubeMusicPlayer(props: YoutubeMusicPlayerProps) {
           <Text textColor={'brandPrimary'} variant={'body'}>
             {item.label}
           </Text>
-        </div>
+        </LabelsSection>
         <ControlsSection>
           {showPreviousAndNextButtons && (
-            <IconButton onClick={() => handlePrevious()} color={'brand'}>
-              <BackwardIcon />
-            </IconButton>
+            <MusicControl
+              label={'Previous'}
+              iconName={'play-skip-back'}
+              onClick={() => handlePrevious()}
+            />
           )}
-          <IconButton onClick={() => handlePlayPause()} color={'brand'}>
-            {status === PlaybackStatus.Playing ? <PauseIcon /> : <PlayIcon />}
-          </IconButton>
+          <MusicControl
+            label={status === PlaybackStatus.Playing ? 'Pause' : 'Play'}
+            iconName={status === PlaybackStatus.Playing ? 'pause' : 'play'}
+            onClick={() => handlePlayPause()}
+          />
           {showPreviousAndNextButtons && (
-            <IconButton onClick={() => handleNext()} color={'brand'}>
-              <ForwardIcon />
-            </IconButton>
+            <MusicControl
+              label={'Next'}
+              iconName={'play-skip-forward'}
+              onClick={() => handleNext()}
+            />
           )}
         </ControlsSection>
       </StickyMusicControls>

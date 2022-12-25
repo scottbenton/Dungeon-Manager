@@ -8,7 +8,6 @@ import { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import LoginIcon from '@heroicons/react/20/solid/UserCircleIcon';
 import { loginEmailAndPasswordUser } from '../../api/authApiCalls';
 import { FormButtonContainer, StyledForm } from './Form.styles';
 
@@ -91,7 +90,7 @@ export function LoginForm() {
           color={'brand'}
           type={'submit'}
           loading={loading}
-          endIcon={LoginIcon}
+          endIcon={'person-circle'}
         >
           Login
         </Button>

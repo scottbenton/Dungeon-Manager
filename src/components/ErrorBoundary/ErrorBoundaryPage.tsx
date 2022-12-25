@@ -1,5 +1,4 @@
 import { FallbackProps } from 'react-error-boundary';
-import ReloadIcon from '@heroicons/react/20/solid/ArrowPathIcon';
 import { ErrorPage } from '../ErrorPage';
 
 export function ErrorBoundaryPage(props: FallbackProps) {
@@ -14,7 +13,7 @@ export function ErrorBoundaryPage(props: FallbackProps) {
       buttonProps={{
         variant: 'primary',
         color: 'brand',
-        endIcon: ReloadIcon,
+        endIcon: 'refresh',
         onClick: () => resetErrorBoundary(),
         children: 'Reload Page',
       }}

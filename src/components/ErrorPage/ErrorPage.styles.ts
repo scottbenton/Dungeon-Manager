@@ -12,7 +12,7 @@ export const ErrorPageContainer = styled('div', {
 });
 
 export const ErrorPageTitle = styled('h1', {
-  '&>svg': {
+  '&>span>svg': {
     marginRight: '$s-4',
     width: '$s-20',
     color: '$text-brand-tertiary',

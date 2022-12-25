@@ -37,11 +37,6 @@ export const Navigation = styled('nav', {
   marginLeft: '$s-8',
   flexGrow: 1,
   '&>a': {
-    '&>svg': {
-      width: '$s-5',
-      marginRight: '$s-2',
-    },
-
     paddingX: '$s-3',
     paddingY: '$s-2',
     height: '100%',

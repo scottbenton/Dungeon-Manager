@@ -1,4 +1,4 @@
-import DeleteIcon from '@heroicons/react/20/solid/XCircleIcon';
+import { Icon } from '@/components/Icon';
 import { useState } from 'react';
 import { getHSL, getHueFromString } from '../../utils/hueHelpers';
 import { Tag as StyledTag } from './Tags.styles';
@@ -31,7 +31,7 @@ export function Tag(props: TagProps): JSX.Element {
       {children}
       {handleDelete && isHovering && (
         <button type={'button'} onClick={() => handleDelete()}>
-          <DeleteIcon />
+          <Icon name={'trash'} />
         </button>
       )}
     </StyledTag>

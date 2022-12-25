@@ -1,15 +1,16 @@
 import { CurrentUserAvatar } from '@/components/Avatar/CurrentUserAvatar';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
-import ThemeIcon from '@heroicons/react/20/solid/SunIcon';
-import LogoutIcon from '@heroicons/react/20/solid/ArrowLeftOnRectangleIcon';
 import { signOut } from '@/features/authentication/api/authApiCalls';
-import { useReduxDispatch } from '@/hooks/reduxHooks';
+import { useReduxDispatch, useReduxSelector } from '@/hooks/reduxHooks';
 import { toggleTheme } from '@/stores/settingsSlice';
+import { Icon } from '@/components/Icon';
+import { THEMES } from '@/stores/SettingsState';
 
 import { AvatarButton, MenuContent, MenuItem } from './AvatarMenu.styles';
 
 export function AvatarMenu(): JSX.Element {
   const dispatch = useReduxDispatch();
+  const currentTheme = useReduxSelector((store) => store.settings.theme);
 
   return (
     <DropdownMenu>
@@ -18,11 +19,11 @@ export function AvatarMenu(): JSX.Element {
       </AvatarButton>
       <MenuContent>
         <MenuItem onSelect={() => dispatch(toggleTheme())}>
-          <ThemeIcon />
+          <Icon name={currentTheme === THEMES.LIGHT ? 'moon' : 'sunny'} />
           Change Theme
         </MenuItem>
         <MenuItem onSelect={() => signOut()}>
-          <LogoutIcon />
+          <Icon name={'log-out-outline'} />
           Logout
         </MenuItem>
       </MenuContent>

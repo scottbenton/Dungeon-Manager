@@ -1,4 +1,4 @@
-import EmptyAvatarIcon from '@heroicons/react/20/solid/UserIcon';
+import { Icon } from '../Icon';
 import { StyledAvatar, StyledFallback } from './Avatar.styles';
 
 export interface AvatarProps {
@@ -11,7 +11,7 @@ export function Avatar(props: AvatarProps): JSX.Element {
     <StyledAvatar>
       {initials || (
         <StyledFallback delayMs={600}>
-          <EmptyAvatarIcon />
+          <Icon name={'person'} />
         </StyledFallback>
       )}
     </StyledAvatar>

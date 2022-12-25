@@ -1,5 +1,4 @@
 import { ErrorPage } from '@/components/ErrorPage';
-import ImagesIcon from '@heroicons/react/20/solid/PhotoIcon';
 import { routePaths, ROUTES } from '@/config/routes';
 
 export function Page404(): JSX.Element {
@@ -12,7 +11,7 @@ export function Page404(): JSX.Element {
       buttonProps={{
         variant: 'primary',
         color: 'brand',
-        endIcon: ImagesIcon,
+        endIcon: 'image',
         children: 'Go to Images Page',
         href: routePaths[ROUTES.IMAGES],
       }}

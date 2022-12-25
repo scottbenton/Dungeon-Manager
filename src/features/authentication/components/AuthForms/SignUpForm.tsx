@@ -7,7 +7,6 @@ import YupPassword from 'yup-password';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { Logger } from '@/lib/logger';
-import CreateUserIcon from '@heroicons/react/20/solid/PlusIcon';
 import { FirebaseError } from 'firebase/app';
 import { Alert } from '@/components/Alert';
 import { FormButtonContainer, StyledForm } from './Form.styles';
@@ -94,7 +93,7 @@ export function SignUpForm() {
           color={'brand'}
           type={'submit'}
           loading={loading}
-          endIcon={CreateUserIcon}
+          endIcon={'add'}
         >
           Create Account
         </Button>

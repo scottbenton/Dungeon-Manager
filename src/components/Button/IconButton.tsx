@@ -1,3 +1,5 @@
+import { IconNames } from '@/types/IonIconNames';
+import IonIcon from '@reacticons/ionicons';
 import { CSS, VariantProps } from '@stitches/react';
 import { MouseEvent, MouseEventHandler, PropsWithChildren } from 'react';
 import { StyledIconButton } from './Button.styles';
@@ -7,10 +9,12 @@ export interface IconButtonProps
     VariantProps<typeof StyledIconButton> {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   css?: CSS;
+  disabled?: boolean;
+  iconName?: IconNames;
 }
 
 export function IconButton(props: IconButtonProps): JSX.Element {
-  const { onClick, css, children, ...buttonProps } = props;
+  const { onClick, css, children, disabled, iconName, ...buttonProps } = props;
 
   return (
     <StyledIconButton
@@ -22,8 +26,9 @@ export function IconButton(props: IconButtonProps): JSX.Element {
           onClick(evt);
         }
       }}
+      disabled={disabled}
     >
-      {children}
+      {iconName ? <IonIcon name={iconName} /> : children}
     </StyledIconButton>
   );
 }
@@ -31,4 +36,6 @@ export function IconButton(props: IconButtonProps): JSX.Element {
 IconButton.defaultProps = {
   onClick: undefined,
   css: undefined,
+  disabled: undefined,
+  iconName: undefined,
 };

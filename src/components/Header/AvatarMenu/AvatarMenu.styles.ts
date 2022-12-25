@@ -44,7 +44,7 @@ export const MenuItem = styled(DropdownMenuItem, {
     outline: 'none',
     backgroundColor: '$surface-background',
   },
-  '&>svg': {
+  '&>span': {
     width: '$s-5',
     color: '$text-gray-tertiary',
     marginRight: '$s-2',

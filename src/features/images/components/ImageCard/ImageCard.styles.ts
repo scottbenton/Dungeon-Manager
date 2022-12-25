@@ -1,6 +1,6 @@
 import { Card } from '@/components/Card';
+import { Icon } from '@/components/Icon';
 import { styled } from '@/config/theme';
-import CheckCircleIcon from '@heroicons/react/24/solid/CheckCircleIcon';
 
 export const StyledImageCard = styled(Card, {
   display: 'flex',
@@ -44,8 +44,7 @@ export const ImageContainer = styled('div', {
   backgroundSize: 'cover',
 });
 
-export const SelectedCheckIcon = styled(CheckCircleIcon, {
-  height: '$s-6',
+export const SelectedCheckIcon = styled(Icon, {
   color: '#fff',
   margin: '$s-2',
   float: 'right',

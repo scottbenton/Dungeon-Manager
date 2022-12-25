@@ -1,12 +1,11 @@
 import { EmptyState } from '@/components/EmptyState';
 import { Text } from '@/components/Text';
 import { useReduxDispatch, useReduxSelector } from '@/hooks/reduxHooks';
-import MusicIcon from '@heroicons/react/24/outline/MusicalNoteIcon';
-import AddIcon from '@heroicons/react/20/solid/PlusIcon';
 import { MusicCard } from './MusicCard';
 import { CardGrid } from './MusicCardList.styles';
 import { MusicSource } from '../../types/MusicSource';
-import { startPlayback } from '../../stores/musicSlice';
+import { deleteMusicItem, startPlayback } from '../../stores/musicSlice';
+import { SpotifyAuthSection } from '../SpotifyAuthSection';
 
 export interface MusicCardListProps {
   openAddMusicDialog: () => void;
@@ -15,14 +14,20 @@ export interface MusicCardListProps {
 export function MusicCardList(props: MusicCardListProps) {
   const { openAddMusicDialog } = props;
 
-  const { items, currentMusicId } = useReduxSelector((state) => ({
-    items: state.music.musicItems,
-    currentMusicId: state.music.playbackState.item?.id,
-  }));
+  const { items, currentMusicId, isAuthenticatedWithSpotify } =
+    useReduxSelector((state) => ({
+      items: state.music.musicItems,
+      currentMusicId: state.music.playbackState.item?.id,
+      isAuthenticatedWithSpotify: !!state.music.spotifyAuth.refreshToken,
+    }));
   const dispatch = useReduxDispatch();
 
   const handlePlay = (id: string, source: MusicSource) => {
     dispatch(startPlayback({ id, source }));
+  };
+
+  const handleDelete = (id: string, source: MusicSource) => {
+    dispatch(deleteMusicItem({ id, source }));
   };
 
   if (
@@ -32,12 +37,12 @@ export function MusicCardList(props: MusicCardListProps) {
     return (
       <EmptyState
         message={'Add music to get started'}
-        Icon={MusicIcon}
+        IconEntry={'musical-notes-outline'}
         callToAction={{
           children: 'Add Music',
           color: 'brand',
           variant: 'primary',
-          endIcon: AddIcon,
+          endIcon: 'add',
           onClick: () => openAddMusicDialog(),
         }}
       />
@@ -65,9 +70,41 @@ export function MusicCardList(props: MusicCardListProps) {
             item={items.youtube[key]}
             isPlaying={currentMusicId === items.youtube[key].id}
             handlePlay={() => handlePlay(key, MusicSource.Youtube)}
+            handleDelete={() => handleDelete(key, MusicSource.Youtube)}
           />
         ))}
       </CardGrid>
+      <Text
+        textColor={'textSecondary'}
+        variant={'overline'}
+        css={{ marginTop: '$s-8' }}
+      >
+        Spotify Music
+      </Text>
+      {isAuthenticatedWithSpotify ? (
+        <CardGrid
+          columns={{
+            '@sm': 2,
+            '@md': 3,
+          }}
+          css={{
+            // Mobile View Fab doesn't overlap
+            marginBottom: '$s-16',
+          }}
+        >
+          {Object.keys(items.spotify).map((key) => (
+            <MusicCard
+              key={key}
+              item={items.spotify[key]}
+              isPlaying={currentMusicId === items.spotify[key].id}
+              handlePlay={() => handlePlay(key, MusicSource.Spotify)}
+              handleDelete={() => handleDelete(key, MusicSource.Spotify)}
+            />
+          ))}
+        </CardGrid>
+      ) : (
+        <SpotifyAuthSection />
+      )}
     </>
   );
 }

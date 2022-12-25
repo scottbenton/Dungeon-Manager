@@ -11,7 +11,7 @@ interface MusicItemAttributes<T> {
   setMusicItems: (docs: { [id: string]: T }) => void;
   updateMusicItem: (id: string, doc: T) => void;
   deleteMusicItem: (id: string) => void;
-  loadImage: (id: string, doc: T) => void;
+  loadImage?: (id: string, doc: T) => void;
 }
 
 export function subscribeToMusicItems<T extends BaseMusicDocument>({
@@ -29,7 +29,7 @@ export function subscribeToMusicItems<T extends BaseMusicDocument>({
 
       snapshot.docs.forEach((doc) => {
         music[doc.id] = doc.data();
-        loadImage(doc.id, doc.data());
+        loadImage && loadImage(doc.id, doc.data());
       });
 
       setMusicItems(music);
@@ -38,7 +38,7 @@ export function subscribeToMusicItems<T extends BaseMusicDocument>({
         switch (change.type) {
           case 'added':
             updateMusicItem(change.doc.id, change.doc.data());
-            loadImage(change.doc.id, change.doc.data());
+            loadImage && loadImage(change.doc.id, change.doc.data());
             break;
           case 'modified':
             updateMusicItem(change.doc.id, change.doc.data());

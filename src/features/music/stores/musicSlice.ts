@@ -5,6 +5,7 @@ import {
   PayloadAction,
   ThunkAction,
 } from '@reduxjs/toolkit';
+import { getSpotifyItemDetails } from '../api/getSpotifyItemDetails';
 import { subscribeToMusicItems } from '../api/subscribeToMusicItems';
 import { BaseMusicItem } from '../types/BaseMusicItem';
 import { MusicSource } from '../types/MusicSource';
@@ -12,6 +13,17 @@ import { PlaybackStatus } from '../types/PlaybackStatus';
 import { SpotifyMusicDocument } from '../types/SpotifyMusicDocument';
 import { YoutubeMusicDocument } from '../types/YoutubeMusicDocument';
 import { MusicState } from './MusicState';
+
+function updateLocalRefreshToken(refreshToken?: string) {
+  if (refreshToken) {
+    localStorage.setItem('spotify.refresh_token', refreshToken);
+  } else {
+    localStorage.removeItem('spotify.refresh_token');
+  }
+}
+function getLocalRefreshToken() {
+  return localStorage.getItem('spotify.refresh_token');
+}
 
 const initialState: MusicState = {
   musicItems: {
@@ -22,6 +34,10 @@ const initialState: MusicState = {
   isLoading: true,
   playbackState: {
     status: PlaybackStatus.NotSelected,
+  },
+  spotifyAuth: {
+    isLoading: false,
+    refreshToken: getLocalRefreshToken() || undefined,
   },
 };
 
@@ -77,16 +93,18 @@ export const musicSlice = createSlice({
       const { source, id } = action.payload;
       delete state.musicItems[source][id];
     },
-    updateMusicItemImage(
+    updateMusicItemLabelAndImage(
       state,
       action: PayloadAction<{
         id: string;
-        item: SpotifyMusicDocument | YoutubeMusicDocument;
+        item: SpotifyMusicDocument;
+        label: string;
         url: string;
       }>
     ) {
-      const { id, item, url } = action.payload;
+      const { id, item, url, label } = action.payload;
       state.musicItems[item.source][id].imageUrl = url;
+      state.musicItems[item.source][id].label = label;
     },
     updateError(state, action: PayloadAction<string | undefined>) {
       state.error = action.payload;
@@ -111,6 +129,36 @@ export const musicSlice = createSlice({
       const status = action.payload;
       state.playbackState.status = status;
     },
+    addSpotifyTokens(
+      state,
+      action: PayloadAction<{ refreshToken: string; accessToken: string }>
+    ) {
+      const { refreshToken, accessToken } = action.payload;
+      updateLocalRefreshToken(refreshToken);
+
+      state.spotifyAuth = {
+        isLoading: false,
+        refreshToken,
+        accessToken,
+      };
+    },
+    clearSpotifyTokens(state) {
+      updateLocalRefreshToken(undefined);
+      state.spotifyAuth.accessToken = undefined;
+      state.spotifyAuth.refreshToken = undefined;
+      state.spotifyAuth.isLoading = false;
+    },
+    updateSpotifyAccessToken(state, action: PayloadAction<string | undefined>) {
+      const accessToken = action.payload;
+      state.spotifyAuth.isLoading = !!accessToken;
+      state.spotifyAuth.accessToken = accessToken;
+    },
+    updateSpotifyError(state, action: PayloadAction<string | undefined>) {
+      state.spotifyAuth.errorMessage = action.payload;
+    },
+    updateSpotifyLoading(state, action: PayloadAction<boolean>) {
+      state.spotifyAuth.isLoading = action.payload;
+    },
   },
 });
 
@@ -119,10 +167,15 @@ export const {
   setMusicItems,
   addOrUpdateMusicItem,
   deleteMusicItem,
-  updateMusicItemImage,
+  updateMusicItemLabelAndImage,
   updateError,
   startPlayback,
   updatePlaybackStatus,
+  addSpotifyTokens,
+  clearSpotifyTokens,
+  updateSpotifyAccessToken,
+  updateSpotifyError,
+  updateSpotifyLoading,
 } = musicSlice.actions;
 
 export const createMusicListener: ThunkAction<
@@ -147,7 +200,24 @@ export const createMusicListener: ThunkAction<
       dispatch(deleteMusicItem({ id, source: MusicSource.Spotify }));
     },
     loadImage: (id: string, doc: SpotifyMusicDocument) => {
-      console.debug(id);
+      getSpotifyItemDetails(doc)
+        .then(({ url, label }) => {
+          dispatch(
+            updateMusicItemLabelAndImage({
+              id,
+              item: doc,
+              label,
+              url,
+            })
+          );
+        })
+        .catch((error) => {
+          if (error.message) {
+            dispatch(updateError(error.message));
+          } else {
+            dispatch(updateError('Error fetching spotify item details'));
+          }
+        });
     },
   });
 
@@ -163,9 +233,6 @@ export const createMusicListener: ThunkAction<
     },
     deleteMusicItem: (id: string) => {
       dispatch(deleteMusicItem({ id, source: MusicSource.Youtube }));
-    },
-    loadImage: (id: string, doc: YoutubeMusicDocument) => {
-      console.debug(id);
     },
   });
 

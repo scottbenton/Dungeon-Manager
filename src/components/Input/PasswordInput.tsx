@@ -1,8 +1,7 @@
 import { forwardRef, useState } from 'react';
-import ShowIcon from '@heroicons/react/20/solid/EyeIcon';
-import HideIcon from '@heroicons/react/20/solid/EyeSlashIcon';
 import { Input, InputProps } from './Input';
 import { InputDecorationButton } from './InputDecorationButton';
+import { Icon } from '../Icon';
 
 export type PasswordInputProps = Omit<
   InputProps,
@@ -26,7 +25,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
             onClick={() => toggleType()}
             id={'view-or-hide-password-button'}
           >
-            {type === 'password' ? <ShowIcon /> : <HideIcon />}
+            <Icon name={type === 'password' ? 'eye' : 'eye-off'} />
           </InputDecorationButton>
         }
         type={type}

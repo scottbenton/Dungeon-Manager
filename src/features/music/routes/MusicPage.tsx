@@ -2,15 +2,17 @@ import { Text } from '@/components/Text';
 import { useReduxDispatch } from '@/hooks/reduxHooks';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/Button';
-import AddIcon from '@heroicons/react/24/outline/PlusIcon';
+import { useSpotifyAuthInterceptor } from '@/features/music/hooks/useSpotifyAuthInterceptor';
 import { createMusicListener } from '../stores/musicSlice';
 import { MusicCardList } from '../components/MusicCardList';
 import { AddMusicDialog } from '../components/AddMusicDialog';
+import { SpotifyAuthSection } from '../components/SpotifyAuthSection';
 
 export default function MusicPage() {
   const dispatch = useReduxDispatch();
 
   const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false);
+  useSpotifyAuthInterceptor();
 
   useEffect(() => {
     const unsubscribe = dispatch(createMusicListener);
@@ -31,6 +33,7 @@ export default function MusicPage() {
         {/* Organize your music using tags to quickly find the right music for the
         moment. */}
       </Text>
+      <SpotifyAuthSection />
       <MusicCardList openAddMusicDialog={() => setAddDialogOpen(true)} />
       <Button
         rounded
@@ -38,12 +41,12 @@ export default function MusicPage() {
         color={'brand'}
         size={'lg'}
         css={{
-          position: 'absolute',
+          position: 'fixed',
           bottom: '$s-4',
           right: '$s-4',
           boxShadow: '$md',
         }}
-        endIcon={AddIcon}
+        endIcon={'add'}
         onClick={() => setAddDialogOpen(true)}
       >
         Add Music

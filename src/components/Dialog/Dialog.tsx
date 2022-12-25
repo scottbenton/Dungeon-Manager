@@ -1,5 +1,5 @@
 import * as RDialog from '@radix-ui/react-dialog';
-import CloseIcon from '@heroicons/react/24/outline/XMarkIcon';
+import { Icon } from '../Icon';
 import { Text } from '../Text';
 import {
   CloseButton,
@@ -30,7 +30,7 @@ export function Dialog(props: DialogProps) {
             </RDialog.Title>
             <RDialog.Close asChild>
               <CloseButton size={'lg'}>
-                <CloseIcon />
+                <Icon name={'close'} size={'lg'} />
               </CloseButton>
             </RDialog.Close>
           </DialogHeader>

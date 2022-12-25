@@ -5,39 +5,28 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import CreatePlaylistIcon from '@heroicons/react/20/solid/PlusIcon';
 import { useReduxSelector } from '@/hooks/reduxHooks';
+import { addMusicItem } from '../../api/addMusicItem';
+import { MusicSource } from '../../types/MusicSource';
+import { SpotifyMusicDocument } from '../../types/SpotifyMusicDocument';
+import { parseSpotifyURL } from '../../utils/parseSpotifyURL';
 import { FormButtonContainer, StyledForm } from './AddMusicDialog.styles';
-import { addMusicItem } from '../api/addMusicItem';
-import { MusicSource } from '../types/MusicSource';
-import { YoutubeMusicDocument } from '../types/YoutubeMusicDocument';
-import { parseYoutubeURL } from '../utils/parseYoutubeURL';
 
-export interface AddYoutubePlaylistFormProps {
+export interface AddSpotifyPlaylistFormProps {
   onCompletion: () => void;
 }
 
-const youtubeSchema = yup.object({
-  label: yup.string().required(),
+const spotifySchema = yup.object({
   url: yup.string().url().required(),
 });
 
-export interface YoutubeFormData {
-  label: string;
+interface SpotifyFormData {
   url: string;
 }
 
-export function AddYoutubePlaylistForm(props: AddYoutubePlaylistFormProps) {
+export function AddSpotifyPlaylistForm(props: AddSpotifyPlaylistFormProps) {
   const { onCompletion } = props;
-
   const uid = useReduxSelector((state) => state.auth.user?.id || '');
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<YoutubeFormData>({
-    resolver: yupResolver(youtubeSchema),
-  });
 
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<{
@@ -45,32 +34,37 @@ export function AddYoutubePlaylistForm(props: AddYoutubePlaylistFormProps) {
     message: string;
   }>();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SpotifyFormData>({
+    resolver: yupResolver(spotifySchema),
+  });
+
   const handleFormSubmit = handleSubmit((data) => {
     setLoading(true);
     setErrorMessage(undefined);
+    const { url } = data;
 
-    const { label, url } = data;
-    const parsedUrl = parseYoutubeURL(url);
+    const parsedUrl = parseSpotifyURL(url);
+
     if (parsedUrl) {
-      addMusicItem<YoutubeMusicDocument>(uid, MusicSource.Youtube, {
+      addMusicItem<SpotifyMusicDocument>(uid, MusicSource.Spotify, {
         id: parsedUrl.id,
-        label: label,
         type: parsedUrl.type,
-        source: MusicSource.Youtube,
+        source: MusicSource.Spotify,
         tags: [],
       })
         .then(() => {
           onCompletion();
         })
-        .catch((e) => {
+        .catch(() => {
           setErrorMessage({
             title: 'Error Adding Document',
             message:
               'There was an error adding your document. Please try again later.',
           });
-        })
-        .finally(() => {
-          setLoading(false);
         });
     } else {
       setErrorMessage({
@@ -90,12 +84,7 @@ export function AddYoutubePlaylistForm(props: AddYoutubePlaylistFormProps) {
         />
       )}
       <Input
-        label={'Label'}
-        {...register('label')}
-        error={errors.label?.message}
-      />
-      <Input
-        label={'Youtube URL'}
+        label={'Spotify URL'}
         {...register('url')}
         error={errors.url?.message}
       />
@@ -105,7 +94,7 @@ export function AddYoutubePlaylistForm(props: AddYoutubePlaylistFormProps) {
           color={'brand'}
           type={'submit'}
           loading={loading}
-          endIcon={CreatePlaylistIcon}
+          endIcon={'add'}
         >
           Add Music
         </Button>

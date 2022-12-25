@@ -24,6 +24,12 @@ export const CardGrid = styled('div', {
   },
 });
 
+export const MusicCardHeader = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+});
+
 export const MusicCardFooter = styled('div', {
   display: 'flex',
   alignItems: 'center',

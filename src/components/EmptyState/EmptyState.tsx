@@ -1,17 +1,19 @@
+import { IconNames } from '@/types/IonIconNames';
 import { CSS } from '@stitches/react';
 import { Button, ButtonProps } from '../Button';
+import { Icon } from '../Icon';
 import { Text } from '../Text';
 import { EmptyStateContainer } from './EmptyState.styles';
 
 export interface EmptyStateProps {
   message: string;
   callToAction?: ButtonProps;
-  Icon: (props: React.ComponentProps<'svg'>) => JSX.Element;
+  IconEntry: ((props: React.ComponentProps<'svg'>) => JSX.Element) | IconNames;
   css?: CSS;
 }
 
 export function EmptyState(props: EmptyStateProps): JSX.Element {
-  const { message, callToAction, Icon, css } = props;
+  const { message, callToAction, IconEntry, css } = props;
 
   return (
     <EmptyStateContainer css={css}>
@@ -19,7 +21,11 @@ export function EmptyState(props: EmptyStateProps): JSX.Element {
         {message}
       </Text>
       {callToAction && <Button {...callToAction} />}
-      <Icon className={'w-64 text-primary-200 absolute'} />
+      {typeof IconEntry === 'string' ? (
+        <Icon name={IconEntry} size={'background'} />
+      ) : (
+        <IconEntry />
+      )}
     </EmptyStateContainer>
   );
 }

@@ -52,4 +52,11 @@ export const routeConfig: { [path in ROUTES]: IRouteConfig } = {
       direction: 'row',
     },
   },
+  [ROUTES.SPOTIFY_CALLBACK]: {
+    path: routePaths[ROUTES.SPOTIFY_CALLBACK],
+    Component: React.lazy(
+      () => import('@/features/music/routes/SpotifyCallbackPage')
+    ),
+    requiresAuth: false,
+  },
 };

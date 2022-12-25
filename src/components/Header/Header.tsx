@@ -1,10 +1,9 @@
 import DungeonManagerIcon from '@/assets/DungeonManagerIcon.svg';
 import { NavLink } from 'react-router-dom';
-import ImagesIcon from '@heroicons/react/20/solid/PhotoIcon';
-import MusicIcon from '@heroicons/react/20/solid/MusicalNoteIcon';
 
 import { Container, LogoContainer, Navigation, Surface } from './Header.styles';
 import { AvatarMenu } from './AvatarMenu';
+import { Icon } from '../Icon';
 
 export function Header(): JSX.Element {
   return (
@@ -19,14 +18,14 @@ export function Header(): JSX.Element {
             to={'/images'}
             className={({ isActive }) => (isActive ? 'active' : undefined)}
           >
-            <ImagesIcon />
+            <Icon name={'image'} css={{ marginRight: '$s-2' }} />
             Images
           </NavLink>
           <NavLink
             to={'/music'}
             className={({ isActive }) => (isActive ? 'active' : undefined)}
           >
-            <MusicIcon />
+            <Icon name={'musical-notes'} css={{ marginRight: '$s-2' }} />
             Music
           </NavLink>
         </Navigation>

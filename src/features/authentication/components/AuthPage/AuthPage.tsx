@@ -1,7 +1,7 @@
 import { Text } from '@/components/Text';
-import UserCircleIcon from '@heroicons/react/24/solid/UserCircleIcon';
 import { Link } from 'react-router-dom';
 import dungeonManagerIconSrc from '@/assets/DungeonManagerIcon.svg';
+import { Icon } from '@/components/Icon';
 import { ReactComponent as PhotoIcon } from '../../assets/SharePhoto.svg';
 import { ReactComponent as MonitorIcon } from '../../assets/Monitor.svg';
 import { ReactComponent as MusicIcon } from '../../assets/MusicDisc.svg';
@@ -114,7 +114,7 @@ export function AuthPage(props: AuthPageProps): JSX.Element {
       >
         <CardHeader>
           <div>
-            <UserCircleIcon />
+            <Icon size={'lg'} name={'person-circle'} />
           </div>
           <Text as={'h1'} variant={'h2'} textColor={'brandPrimary'}>
             {title}

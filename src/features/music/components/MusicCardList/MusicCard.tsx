@@ -1,39 +1,42 @@
 import { Button } from '@/components/Button';
+import { IconButton } from '@/components/Button/IconButton';
 import { Card } from '@/components/Card';
 import { Text } from '@/components/Text';
-import PlayIcon from '@heroicons/react/20/solid/PlayIcon';
-import PlayingIcon from '@heroicons/react/20/solid/SpeakerWaveIcon';
 import { SpotifyMusicItem } from '../../types/SpotifyMusicItem';
 import { YoutubeMusicItem } from '../../types/YoutubeMusicItem';
-import { MusicCardFooter } from './MusicCardList.styles';
+import { MusicCardFooter, MusicCardHeader } from './MusicCardList.styles';
 import { SourceIcon } from './SourceIcon';
 
 export interface MusicCardProps {
   item: YoutubeMusicItem | SpotifyMusicItem;
   isPlaying: boolean;
   handlePlay: () => void;
+  handleDelete: () => void;
 }
 
 export function MusicCard(props: MusicCardProps) {
-  const { item, handlePlay, isPlaying } = props;
+  const { item, handlePlay, isPlaying, handleDelete } = props;
   const { label, source } = item;
 
   return (
     <Card>
-      <Text
-        textColor={'textSecondary'}
-        variant={'h4'}
-        css={{
-          paddingX: '$s-1',
-          paddingY: '$s-2',
-          fontWeight: '$light',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {label || 'Loading...'}
-      </Text>
+      <MusicCardHeader>
+        <Text
+          textColor={'textSecondary'}
+          variant={'h4'}
+          css={{
+            paddingX: '$s-1',
+            paddingY: '$s-2',
+            fontWeight: '$light',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {label || 'Loading...'}
+        </Text>
+        <IconButton iconName={'close'} onClick={() => handleDelete()} />
+      </MusicCardHeader>
       <MusicCardFooter>
         <SourceIcon source={source} />
         <Button
@@ -41,7 +44,7 @@ export function MusicCard(props: MusicCardProps) {
           color={'brand'}
           variant={'secondary'}
           rounded
-          endIcon={isPlaying ? PlayingIcon : PlayIcon}
+          endIcon={isPlaying ? 'volume-medium' : 'play'}
           disabled={isPlaying}
           onClick={() => handlePlay()}
         >
