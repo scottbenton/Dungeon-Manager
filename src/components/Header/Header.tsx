@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 import { Container, LogoContainer, Navigation, Surface } from './Header.styles';
 import { AvatarMenu } from './AvatarMenu';
-import { Icon } from '../Icon';
+import { Icon, MaterialIcon } from '../Icon';
+import { MATERIAL_ICON_VARIANTS } from '../Icon/MaterialIcon.types';
 
 export function Header(): JSX.Element {
   return (
@@ -18,15 +19,23 @@ export function Header(): JSX.Element {
             to={'/images'}
             className={({ isActive }) => (isActive ? 'active' : undefined)}
           >
-            <Icon name={'image'} css={{ marginRight: '$s-2' }} />
-            Images
+            <MaterialIcon
+              name={'image'}
+              filled={false}
+              css={{ marginRight: '$s-2' }}
+            />
+            <span className={'label'}>Images</span>
           </NavLink>
           <NavLink
             to={'/music'}
             className={({ isActive }) => (isActive ? 'active' : undefined)}
           >
-            <Icon name={'musical-notes'} css={{ marginRight: '$s-2' }} />
-            Music
+            <MaterialIcon
+              name={'music_note'}
+              filled={false}
+              css={{ marginRight: '$s-2' }}
+            />
+            <span className={'label'}>Music</span>
           </NavLink>
         </Navigation>
         <AvatarMenu />

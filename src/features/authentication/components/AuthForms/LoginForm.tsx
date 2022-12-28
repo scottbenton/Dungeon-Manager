@@ -90,7 +90,7 @@ export function LoginForm() {
           color={'brand'}
           type={'submit'}
           loading={loading}
-          endIcon={'person-circle'}
+          endIcon={'account_circle'}
         >
           Login
         </Button>

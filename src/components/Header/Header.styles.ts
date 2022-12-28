@@ -52,7 +52,9 @@ export const Navigation = styled('nav', {
       color: '$text-brand-secondary',
     },
     '&:focus': {
-      textDecoration: 'underline',
+      '&>span.label': {
+        textDecoration: 'underline',
+      },
       outline: 'none',
     },
     '&.active': {

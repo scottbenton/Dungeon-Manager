@@ -1,12 +1,8 @@
 import * as RDialog from '@radix-ui/react-dialog';
-import { Icon } from '../Icon';
+import { IconButton } from '../Button/IconButton';
+import { MaterialIcon } from '../Icon';
 import { Text } from '../Text';
-import {
-  CloseButton,
-  DialogContent,
-  DialogHeader,
-  DialogOverlay,
-} from './DialogStyles';
+import { DialogContent, DialogHeader, DialogOverlay } from './DialogStyles';
 
 export interface DialogProps {
   open: boolean;
@@ -29,9 +25,9 @@ export function Dialog(props: DialogProps) {
               </Text>
             </RDialog.Title>
             <RDialog.Close asChild>
-              <CloseButton size={'lg'}>
-                <Icon name={'close'} size={'lg'} />
-              </CloseButton>
+              <IconButton>
+                <MaterialIcon name={'close'} />
+              </IconButton>
             </RDialog.Close>
           </DialogHeader>
           {content}

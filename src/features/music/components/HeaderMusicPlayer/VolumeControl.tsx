@@ -1,5 +1,4 @@
-import { Icon } from '@/components/Icon';
-import { IconNames } from '@/types/IonIconNames';
+import { MaterialIcon } from '@/components/Icon';
 import { ChangeEvent, MutableRefObject, useEffect, useState } from 'react';
 import {
   VolumeControlContainer,
@@ -32,22 +31,19 @@ export function VolumeControl(props: VolumeControlProps): JSX.Element {
     }
   };
 
-  const getVolumeIconName = (): IconNames => {
+  const getVolumeIconName = (): string => {
     if (volumeLevel === 0) {
-      return 'volume-off';
+      return 'volume_mute';
     }
-    if (volumeLevel < 0.3) {
-      return 'volume-low';
+    if (volumeLevel < 0.5) {
+      return 'volume_down';
     }
-    if (volumeLevel < 0.7) {
-      return 'volume-medium';
-    }
-    return 'volume-high';
+    return 'volume_up';
   };
 
   return (
     <VolumeControlContainer>
-      <Icon name={getVolumeIconName()} css={{ marginRight: '$s-2' }} />
+      <MaterialIcon name={getVolumeIconName()} css={{ marginRight: '$s-2' }} />
       <VolumeControlInput
         id={'volume-input'}
         type={'range'}

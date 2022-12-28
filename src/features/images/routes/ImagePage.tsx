@@ -5,7 +5,7 @@ import { createImageListener } from '@/features/images/stores/imageSlice';
 import { useReduxDispatch, useReduxSelector } from '@/hooks/reduxHooks';
 import { useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Icon } from '@/components/Icon';
+import { MaterialIcon } from '@/components/Icon';
 import { constructImageViewerPath } from '@/config/routes';
 import { Link } from 'react-router-dom';
 import { createImageItem } from '../api/createImageItem';
@@ -62,7 +62,11 @@ export default function ImagePage() {
       <ViewerLinkContainer>
         <Link to={constructImageViewerPath(uid || '')} target={'_blank'}>
           Go to Viewer
-          <Icon name={'open-outline'} />
+          <MaterialIcon
+            name={'open_in_new'}
+            size={'sm'}
+            css={{ marginLeft: '$s-1' }}
+          />
         </Link>
       </ViewerLinkContainer>
       <FileDropzone
@@ -77,7 +81,7 @@ export default function ImagePage() {
       ) : imageOrder.length === 0 ? (
         <EmptyState
           message={'Upload an image to get started'}
-          IconEntry={'people-circle-outline'}
+          IconEntry={'groups'}
         />
       ) : (
         <ImageList imageOrder={imageOrder} selectedImageId={selectedImageId} />

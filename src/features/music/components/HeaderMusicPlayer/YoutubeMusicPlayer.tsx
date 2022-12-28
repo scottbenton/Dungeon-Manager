@@ -1,4 +1,3 @@
-import { IconButton } from '@/components/Button/IconButton';
 import { useCallback, useEffect, useRef } from 'react';
 import { Text } from '@/components/Text';
 import { useReduxDispatch } from '@/hooks/reduxHooks';
@@ -92,19 +91,21 @@ export function YoutubeMusicPlayer(props: YoutubeMusicPlayerProps) {
           {showPreviousAndNextButtons && (
             <MusicControl
               label={'Previous'}
-              iconName={'play-skip-back'}
+              iconName={'skip_previous'}
               onClick={() => handlePrevious()}
             />
           )}
           <MusicControl
             label={status === PlaybackStatus.Playing ? 'Pause' : 'Play'}
-            iconName={status === PlaybackStatus.Playing ? 'pause' : 'play'}
+            iconName={
+              status === PlaybackStatus.Playing ? 'pause' : 'play_arrow'
+            }
             onClick={() => handlePlayPause()}
           />
           {showPreviousAndNextButtons && (
             <MusicControl
               label={'Next'}
-              iconName={'play-skip-forward'}
+              iconName={'skip_next'}
               onClick={() => handleNext()}
             />
           )}

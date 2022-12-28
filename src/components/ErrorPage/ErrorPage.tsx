@@ -6,7 +6,8 @@ import {
   CallToAction,
 } from './ErrorPage.styles';
 import { ButtonProps } from '../Button';
-import { Icon } from '../Icon';
+import { Icon, MaterialIcon } from '../Icon';
+import { MATERIAL_ICON_VARIANTS } from '../Icon/MaterialIcon.types';
 
 export interface ErrorPageProps {
   title: string;
@@ -22,7 +23,7 @@ export function ErrorPage(props: ErrorPageProps): JSX.Element {
     <PageContent centerContent fullscreen={fullscreen}>
       <ErrorPageContainer>
         <ErrorPageTitle>
-          <Icon name={'alert-circle'} />
+          <MaterialIcon name={'error'} size={'xl'} />
           {title}
         </ErrorPageTitle>
         <ErrorPageMessage>{message}</ErrorPageMessage>

@@ -7,7 +7,7 @@ import {
   DropzoneText,
 } from './FileDropzone.styles';
 import { Text } from '../Text';
-import { Icon } from '../Icon';
+import { Icon, MaterialIcon } from '../Icon';
 
 export interface FileDropzoneProps extends PropsWithChildren {
   getRootProps: () => any;
@@ -33,7 +33,7 @@ export function FileDropzone(props: FileDropzoneProps): JSX.Element {
       <Dropzone {...getRootProps()} isDragActive={isDragActive}>
         <input id={`${label}-file-upload`} {...getInputProps()} />
         <DropzoneIcon>
-          <Icon name={'image'} size={'lg'} />
+          <MaterialIcon filled={false} name={'image'} size={'lg'} />
         </DropzoneIcon>
         {isDragActive ? (
           <DropzoneText isDragActive>Drop the files here.</DropzoneText>

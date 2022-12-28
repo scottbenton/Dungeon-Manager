@@ -1,6 +1,5 @@
 import { styled } from '@/config/theme';
 import * as RDialog from '@radix-ui/react-dialog';
-import { Button } from '../Button';
 import { Card } from '../Card';
 
 export const DialogOverlay = styled(RDialog.Overlay, {
@@ -27,13 +26,4 @@ export const DialogHeader = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-});
-
-export const CloseButton = styled(Button, {
-  padding: '$s-2!important',
-  borderRadius: '$xl',
-
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
 });

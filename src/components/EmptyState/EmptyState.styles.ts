@@ -11,11 +11,11 @@ export const EmptyStateContainer = styled('div', {
   height: '$s-72',
   marginY: '$s-8',
 
-  '&>:not(span.icon)': {
+  '&>:not(span.mui-icon)': {
     position: 'relative',
     zIndex: '$10',
   },
-  '&>span.icon': {
+  '&>span.mui-icon': {
     position: 'absolute',
     color: '$brand-100',
     [`.${darkTheme} &`]: {

@@ -35,7 +35,11 @@ export function MusicCard(props: MusicCardProps) {
         >
           {label || 'Loading...'}
         </Text>
-        <IconButton iconName={'close'} onClick={() => handleDelete()} />
+        <IconButton
+          iconName={'close'}
+          size={'sm'}
+          onClick={() => handleDelete()}
+        />
       </MusicCardHeader>
       <MusicCardFooter>
         <SourceIcon source={source} />
@@ -44,7 +48,7 @@ export function MusicCard(props: MusicCardProps) {
           color={'brand'}
           variant={'secondary'}
           rounded
-          endIcon={isPlaying ? 'volume-medium' : 'play'}
+          endIcon={isPlaying ? 'equalizer' : 'play_arrow'}
           disabled={isPlaying}
           onClick={() => handlePlay()}
         >

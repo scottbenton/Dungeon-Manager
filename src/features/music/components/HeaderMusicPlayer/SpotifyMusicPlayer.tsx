@@ -115,13 +115,15 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
           />
           <MusicControl
             label={'Previous'}
-            iconName={'play-skip-back'}
+            iconName={'skip_previous'}
             onClick={() => spotifyPlayerRef.current?.previousTrack()}
             disabled={!enabledControls.previous}
           />
           <MusicControl
             label={status === PlaybackStatus.Playing ? 'Pause' : 'Play'}
-            iconName={status === PlaybackStatus.Playing ? 'pause' : 'play'}
+            iconName={
+              status === PlaybackStatus.Playing ? 'pause' : 'play_arrow'
+            }
             onClick={() => spotifyPlayerRef.current?.togglePlay()}
             disabled={
               status === PlaybackStatus.Playing
@@ -132,7 +134,7 @@ export function SpotifyMusicPlayer(props: SpotifyMusicPlayerProps) {
           <MusicControl
             label={'Next'}
             onClick={() => spotifyPlayerRef.current?.nextTrack()}
-            iconName={'play-skip-forward'}
+            iconName={'skip_next'}
             disabled={!enabledControls.next}
           />
           <MusicControl

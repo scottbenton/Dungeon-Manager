@@ -1,10 +1,9 @@
-import { Icon } from '@/components/Icon';
-import { IconNames } from '@/types/IonIconNames';
+import { MaterialIcon } from '@/components/Icon';
 import { StyledMusicControl } from './MusicControl.styles';
 
 export interface MusicControlProps {
   label: string;
-  iconName: IconNames;
+  iconName: string;
   onClick: () => void;
   disabled?: boolean;
   selected?: boolean;
@@ -21,7 +20,7 @@ export function MusicControl(props: MusicControlProps): JSX.Element {
       aria-pressed={selected}
       onClick={() => onClick()}
     >
-      <Icon name={iconName} />
+      <MaterialIcon name={iconName} />
     </StyledMusicControl>
   );
 }

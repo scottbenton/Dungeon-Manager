@@ -6,6 +6,7 @@ import { AppProviders } from './providers';
 
 import '@fontsource/staatliches'; // Defaults to weight 400.
 import '@fontsource/inter/variable.css';
+import 'material-symbols';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

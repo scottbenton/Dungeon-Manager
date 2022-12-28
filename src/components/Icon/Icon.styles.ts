@@ -1,25 +1,51 @@
 import { styled } from '@/config/theme';
-import IonIcon from '@reacticons/ionicons';
 
-export const StyledIcon = styled(IonIcon, {
-  display: 'flex !important',
+export const StyledMaterialIcon = styled('span', {
+  $$weight: 400,
+  $$grade: 0,
+
   variants: {
+    filled: {
+      true: {
+        $$fill: 1,
+      },
+      false: {
+        $$fill: 0,
+      },
+    },
     size: {
+      sm: {
+        $$size: 20,
+        $$fontSize: '20px',
+      },
       md: {
-        width: '20px !important',
-        height: '20px !important',
+        $$size: 24,
+        $$fontSize: '24px',
       },
       lg: {
-        width: '24px !important',
-        height: '24px !important',
+        $$size: 40,
+        $$fontSize: '40px',
+      },
+      xl: {
+        $$size: 48,
+        $$fontSize: '48px',
       },
       background: {
-        width: '$s-64 !important',
-        height: '$s-64 !important',
+        $$size: 256,
+        $$fontSize: '256px',
       },
     },
   },
   defaultVariants: {
+    filled: false,
     size: 'md',
   },
+
+  '&.mui-icon': {
+    fontVariationSettings:
+      '"FILL" $$fill, "wght" $$weight, "GRAD" $$grade, "opsz" $$size',
+    fontSize: '$$fontSize !important',
+  },
+  // width: '$$size',
+  // height: '$$size',
 });

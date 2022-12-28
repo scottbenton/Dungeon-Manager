@@ -35,9 +35,7 @@ export const DropzoneIcon = styled('div', {
   backgroundColor: '$surface-brand',
   color: '$text-brand-secondary',
   padding: '$s-3',
-  '&>svg': {
-    width: '$s-6',
-  },
+  display: 'flex',
 });
 
 export const DropzoneText = styled('p', {

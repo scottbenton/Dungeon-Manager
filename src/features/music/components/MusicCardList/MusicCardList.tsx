@@ -37,7 +37,7 @@ export function MusicCardList(props: MusicCardListProps) {
     return (
       <EmptyState
         message={'Add music to get started'}
-        IconEntry={'musical-notes-outline'}
+        IconEntry={'music_note'}
         callToAction={{
           children: 'Add Music',
           color: 'brand',

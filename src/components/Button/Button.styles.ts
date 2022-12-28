@@ -1,4 +1,4 @@
-import { styled } from '@/config/theme';
+import { darkTheme, styled } from '@/config/theme';
 
 export const StyledButton = styled('button', {
   display: 'flex',
@@ -184,23 +184,9 @@ export const StyledIconButton = styled('button', {
   transitionDuration: '$transitions$duration-150',
   transitionTimingFunction: '$transitions$ease-in-out',
 
+  padding: '$s-2',
+
   variants: {
-    size: {
-      md: {
-        padding: '$s-2',
-        '&>svg, &>span': {
-          width: '$s-5 !important',
-          height: '$s-5 !important',
-        },
-      },
-      lg: {
-        padding: '$s-2',
-        '&>svg, &>span': {
-          width: '$s-6 !important',
-          height: '$s-6 !important',
-        },
-      },
-    },
     color: {
       brand: {
         $$textColor: '$colors$text-brand-secondary',
@@ -212,9 +198,9 @@ export const StyledIconButton = styled('button', {
       },
       neutral: {
         $$textColor: '$colors$text-gray-secondary',
-        $$surfaceDark: '$colors$gray-700',
-        $$surfaceDarkHover: '$colors$gray-800',
-        $$surfaceLight: '$colors$gray-200',
+        $$surfaceDark: 'transparent',
+        $$surfaceDarkHover: '$colors$gray-700',
+        $$surfaceLight: 'transparent',
         $$surfaceLightHover: '$colors$gray-300',
         $$focusColor: '$colors$gray-400',
       },
@@ -253,14 +239,19 @@ export const StyledIconButton = styled('button', {
     },
   },
   defaultVariants: {
-    size: 'md',
     color: 'neutral',
   },
 
-  color: '$$surfaceDark',
+  color: '$$textColor',
   backgroundColor: '$$surfaceLight',
   '&:hover': {
     backgroundColor: '$$surfaceLightHover',
+  },
+  [`.${darkTheme} &`]: {
+    backgroundColor: '$$surfaceDark',
+    '&:hover': {
+      backgroundColor: '$$surfaceDarkHover',
+    },
   },
   '&:focus': {
     outline: 'none',

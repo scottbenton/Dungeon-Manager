@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { MaterialIcon } from '@/components/Icon';
 import { Tag } from './Tag';
 import { AddTagButton, TagList as StyledList } from './Tags.styles';
 
@@ -23,7 +23,7 @@ export function TagList(props: TagListProps): JSX.Element {
       ))}
       {handleAdd && (
         <AddTagButton type={'button'}>
-          <Icon name={'add'} />
+          <MaterialIcon name={'add'} />
         </AddTagButton>
       )}
     </StyledList>

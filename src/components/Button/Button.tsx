@@ -1,5 +1,3 @@
-import { IconNames } from '@/types/IonIconNames';
-import IonIcon from '@reacticons/ionicons';
 import { CSS, VariantProps } from '@stitches/react';
 import React, {
   MouseEvent,
@@ -7,7 +5,6 @@ import React, {
   PropsWithChildren,
   MutableRefObject,
   forwardRef,
-  ComponentProps,
 } from 'react';
 import { Link } from 'react-router-dom';
 import { Loader } from '../Loader';
@@ -19,8 +16,8 @@ export interface ButtonProps
     VariantProps<typeof StyledButton> {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: 'button' | 'reset' | 'submit';
-  startIcon?: ((props: any) => JSX.Element) | IconNames;
-  endIcon?: ((props: any) => JSX.Element) | IconNames;
+  startIcon?: ((props: any) => JSX.Element) | string;
+  endIcon?: ((props: any) => JSX.Element) | string;
   href?: string;
   loading?: boolean;
   disabled?: boolean;
@@ -46,8 +43,8 @@ export const Button = forwardRef<
     ...styleProps
   } = props;
 
-  const SI = startIcon as string | ((props: any) => JSX.Element);
-  const EI = endIcon as string | ((props: any) => JSX.Element);
+  const SI = startIcon;
+  const EI = endIcon;
 
   if (href) {
     return (

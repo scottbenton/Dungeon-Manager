@@ -1,6 +1,7 @@
 import { darkTheme, styled } from '@/config/theme';
 
 export const StyledMusicControl = styled('button', {
+  display: 'flex',
   padding: '$s-2',
   borderRadius: '$full',
   position: 'relative',
@@ -29,6 +30,7 @@ export const StyledMusicControl = styled('button', {
 
     position: 'absolute',
     left: '50%',
+    bottom: 2,
     transform: 'translate(-50%, -50%)',
   },
 
