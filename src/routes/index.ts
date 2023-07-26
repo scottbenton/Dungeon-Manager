@@ -25,6 +25,16 @@ export const routeConfig: { [path in ROUTES]: IRouteConfig } = {
       fullscreen: true,
     },
   },
+  [ROUTES.IMAGE_VIEWER_OBS]: {
+    path: routePaths[ROUTES.IMAGE_VIEWER_OBS],
+    Component: React.lazy(
+      () => import('@/features/images/routes/ImageViewerPageObs')
+    ),
+    requiresAuth: false,
+    layoutProps: {
+      fullscreen: true,
+    },
+  },
   [ROUTES.MUSIC]: {
     path: routePaths[ROUTES.MUSIC],
     Component: React.lazy(() => import('@/features/music/routes/MusicPage')),
