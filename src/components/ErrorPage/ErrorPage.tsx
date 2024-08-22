@@ -6,8 +6,7 @@ import {
   CallToAction,
 } from './ErrorPage.styles';
 import { ButtonProps } from '../Button';
-import { Icon, MaterialIcon } from '../Icon';
-import { MATERIAL_ICON_VARIANTS } from '../Icon/MaterialIcon.types';
+import { MaterialIcon } from '../Icon';
 
 export interface ErrorPageProps {
   title: string;

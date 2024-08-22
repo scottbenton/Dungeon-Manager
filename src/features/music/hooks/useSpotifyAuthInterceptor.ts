@@ -15,10 +15,7 @@ export function useSpotifyAuthInterceptor() {
   useEffect(() => {
     if (accessToken) {
       spotifyApi.interceptors.request.use((config) => {
-        config.headers = {
-          ...config.headers,
-          Authorization: `Bearer ${accessToken}`,
-        };
+        config.headers.set('Authorization', `Bearer ${accessToken}`);
         return config;
       });
     }
@@ -39,7 +36,7 @@ export function useSpotifyAuthInterceptor() {
             return spotifyApi(config);
           }
           return Promise.reject(error);
-        }
+        },
       );
     }
 

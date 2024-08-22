@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { GoogleLoginButtonStyled } from './GoogleLoginButton.styles';
-import { ReactComponent as GoogleLogo } from '../../assets/GoogleLogo.svg';
+import GoogleLogo from '../../assets/GoogleLogo.svg';
 import { loginWithGoogle } from '../../api/authApiCalls';
 
 export interface GoogleLoginButtonProps {

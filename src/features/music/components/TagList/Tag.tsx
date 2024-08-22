@@ -1,4 +1,4 @@
-import { Icon } from '@/components/Icon';
+import { MaterialIcon } from '@/components/Icon';
 import { useState } from 'react';
 import { getHSL, getHueFromString } from '../../utils/hueHelpers';
 import { Tag as StyledTag } from './Tags.styles';
@@ -31,7 +31,7 @@ export function Tag(props: TagProps): JSX.Element {
       {children}
       {handleDelete && isHovering && (
         <button type={'button'} onClick={() => handleDelete()}>
-          <Icon name={'trash'} />
+          <MaterialIcon name={'trash'} />
         </button>
       )}
     </StyledTag>

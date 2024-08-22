@@ -1,5 +1,5 @@
 import { Card } from '@/components/Card';
-import { Icon } from '@/components/Icon';
+import { MaterialIcon } from '@/components/Icon';
 import { styled } from '@/config/theme';
 
 export const StyledImageCard = styled(Card, {
@@ -44,7 +44,7 @@ export const ImageContainer = styled('div', {
   backgroundSize: 'cover',
 });
 
-export const SelectedCheckIcon = styled(Icon, {
+export const SelectedCheckIcon = styled(MaterialIcon, {
   color: '#fff',
   margin: '$s-2',
   float: 'right',

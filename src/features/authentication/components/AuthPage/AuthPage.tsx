@@ -2,9 +2,9 @@ import { Text } from '@/components/Text';
 import { Link } from 'react-router-dom';
 import dungeonManagerIconSrc from '@/assets/DungeonManagerIcon.svg';
 import { MaterialIcon } from '@/components/Icon';
-import { ReactComponent as PhotoIcon } from '../../assets/SharePhoto.svg';
-import { ReactComponent as MonitorIcon } from '../../assets/Monitor.svg';
-import { ReactComponent as MusicIcon } from '../../assets/MusicDisc.svg';
+import PhotoIcon from '../../assets/SharePhoto.svg';
+import MonitorIcon from '../../assets/Monitor.svg';
+import MusicIcon from '../../assets/MusicDisc.svg';
 import {
   CardFormContainer,
   CardHeader,

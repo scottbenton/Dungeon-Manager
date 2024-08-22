@@ -2,7 +2,6 @@ import { Alert } from '@/components/Alert';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { PasswordInput } from '@/components/Input/PasswordInput';
-import { Logger } from '@/lib/logger';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
@@ -45,7 +44,6 @@ export function LoginForm() {
       loginEmailAndPasswordUser(email, password)
         .catch((error: FirebaseError) => {
           console.error(error);
-          Logger.error('EmailLogin', error);
 
           setErrorMessage({
             title: 'Error logging in',
@@ -57,7 +55,7 @@ export function LoginForm() {
         });
     },
     (error) => {
-      Logger.error('EmailLoginValidation', error);
+      console.error(error);
       setErrorMessage({
         title: 'Validation Failed',
         message: 'Please fix the errors noted below and try again.',

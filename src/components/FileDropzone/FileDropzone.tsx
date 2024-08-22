@@ -7,7 +7,7 @@ import {
   DropzoneText,
 } from './FileDropzone.styles';
 import { Text } from '../Text';
-import { Icon, MaterialIcon } from '../Icon';
+import { MaterialIcon } from '../Icon';
 
 export interface FileDropzoneProps extends PropsWithChildren {
   getRootProps: () => any;

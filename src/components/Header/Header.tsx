@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { Container, LogoContainer, Navigation, Surface } from './Header.styles';
 import { AvatarMenu } from './AvatarMenu';
-import { Icon, MaterialIcon } from '../Icon';
-import { MATERIAL_ICON_VARIANTS } from '../Icon/MaterialIcon.types';
+import { MaterialIcon } from '../Icon';
 
 export function Header(): JSX.Element {
   return (
