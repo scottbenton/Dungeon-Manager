@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { InputDecorationButtonStyled } from './Input.styles';
+import { inputStyles } from './Input.styles';
 
 export interface InputDecorationButtonProps extends PropsWithChildren {
   onClick: () => void;
@@ -9,13 +9,16 @@ export interface InputDecorationButtonProps extends PropsWithChildren {
 export function InputDecorationButton(props: InputDecorationButtonProps) {
   const { onClick, id, children } = props;
 
+  const { inputButton } = inputStyles();
+
   return (
-    <InputDecorationButtonStyled
+    <button
       type={'button'}
       onClick={() => onClick()}
       id={id}
+      className={inputButton()}
     >
       {children}
-    </InputDecorationButtonStyled>
+    </button>
   );
 }

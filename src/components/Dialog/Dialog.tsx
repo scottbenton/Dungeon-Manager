@@ -1,12 +1,10 @@
 import * as RDialog from '@radix-ui/react-dialog';
-import { Icon } from '../Icon';
+import { IconButton } from '../Button/IconButton';
+import { MaterialIcon } from '../Icon';
 import { Text } from '../Text';
-import {
-  CloseButton,
-  DialogContent,
-  DialogHeader,
-  DialogOverlay,
-} from './DialogStyles';
+import { Card } from '../Card';
+import { dialogClasses } from './DialogStyles';
+import clsx from 'clsx';
 
 export interface DialogProps {
   open: boolean;
@@ -17,26 +15,29 @@ export interface DialogProps {
 
 export function Dialog(props: DialogProps) {
   const { open, setOpen, title, content } = props;
+  const { overlay, content: contentClasses, header } = dialogClasses();
   return (
     <RDialog.Root open={open} onOpenChange={setOpen}>
-      <DialogOverlay />
-      <RDialog.Content asChild>
-        <DialogContent css={{ paddingX: '$s-6' }}>
-          <DialogHeader>
-            <RDialog.Title asChild>
-              <Text variant={'h4'} as={'h1'}>
-                {title}
-              </Text>
-            </RDialog.Title>
-            <RDialog.Close asChild>
-              <CloseButton size={'lg'}>
-                <Icon name={'close'} size={'lg'} />
-              </CloseButton>
-            </RDialog.Close>
-          </DialogHeader>
-          {content}
-        </DialogContent>
-      </RDialog.Content>
+      <RDialog.Portal>
+        <RDialog.Overlay className={overlay()} />
+        <RDialog.Content>
+          <Card className={clsx('px-6', contentClasses())}>
+            <div className={header()}>
+              <RDialog.Title asChild>
+                <Text variant={'h4'} as={'h1'}>
+                  {title}
+                </Text>
+              </RDialog.Title>
+              <RDialog.Close asChild>
+                <IconButton>
+                  <MaterialIcon name={'close'} />
+                </IconButton>
+              </RDialog.Close>
+            </div>
+            {content}
+          </Card>
+        </RDialog.Content>
+      </RDialog.Portal>
     </RDialog.Root>
   );
 }

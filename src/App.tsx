@@ -7,7 +7,6 @@ import {
   matchPath,
 } from 'react-router-dom';
 import { routeConfig } from '@/routes';
-import { cssReset } from './config/cssReset';
 import { Layout } from './components/Layout';
 import { useReduxDispatch } from './hooks/reduxHooks';
 import { createFirebaseUserListener } from './features/authentication/stores/authSlice';
@@ -15,8 +14,6 @@ import { Page404 } from './routes/Page404';
 import { AuthBlocker } from './components/AuthBlocker';
 
 export function App() {
-  cssReset();
-
   const dispatch = useReduxDispatch();
 
   useEffect(() => {

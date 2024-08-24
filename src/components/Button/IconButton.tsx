@@ -1,25 +1,24 @@
-import { IconNames } from '@/types/IonIconNames';
-import IonIcon from '@reacticons/ionicons';
-import { CSS, VariantProps } from '@stitches/react';
 import { MouseEvent, MouseEventHandler, PropsWithChildren } from 'react';
-import { StyledIconButton } from './Button.styles';
+import { MaterialIcon, IconSizes } from '../Icon';
+import { iconButtonClasses } from './Button.styles';
+import { VariantProps } from 'tailwind-variants';
 
 export interface IconButtonProps
   extends PropsWithChildren,
-    VariantProps<typeof StyledIconButton> {
+    VariantProps<typeof iconButtonClasses> {
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  css?: CSS;
+  className?: string;
   disabled?: boolean;
-  iconName?: IconNames;
+  iconName?: string;
+  size?: IconSizes;
 }
 
 export function IconButton(props: IconButtonProps): JSX.Element {
-  const { onClick, css, children, disabled, iconName, ...buttonProps } = props;
+  const { onClick, children, disabled, iconName, size } = props;
 
   return (
-    <StyledIconButton
-      {...buttonProps}
-      css={css}
+    <button
+      className={iconButtonClasses()}
       onClick={(evt: MouseEvent<HTMLButtonElement>) => {
         evt.currentTarget.blur();
         if (onClick) {
@@ -28,14 +27,7 @@ export function IconButton(props: IconButtonProps): JSX.Element {
       }}
       disabled={disabled}
     >
-      {iconName ? <IonIcon name={iconName} /> : children}
-    </StyledIconButton>
+      {iconName ? <MaterialIcon name={iconName} size={size} /> : children}
+    </button>
   );
 }
-
-IconButton.defaultProps = {
-  onClick: undefined,
-  css: undefined,
-  disabled: undefined,
-  iconName: undefined,
-};

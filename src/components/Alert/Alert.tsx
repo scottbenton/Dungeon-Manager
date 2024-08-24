@@ -1,30 +1,26 @@
-import { CSS, VariantProps } from '@stitches/react';
+import { VariantProps } from 'tailwind-variants';
 import { Text } from '../Text';
-import { StyledAlert } from './Alert.styles';
+import { alertClasses } from './Alert.styles';
+import { clsx } from 'clsx';
 
-export interface AlertProps extends VariantProps<typeof StyledAlert> {
+export interface AlertProps extends VariantProps<typeof alertClasses> {
   title: string;
   message: string;
-  // type: todo
-  css?: CSS;
   className?: string;
 }
 
 export function Alert(props: AlertProps): JSX.Element {
-  const { title, message, css, className, ...alertProps } = props;
+  const { title, message, className, variant } = props;
+  const { base, text } = alertClasses({ variant });
+
   return (
-    <StyledAlert css={css} className={className} {...alertProps}>
+    <div className={clsx(className, base())}>
       <Text as={'span'} variant={'h5'} textColor={'inherit'}>
         {title}
       </Text>
-      <Text as={'p'} textColor={'inherit'}>
+      <Text className={text()} as={'p'} textColor={'inherit'}>
         {message}
       </Text>
-    </StyledAlert>
+    </div>
   );
 }
-
-Alert.defaultProps = {
-  css: undefined,
-  className: undefined,
-};

@@ -1,22 +1,5 @@
-import { styled } from '@/config/theme';
-import { keyframes } from '@stitches/react';
+import { tv } from 'tailwind-variants';
 
-const spin = keyframes({
-  from: {
-    transform: 'rotate(0deg)',
-  },
-  to: {
-    transform: 'rotate(360deg)',
-  },
-});
-
-export const Loader = styled('div', {
-  borderRadius: '$full',
-  borderTopWidth: '$1',
-  borderRightWidth: '$1',
-  borderColor: 'CurrentColor',
-  width: '$s-5',
-  height: '$s-5',
-
-  animation: `${spin} 1s linear infinite`,
+export const loaderStyles = tv({
+  base: 'animate-spin duration-1000 ease-linear w-5 h-5 border-t border-b border-current rounded-full',
 });

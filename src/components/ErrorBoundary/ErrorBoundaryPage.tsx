@@ -12,7 +12,7 @@ export function ErrorBoundaryPage(props: FallbackProps) {
       }
       buttonProps={{
         variant: 'primary',
-        color: 'brand',
+        color: 'primary',
         endIcon: 'refresh',
         onClick: () => resetErrorBoundary(),
         children: 'Reload Page',

@@ -1,30 +1,28 @@
-import { IconNames } from '@/types/IonIconNames';
-import IonIcon from '@reacticons/ionicons';
-import { CSS, VariantProps } from '@stitches/react';
 import React, {
   MouseEvent,
   MouseEventHandler,
   PropsWithChildren,
   MutableRefObject,
   forwardRef,
-  ComponentProps,
 } from 'react';
 import { Link } from 'react-router-dom';
 import { Loader } from '../Loader';
-import { StyledButton } from './Button.styles';
+import { buttonClasses } from './Button.styles';
 import { ButtonIcon } from './ButtonIcon';
+import { VariantProps } from 'tailwind-variants';
+import clsx from 'clsx';
 
 export interface ButtonProps
   extends PropsWithChildren,
-    VariantProps<typeof StyledButton> {
+    VariantProps<typeof buttonClasses> {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: 'button' | 'reset' | 'submit';
-  startIcon?: ((props: any) => JSX.Element) | IconNames;
-  endIcon?: ((props: any) => JSX.Element) | IconNames;
+  startIcon?: ((props: any) => JSX.Element) | string;
+  endIcon?: ((props: any) => JSX.Element) | string;
   href?: string;
   loading?: boolean;
   disabled?: boolean;
-  css?: CSS;
+  className?: string;
 }
 
 const LoaderElement = () => <Loader />;
@@ -42,34 +40,53 @@ export const Button = forwardRef<
     href,
     loading,
     disabled,
-    css,
-    ...styleProps
+    className,
+    size,
+    variant,
+    color,
+    rounded,
   } = props;
 
-  const SI = startIcon as string | ((props: any) => JSX.Element);
-  const EI = endIcon as string | ((props: any) => JSX.Element);
+  const {
+    base,
+    label,
+    startIcon: startIconClasses,
+    endIcon: endIconClasses,
+  } = buttonClasses({
+    size,
+    variant,
+    color,
+    rounded,
+  });
 
   if (href) {
     return (
-      <StyledButton
-        as={Link}
+      <Link
         to={href}
-        css={css}
+        className={clsx(base(), className)}
         ref={ref as MutableRefObject<HTMLAnchorElement>}
-        {...styleProps}
       >
         {startIcon && (
-          <ButtonIcon Element={startIcon} className={'startIcon'} />
+          <ButtonIcon
+            Element={startIcon}
+            size={size}
+            className={startIconClasses()}
+          />
         )}
-        <span className={'label'}>{children}</span>
-        {endIcon && <ButtonIcon Element={endIcon} className={'endIcon'} />}
-      </StyledButton>
+        <span className={label()}>{children}</span>
+        {endIcon && (
+          <ButtonIcon
+            Element={endIcon}
+            size={size}
+            className={endIconClasses()}
+          />
+        )}
+      </Link>
     );
   }
 
   return (
-    <StyledButton
-      {...styleProps}
+    <button
       onClick={(evt: MouseEvent<HTMLButtonElement>) => {
         evt.currentTarget.blur();
         if (onClick) {
@@ -77,29 +94,24 @@ export const Button = forwardRef<
         }
       }}
       disabled={disabled || loading}
-      type={type}
-      css={css}
+      className={clsx(base(), className)}
       ref={ref as MutableRefObject<HTMLButtonElement>}
     >
-      {startIcon && <ButtonIcon Element={startIcon} className={'startIcon'} />}
-      <span className={'label'}>{children}</span>
+      {startIcon && (
+        <ButtonIcon
+          Element={startIcon}
+          size={size}
+          className={startIconClasses()}
+        />
+      )}
+      <span className={label()}>{children}</span>
       {(endIcon || loading) && (
         <ButtonIcon
           Element={loading ? LoaderElement : (endIcon as any)}
-          className={'endIcon'}
+          size={size}
+          className={endIconClasses()}
         />
       )}
-    </StyledButton>
+    </button>
   );
 });
-
-Button.defaultProps = {
-  startIcon: undefined,
-  endIcon: undefined,
-  onClick: undefined,
-  href: undefined,
-  type: undefined,
-  loading: undefined,
-  disabled: undefined,
-  css: undefined,
-};

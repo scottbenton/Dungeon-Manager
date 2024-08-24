@@ -1,27 +1,25 @@
 import { PropsWithChildren } from 'react';
-import { CSS } from '@stitches/react';
-import {
-  Dropzone,
-  DropzoneContainer,
-  DropzoneIcon,
-  DropzoneText,
-} from './FileDropzone.styles';
+import { fileDropzoneClasses } from './FileDropzone.styles';
 import { Text } from '../Text';
-import { Icon } from '../Icon';
+import { MaterialIcon } from '../Icon';
 
 export interface FileDropzoneProps extends PropsWithChildren {
   getRootProps: () => any;
   getInputProps: () => any;
   isDragActive: boolean;
-  css?: CSS;
+  className?: string;
   label: string;
 }
 
 export function FileDropzone(props: FileDropzoneProps): JSX.Element {
-  const { getRootProps, getInputProps, isDragActive, css, label } = props;
+  const { getRootProps, getInputProps, isDragActive, className, label } = props;
+
+  const { dropzone, icon, textBold, text } = fileDropzoneClasses({
+    isDragActive,
+  });
 
   return (
-    <DropzoneContainer css={css}>
+    <div className={className}>
       <Text
         as={'label'}
         variant={'label'}
@@ -30,24 +28,20 @@ export function FileDropzone(props: FileDropzoneProps): JSX.Element {
       >
         {label}
       </Text>
-      <Dropzone {...getRootProps()} isDragActive={isDragActive}>
+      <div className={dropzone()} {...getRootProps()}>
         <input id={`${label}-file-upload`} {...getInputProps()} />
-        <DropzoneIcon>
-          <Icon name={'image'} size={'lg'} />
-        </DropzoneIcon>
+        <div className={icon()}>
+          <MaterialIcon filled={false} name={'image'} size={'lg'} />
+        </div>
         {isDragActive ? (
-          <DropzoneText isDragActive>Drop the files here.</DropzoneText>
+          <p className={text()}>Drop the files here.</p>
         ) : (
-          <DropzoneText isDragActive={false}>
-            <span>Upload an Image </span>
+          <p className={text()}>
+            <span className={textBold()}>Upload an Image </span>
             or drag and drop files here to upload them
-          </DropzoneText>
+          </p>
         )}
-      </Dropzone>
-    </DropzoneContainer>
+      </div>
+    </div>
   );
 }
-
-FileDropzone.defaultProps = {
-  css: undefined,
-};

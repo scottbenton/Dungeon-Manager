@@ -1,39 +1,10 @@
-import { styled } from '@/config/theme';
-import * as RDialog from '@radix-ui/react-dialog';
-import { Button } from '../Button';
-import { Card } from '../Card';
+import { tv } from 'tailwind-variants';
 
-export const DialogOverlay = styled(RDialog.Overlay, {
-  backgroundColor: '$surface-gray-transparent-light',
-  position: 'fixed',
-  inset: 0,
-  zIndex: '$modal',
-});
-
-export const DialogContent = styled(Card, {
-  maxWidth: '$lg',
-  width: '100%',
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  boxShadow: '$xl',
-  zIndex: '$modal',
-});
-
-export const DialogHeader = styled('div', {
-  // paddingX: '$s-2',
-  // paddingY: '$s-2',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-});
-
-export const CloseButton = styled(Button, {
-  padding: '$s-2!important',
-  borderRadius: '$xl',
-
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+export const dialogClasses = tv({
+  slots: {
+    overlay: 'bg-gray-950/20 fixed inset-0 z-50',
+    content:
+      'max-w-lg w-full fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-xl z-[51]',
+    header: 'flex items-center justify-between',
+  },
 });

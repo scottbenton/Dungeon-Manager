@@ -1,25 +1,23 @@
-import { styled } from '@/config/theme';
-import IonIcon from '@reacticons/ionicons';
+import { tv } from 'tailwind-variants';
+import './icon.css';
 
-export const StyledIcon = styled(IonIcon, {
-  display: 'flex !important',
+export const iconStyles = tv({
+  base: 'mui-icon',
   variants: {
+    filled: {
+      true: 'filled',
+      false: '',
+    },
     size: {
-      md: {
-        width: '20px !important',
-        height: '20px !important',
-      },
-      lg: {
-        width: '24px !important',
-        height: '24px !important',
-      },
-      background: {
-        width: '$s-64 !important',
-        height: '$s-64 !important',
-      },
+      sm: 'size-sm',
+      md: 'size-md',
+      lg: 'size-lg',
+      xl: 'size-xl',
+      background: 'size-background',
     },
   },
   defaultVariants: {
+    filled: false,
     size: 'md',
   },
 });

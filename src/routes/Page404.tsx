@@ -10,7 +10,7 @@ export function Page404(): JSX.Element {
       }
       buttonProps={{
         variant: 'primary',
-        color: 'brand',
+        color: 'primary',
         endIcon: 'image',
         children: 'Go to Images Page',
         href: routePaths[ROUTES.IMAGES],

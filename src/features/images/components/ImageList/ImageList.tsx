@@ -1,5 +1,4 @@
 import { ImageCard } from '../ImageCard';
-import { ImageGrid } from './ImageList.styles';
 
 export interface ImageListProps {
   imageOrder: string[];
@@ -10,12 +9,7 @@ export function ImageList(props: ImageListProps): JSX.Element {
   const { imageOrder, selectedImageId } = props;
 
   return (
-    <ImageGrid
-      columns={{
-        '@sm': 2,
-        '@md': 3,
-      }}
-    >
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-5'>
       {imageOrder.map((imageId) => (
         <ImageCard
           key={imageId}
@@ -23,10 +17,6 @@ export function ImageList(props: ImageListProps): JSX.Element {
           isSelected={selectedImageId === imageId}
         />
       ))}
-    </ImageGrid>
+    </div>
   );
 }
-
-ImageList.defaultProps = {
-  selectedImageId: undefined,
-};

@@ -1,35 +1,30 @@
-import { darkTheme } from '@/config/theme';
 import { useReduxSelector } from '@/hooks/reduxHooks';
 import { THEMES } from '@/stores/SettingsState';
 import { PropsWithChildren } from 'react';
-import { VariantProps } from '@stitches/react';
-import { HeaderMusicPlayer } from '@/features/music/components/HeaderMusicPlayer';
 
 import { Header } from '../Header';
-import { Page, PageContent } from './Layout.styles';
+import { pageStyles } from './Layout.styles';
 import { ErrorBoundary } from '../ErrorBoundary';
+import clsx from 'clsx';
+import { VariantProps } from 'tailwind-variants';
 
-export type LayoutProps = VariantProps<typeof PageContent> & PropsWithChildren;
+export type LayoutProps = VariantProps<typeof pageStyles> & PropsWithChildren;
 
 export function Layout(props: LayoutProps): JSX.Element {
-  const { children, ...layoutProps } = props;
-  const { fullscreen } = layoutProps;
+  const { children, ...variants } = props;
+  const { fullscreen } = variants;
+  const { root, page, pageContent } = pageStyles(variants);
 
   const themeKey = useReduxSelector((state) => state.settings.theme);
 
   return (
-    <Page
-      className={themeKey === THEMES.DARK ? darkTheme.className : undefined}
-    >
-      <ErrorBoundary>
-        {!fullscreen && <Header />}
-        <HeaderMusicPlayer />
-        <PageContent {...layoutProps}>{children}</PageContent>
-      </ErrorBoundary>
-    </Page>
+    <div className={clsx(root(), themeKey === THEMES.DARK ? 'dark' : '')}>
+      <div className={page()}>
+        <ErrorBoundary>
+          {!fullscreen && <Header />}
+          <div className={pageContent()}>{children}</div>
+        </ErrorBoundary>
+      </div>
+    </div>
   );
 }
-Layout.defaultProps = {
-  fullscreen: false,
-  centerContent: false,
-};

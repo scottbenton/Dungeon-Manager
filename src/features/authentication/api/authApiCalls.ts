@@ -10,7 +10,6 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { firebaseApp } from '@/lib/firebase';
-import { Logger } from '@/lib/logger';
 
 const auth = getAuth(firebaseApp);
 const googleAuthProvider = new GoogleAuthProvider();
@@ -21,9 +20,6 @@ export function firebaseUserListener(
 ) {
   return onAuthStateChanged(auth, onUser, (err) => {
     onError(err);
-    Logger.error(err.name, {
-      message: err.message,
-    });
   });
 }
 

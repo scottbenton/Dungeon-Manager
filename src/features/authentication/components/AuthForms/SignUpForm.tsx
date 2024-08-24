@@ -6,10 +6,8 @@ import * as yup from 'yup';
 import YupPassword from 'yup-password';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { Logger } from '@/lib/logger';
 import { FirebaseError } from 'firebase/app';
 import { Alert } from '@/components/Alert';
-import { FormButtonContainer, StyledForm } from './Form.styles';
 import { createEmailAndPasswordUser } from '../../api/authApiCalls';
 
 YupPassword(yup); // extend yup
@@ -48,7 +46,6 @@ export function SignUpForm() {
       createEmailAndPasswordUser(email, password)
         .catch((error: FirebaseError) => {
           console.error(error);
-          Logger.error('EmailSignup', error);
           setErrorMessage({
             title: 'Error creating user',
             message: error.message,
@@ -59,17 +56,17 @@ export function SignUpForm() {
         });
     },
     (error) => {
+      console.error(error);
       // Field Errors will be handled in field validation
-      Logger.error('EmailSignupValidation', error);
       setErrorMessage({
         title: 'Validation Failed',
         message: 'Please fix the errors noted below and try again.',
       });
-    }
+    },
   );
 
   return (
-    <StyledForm onSubmit={handleFormSubmit}>
+    <form className={'space-y-4'} onSubmit={handleFormSubmit}>
       {errorMessage && (
         <Alert
           variant={'error'}
@@ -87,17 +84,17 @@ export function SignUpForm() {
         {...register('password')}
         error={errors.password?.message}
       />
-      <FormButtonContainer>
+      <div className={'flex justify-end pt-2'}>
         <Button
           variant={'primary'}
-          color={'brand'}
+          color={'primary'}
           type={'submit'}
           loading={loading}
           endIcon={'add'}
         >
           Create Account
         </Button>
-      </FormButtonContainer>
-    </StyledForm>
+      </div>
+    </form>
   );
 }

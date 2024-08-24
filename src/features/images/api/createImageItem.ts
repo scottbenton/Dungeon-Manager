@@ -1,7 +1,6 @@
 import { addDoc, arrayUnion, setDoc } from 'firebase/firestore';
 import { uploadBytes } from 'firebase/storage';
 import { ImageDocument } from '../types/ImageDocument';
-import { ImageSetDocument } from '../types/ImageSetDocument';
 import {
   getImageItemCollectionRef,
   getImageSetRef,
@@ -20,16 +19,14 @@ export function createImageItem(uid: string, file: File) {
       filename: snapshot.ref.name,
       displayName: getFriendlyFilename(file.name),
     };
-    addDoc<ImageDocument>(getImageItemCollectionRef(uid), newImage).then(
-      (doc) => {
-        setDoc<ImageSetDocument>(
-          getImageSetRef(uid),
-          {
-            itemIds: arrayUnion(doc.id),
-          },
-          { merge: true }
-        );
-      }
-    );
+    addDoc(getImageItemCollectionRef(uid), newImage).then((doc) => {
+      setDoc(
+        getImageSetRef(uid),
+        {
+          itemIds: arrayUnion(doc.id),
+        },
+        { merge: true },
+      );
+    });
   });
 }

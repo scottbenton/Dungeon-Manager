@@ -1,0 +1,35 @@
+.mui-icon {
+  --weight: 400;
+  --grade: 0;
+  --fill: 0;
+  --size: 24;
+
+  font-variation-settings:
+    'FILL' var(--fill),
+    'wght' var(--weight),
+    'GRAD' var(--grade),
+    'opsz' var(--size);
+}
+.mui-icon.filled {
+  --fill: 1;
+}
+.mui-icon.size-sm {
+  --size: 20;
+  font-size: 20px !important;
+}
+.mui-icon.size-md {
+  --size: 24;
+  font-size: 24px !important;
+}
+.mui-icon.size-lg {
+  --size: 40;
+  font-size: 40px !important;
+}
+.mui-icon.size-xl {
+  --size: 48;
+  font-size: 48px !important;
+}
+.mui-icon.size-background {
+  --size: 256;
+  font-size: 256px !important;
+}

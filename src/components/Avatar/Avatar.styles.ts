@@ -1,31 +1,10 @@
-import { Avatar, Fallback } from '@radix-ui/react-avatar';
-import { styled } from '@/config/theme';
+import { tv } from 'tailwind-variants';
 
-export const StyledAvatar = styled(Avatar, {
-  width: '$s-10',
-  height: '$s-10',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  overflow: 'hidden',
-  fontSize: '$text-base',
-  lineHeight: 1,
-  fontWeight: '$semibold',
-  borderRadius: '$full',
-  backgroundColor: '$surface-brand',
-  color: '$text-brand-primary',
-});
-
-export const StyledFallback = styled(Fallback, {
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: '$gray-500',
-  color: '#fff',
-
-  '&>svg': {
-    width: '$s-5',
+export const avatarStyles = tv({
+  slots: {
+    base: 'w-10 h-10 flex items-center justify-center overflow-hidden text-base font-semibold rounded-full bg-primary-200 dark:bg-primary-900 text-primary-700 dark:text-white',
+    fallback:
+      'w-full h-full flex items-center justify-center bg-gray-500 text-white',
+    fallbackSvg: 'w-5',
   },
 });

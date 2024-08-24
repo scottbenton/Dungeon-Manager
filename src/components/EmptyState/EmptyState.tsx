@@ -1,36 +1,45 @@
-import { IconNames } from '@/types/IonIconNames';
-import { CSS } from '@stitches/react';
 import { Button, ButtonProps } from '../Button';
-import { Icon } from '../Icon';
+import { MaterialIcon } from '../Icon';
 import { Text } from '../Text';
-import { EmptyStateContainer } from './EmptyState.styles';
+import { emptyStateClasses } from './EmptyState.styles';
+import clsx from 'clsx';
+import { MATERIAL_ICON_VARIANTS } from '../Icon/MaterialIcon.types';
 
 export interface EmptyStateProps {
   message: string;
   callToAction?: ButtonProps;
-  IconEntry: ((props: React.ComponentProps<'svg'>) => JSX.Element) | IconNames;
-  css?: CSS;
+  IconEntry: ((props: React.ComponentProps<'svg'>) => JSX.Element) | string;
+  className?: string;
 }
 
 export function EmptyState(props: EmptyStateProps): JSX.Element {
-  const { message, callToAction, IconEntry, css } = props;
+  const { message, callToAction, IconEntry, className } = props;
+
+  const { container, contents, actions, icon } = emptyStateClasses();
 
   return (
-    <EmptyStateContainer css={css}>
-      <Text variant={'h4'} as={'h2'} textColor={'brandPrimary'}>
-        {message}
-      </Text>
-      {callToAction && <Button {...callToAction} />}
+    <div className={clsx(className, container())}>
+      <div className={contents()}>
+        <Text variant={'h4'} as={'h2'} textColor={'primary'}>
+          {message}
+        </Text>
+        {callToAction && (
+          <Button
+            {...callToAction}
+            className={clsx(callToAction.className, actions())}
+          />
+        )}
+      </div>
       {typeof IconEntry === 'string' ? (
-        <Icon name={IconEntry} size={'background'} />
+        <MaterialIcon
+          variant={MATERIAL_ICON_VARIANTS.ROUNDED}
+          name={IconEntry}
+          className={icon()}
+          size={'background'}
+        />
       ) : (
-        <IconEntry />
+        <IconEntry className={icon()} />
       )}
-    </EmptyStateContainer>
+    </div>
   );
 }
-
-EmptyState.defaultProps = {
-  css: undefined,
-  callToAction: undefined,
-};

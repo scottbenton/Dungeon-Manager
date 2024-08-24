@@ -1,50 +1,13 @@
-import { styled } from '@/config/theme';
-import { Button } from '../Button';
+import { tv } from 'tailwind-variants';
 
-export const ErrorPageContainer = styled('div', {
-  maxWidth: '$md',
-  width: '100%',
-  paddingX: '$s-4',
-  display: 'flex',
-  alignItems: 'center',
-  textAlign: 'center',
-  flexDirection: 'column',
-});
-
-export const ErrorPageTitle = styled('h1', {
-  '&>span>svg': {
-    marginRight: '$s-4',
-    width: '$s-20',
-    color: '$text-brand-tertiary',
+export const errorPageStyles = tv({
+  slots: {
+    container:
+      'max-w-md w-full px-4 flex items-center justify-center flex-col text-center',
+    title:
+      'flex items-center justify-center text-primary-900 dark:text-primary-100 font-black text-6xl whitespace-nowrap',
+    icon: 'mr-4 text-primary-500',
+    message: 'text-gray-700 dark:text-gray-200 mt-4',
+    callToAction: 'mt-6',
   },
-  display: 'flex',
-  color: '$text-brand-primary',
-  fontWeight: '$black',
-  fontSize: '$text-6xl',
-  whiteSpace: 'nowrap',
-  flexWrap: 'wrap',
-});
-
-export const ErrorPageMessage = styled('p', {
-  color: '$text-gray-secondary',
-  marginTop: '$s-4',
-});
-
-export const ErrorIcon = styled('div', {
-  width: '$s-16',
-  height: '$s-16',
-  backgroundColor: '$surface-error',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '$full',
-
-  '&>svg': {
-    width: '$s-12',
-    color: '$text-error-primary',
-  },
-});
-
-export const CallToAction = styled(Button, {
-  marginTop: '$s-6',
 });

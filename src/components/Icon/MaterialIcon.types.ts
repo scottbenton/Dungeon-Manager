@@ -1,0 +1,5 @@
+export enum MATERIAL_ICON_VARIANTS {
+  OUTLINED,
+  ROUNDED,
+  SHARP,
+}

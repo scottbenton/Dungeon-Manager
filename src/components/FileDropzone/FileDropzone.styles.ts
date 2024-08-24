@@ -1,54 +1,23 @@
-import { styled } from '@/config/theme';
+import { tv } from 'tailwind-variants';
 
-export const DropzoneContainer = styled('div', {});
-
-export const Dropzone = styled('div', {
-  paddingX: '$s-4',
-  paddingY: '$s-8',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '$xl',
-  borderWidth: '$2',
-  borderStyle: 'dashed',
-  cursor: 'pointer',
-  marginTop: '$s-1',
-
+export const fileDropzoneClasses = tv({
+  slots: {
+    dropzone:
+      'px-4 py-8 flex flex-col items-center justify-center rounded-xl border-2 border-dashed cursor-pointer mt-1',
+    icon: 'mb-3 rounded-xl bg-primary-200 text-primary-500 p-3 flex',
+    textBold: 'font-semibold text-primary-700 dark:text-primary-400',
+    text: 'text-gray-700 dark:text-gray-200',
+  },
   variants: {
     isDragActive: {
       true: {
-        borderColor: '$border-brand',
-        backgroundColor: '$surface-brand',
+        dropzone: 'border-primary-500 bg-primary-200',
+        text: 'text-primary-800 dark:text-primary-200',
       },
       false: {
-        borderColor: '$border-neutral',
-        backgroundColor: '$surface-foreground',
+        dropzone:
+          'border-gray-400 dark:border-gray-600 bg-white dark:bg-gray-800',
       },
-    },
-  },
-});
-
-export const DropzoneIcon = styled('div', {
-  marginBottom: '$s-3',
-  borderRadius: '$xl',
-  backgroundColor: '$surface-brand',
-  color: '$text-brand-secondary',
-  padding: '$s-3',
-  '&>svg': {
-    width: '$s-6',
-  },
-});
-
-export const DropzoneText = styled('p', {
-  '&>span': {
-    fontWeight: '$semibold',
-    color: '$text-brand-primary',
-  },
-  variants: {
-    isDragActive: {
-      true: { color: '$text-brand-primary' },
-      false: { color: '$text-gray-secondary' },
     },
   },
 });

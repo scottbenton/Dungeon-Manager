@@ -2,16 +2,13 @@ import { Button } from '@/components/Button';
 import { Text } from '@/components/Text';
 import { useReduxSelector } from '@/hooks/reduxHooks';
 import { useEffect, useRef, useState } from 'react';
-import {
-  ButtonContainer,
-  ImageContainer,
-  SelectedCheckIcon,
-  StyledImageCard,
-  StyledInput,
-} from './ImageCard.styles';
+import { imageCardStyles } from './ImageCard.styles';
 import { selectImage } from '../../api/selectImage';
 import { deleteImageItem } from '../../api/deleteImageItem';
 import { updateImageItemDisplayName } from '../../api/updateImageItem';
+import { Card } from '@/components/Card';
+import { MATERIAL_ICON_VARIANTS } from '@/components/Icon/MaterialIcon.types';
+import { MaterialIcon } from '@/components/Icon';
 
 export interface ImageCardProps {
   id: string;
@@ -48,13 +45,15 @@ export function ImageCard(props: ImageCardProps): JSX.Element {
     setIsEditing(false);
   };
 
+  const { card } = imageCardStyles({
+    selected: isSelected,
+    hovering: isHovering,
+  });
+
   return (
-    <StyledImageCard
-      padding={false}
-      hovering={isHovering}
-      selected={isSelected}
-    >
+    <Card className={card()} padding={false}>
       <button
+        className={'flex flex-col'}
         type={'button'}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
@@ -64,53 +63,57 @@ export function ImageCard(props: ImageCardProps): JSX.Element {
           }
         }}
       >
-        <ImageContainer
-          css={{
+        <div
+          className={'aspect-video w-fill bg-cover bg-center'}
+          style={{
             backgroundImage: isSelected
               ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${item.url})`
               : `url(${item.url})`,
           }}
         >
           {isSelected && (
-            <SelectedCheckIcon name={'checkmark-circle'} size={'lg'} />
+            <MaterialIcon
+              className={'text-white m-2 float-right'}
+              name={'check_circle'}
+              size={'md'}
+              variant={MATERIAL_ICON_VARIANTS.ROUNDED}
+              filled
+            />
           )}
-        </ImageContainer>
+        </div>
         {isEditing ? (
-          <StyledInput
+          <input
+            className='text-xl font-light px-1 py-2 border-b h-[45px] bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 focus:outline-none focus:border-primary-500 border'
             ref={inputRef}
             value={newName}
             onChange={(evt) => setNewName(evt.currentTarget.value)}
           />
         ) : (
           <Text
-            textColor={isSelected ? 'brandSecondary' : 'textSecondary'}
+            textColor={isSelected ? 'secondary' : 'textSecondary'}
             variant={'h4'}
             textAlign={'center'}
-            css={{
-              paddingX: '$s-1',
-              paddingY: '$s-2',
-              fontWeight: '$light',
-              borderBottomWidth: '$1',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            }}
+            className={
+              'px-1 py-2 font-ligh border-b overflow-hidden text-ellipsis whitespace-nowrap'
+            }
           >
             {item.label}
           </Text>
         )}
       </button>
-      <ButtonContainer>
+      <div className={'flex'}>
         {isEditing ? (
           <>
             <Button
-              startIcon={'checkmark'}
+              className={'w-1/2 rounded-none flex justify-center'}
+              startIcon={'check'}
               color={'success'}
               onClick={() => saveNewName()}
             >
               Save
             </Button>
             <Button
+              className={'w-1/2 rounded-none flex justify-center'}
               startIcon={'close'}
               color={'neutral'}
               onClick={() => {
@@ -123,14 +126,16 @@ export function ImageCard(props: ImageCardProps): JSX.Element {
         ) : (
           <>
             <Button
-              startIcon={'create-outline'}
-              color={'brand'}
+              className={'w-1/2 rounded-none flex justify-center'}
+              startIcon={'edit_square'}
+              color={'primary'}
               onClick={() => setIsEditing(true)}
             >
               Edit
             </Button>
             <Button
-              startIcon={'trash'}
+              className={'w-1/2 rounded-none flex justify-center'}
+              startIcon={'delete'}
               color={'error'}
               onClick={() => {
                 if (uid) {
@@ -142,7 +147,7 @@ export function ImageCard(props: ImageCardProps): JSX.Element {
             </Button>
           </>
         )}
-      </ButtonContainer>
-    </StyledImageCard>
+      </div>
+    </Card>
   );
 }
