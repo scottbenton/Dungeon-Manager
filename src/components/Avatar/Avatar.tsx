@@ -1,5 +1,6 @@
 import { MaterialIcon } from '../Icon';
-import { StyledAvatar, StyledFallback } from './Avatar.styles';
+import { avatarStyles } from './Avatar.styles';
+import { Root, Fallback } from '@radix-ui/react-avatar';
 
 export interface AvatarProps {
   initials?: string;
@@ -7,17 +8,16 @@ export interface AvatarProps {
 
 export function Avatar(props: AvatarProps): JSX.Element {
   const { initials } = props;
+
+  const { base, fallback, fallbackSvg } = avatarStyles();
+
   return (
-    <StyledAvatar>
+    <Root className={base()}>
       {initials || (
-        <StyledFallback delayMs={600}>
-          <MaterialIcon name={'person'} />
-        </StyledFallback>
+        <Fallback className={fallback()} delayMs={600}>
+          <MaterialIcon name={'person'} className={fallbackSvg()} />
+        </Fallback>
       )}
-    </StyledAvatar>
+    </Root>
   );
 }
-
-Avatar.defaultProps = {
-  initials: undefined,
-};

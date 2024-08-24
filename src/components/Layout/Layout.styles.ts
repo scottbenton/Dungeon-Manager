@@ -1,47 +1,38 @@
-import { styled } from '@/config/theme';
+import { tv } from 'tailwind-variants';
 
-export const Page = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
-  minHeight: '100vh',
-  backgroundColor: '$surface-background',
-  color: '$text-gray-primary',
-});
-
-export const PageContent = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  flexGrow: 1,
-  position: 'relative',
+export const pageStyles = tv({
+  slots: {
+    root: 'min-h-lvh w-full',
+    page: 'flex flex-col w-full min-h-screen bg-gray-100 dark:bg-gray-900 text-text-gray-primary',
+    pageContent: 'flex flex-col flex-grow relative',
+  },
   variants: {
     fullscreen: {
+      true: {
+        pageContent: '',
+      },
       false: {
-        maxWidth: '$screen-lg',
-        width: '100%',
-        marginX: '$auto',
-        padding: '$s-4',
+        pageContent: 'max-w-screen-lg mx-auto w-full p-4',
       },
     },
     centerContent: {
       true: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        pageContent: 'items-center justify-center',
       },
+      false: {},
     },
     direction: {
-      column: {
-        flexDirection: 'column',
-      },
       row: {
-        flexDirection: 'row',
+        pageContent: 'flex-row',
+      },
+      column: {
+        pageContent: 'flex-col',
       },
     },
   },
-
   defaultVariants: {
     fullscreen: false,
-    centerContent: true,
+    centerContent: false,
     direction: 'column',
   },
 });

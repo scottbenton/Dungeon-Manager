@@ -1,64 +1,15 @@
-import { styled } from '@/config/theme';
+import { tv } from 'tailwind-variants';
 
-export const Surface = styled('div', {
-  width: '100%',
-  backgroundColor: '$surface-foreground',
-  color: '$text-gray-primary',
-});
-
-export const Container = styled('div', {
-  maxWidth: '$screen-lg',
-  width: '100%',
-  marginX: '$auto',
-  display: 'flex',
-  alignItems: 'center',
-  paddingX: '$s-4',
-});
-
-export const LogoContainer = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  '&>img': {
-    height: '$s-10',
-    width: '$s-10',
-  },
-  '&>span': {
-    fontFamily: '$title',
-    fontSize: '$text-xl',
-    letterSpacing: '$tracking-wide',
-    color: '$text-brand-primary',
-    marginLeft: '$s-2',
-  },
-  paddingY: '$s-1',
-});
-
-export const Navigation = styled('nav', {
-  display: 'flex',
-  marginLeft: '$s-8',
-  flexGrow: 1,
-  '&>a': {
-    paddingX: '$s-3',
-    paddingY: '$s-2',
-    height: '100%',
-    display: 'flex',
-    justifyItems: 'center',
-    alignItems: 'center',
-    color: '$text-gray-tertiary',
-    transitionProperty: '$transitions$transition-color',
-    transitionDuration: '$transitions$duration-150',
-    transitionTimingFunction: '$transitions$ease-in-out',
-
-    '&:hover': {
-      color: '$text-brand-secondary',
-    },
-    '&:focus': {
-      '&>span.label': {
-        textDecoration: 'underline',
-      },
-      outline: 'none',
-    },
-    '&.active': {
-      color: '$text-brand-primary',
-    },
+export const headerStyles = tv({
+  slots: {
+    surface: 'w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white',
+    container: 'max-w-screen-lg w-full mx-auto flex items-center px-4',
+    logoContainer: 'flex items-center py-1',
+    logo: 'h-10 w-10',
+    appName:
+      'font-title font-black text-xl text-primary-700 dark:text-white ml-2',
+    navigation: 'flex flex-grow ml-8',
+    navLink:
+      'px-3 py-2 flex items-center text-gray-500 dark:text-gray-400 transition-colors duration-150 ease-in-out hover:text-primary-700 dark:hover:text-primary-200',
   },
 });

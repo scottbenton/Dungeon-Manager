@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { GoogleLoginButtonStyled } from './GoogleLoginButton.styles';
-import GoogleLogo from '../../assets/GoogleLogo.svg';
+import GoogleLogo from '../../assets/GoogleLogo.svg?react';
 import { loginWithGoogle } from '../../api/authApiCalls';
+import { Button } from '@/components/Button';
 
 export interface GoogleLoginButtonProps {
   prefixText: string;
@@ -20,9 +20,17 @@ export function GoogleLoginButton(props: GoogleLoginButtonProps) {
   };
 
   return (
-    <GoogleLoginButtonStyled onClick={() => handleClick()} disabled={loading}>
-      <GoogleLogo />
-      {prefixText} with Google
-    </GoogleLoginButtonStyled>
+    <>
+      <Button
+        variant={'secondary'}
+        size={'lg'}
+        color={'neutral'}
+        startIcon={() => <GoogleLogo />}
+        onClick={() => handleClick()}
+        disabled={loading}
+      >
+        {prefixText} with Google
+      </Button>
+    </>
   );
 }

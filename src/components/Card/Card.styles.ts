@@ -1,25 +1,19 @@
-import { styled } from '@/config/theme';
+import { tv } from 'tailwind-variants';
 
-export const Card = styled('div', {
-  backgroundColor: '$surface-foreground',
-  borderWidth: '$1',
-  borderRadius: '$xl',
-  color: '$text-gray-primary',
-  overflow: 'hidden',
-  // boxShadow: '$md',
-
+export const cardStyles = tv({
+  base: 'bg-white dark:bg-gray-800 border dark:border-gray-600 text-gray-800 overflow-hidden',
   variants: {
     padding: {
-      true: {
-        padding: '$s-4',
-      },
-      false: {
-        padding: 0,
-      },
+      true: 'p-4',
+      false: '',
+    },
+    rounded: {
+      true: 'rounded-xl',
+      false: 'rounded-none',
     },
   },
-
   defaultVariants: {
     padding: true,
+    rounded: true,
   },
 });

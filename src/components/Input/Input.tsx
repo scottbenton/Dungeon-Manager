@@ -1,6 +1,7 @@
 import { forwardRef, InputHTMLAttributes, useState } from 'react';
 import { Text } from '../Text';
-import { HelperText, InputGroup } from './Input.styles';
+import { inputStyles } from './Input.styles';
+import clsx from 'clsx';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -25,6 +26,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const [isFocused, setIsFocused] = useState<boolean>(false);
 
+    const {
+      inputGroup,
+      input,
+      helperText: helperTextStyles,
+      inputButton,
+    } = inputStyles({
+      error: !!error,
+      focused: isFocused,
+    });
+
     return (
       <div>
         <Text
@@ -32,25 +43,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           variant={'label'}
           textColor={'textSecondary'}
           htmlFor={id}
-          css={
-            hideLabel
-              ? {
-                  position: 'absolute',
-                  width: 1,
-                  height: 1,
-                  padding: 0,
-                  margin: -1,
-                  overflow: 'hidden',
-                  clip: 'rect(0, 0, 0, 0)',
-                  whiteSpace: 'nowrap',
-                  borderWidth: 0,
-                }
-              : undefined
-          }
+          className={hideLabel ? 'sr-only' : ''}
         >
           {label}
         </Text>
-        <InputGroup focused={isFocused} error={!!error}>
+        <div className={inputGroup()}>
           <input
             id={id}
             ref={ref}
@@ -62,26 +59,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               }
             }}
             {...inputProps}
+            className={clsx(input(), inputProps.className)}
           />
           {inputDecorationEnd}
-        </InputGroup>
+        </div>
         {(error || helperText) && (
-          <HelperText
+          <Text
+            className={helperTextStyles()}
             as={'span'}
             variant={'caption'}
             textColor={error ? 'errorSecondary' : undefined}
           >
             {error || helperText}
-          </HelperText>
+          </Text>
         )}
       </div>
     );
-  }
+  },
 );
-
-Input.defaultProps = {
-  helperText: undefined,
-  error: undefined,
-  inputDecorationEnd: undefined,
-  hideLabel: undefined,
-};

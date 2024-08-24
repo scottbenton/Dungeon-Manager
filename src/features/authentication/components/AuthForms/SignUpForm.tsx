@@ -8,7 +8,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { FirebaseError } from 'firebase/app';
 import { Alert } from '@/components/Alert';
-import { FormButtonContainer, StyledForm } from './Form.styles';
 import { createEmailAndPasswordUser } from '../../api/authApiCalls';
 
 YupPassword(yup); // extend yup
@@ -63,11 +62,11 @@ export function SignUpForm() {
         title: 'Validation Failed',
         message: 'Please fix the errors noted below and try again.',
       });
-    }
+    },
   );
 
   return (
-    <StyledForm onSubmit={handleFormSubmit}>
+    <form className={'space-y-4'} onSubmit={handleFormSubmit}>
       {errorMessage && (
         <Alert
           variant={'error'}
@@ -85,17 +84,17 @@ export function SignUpForm() {
         {...register('password')}
         error={errors.password?.message}
       />
-      <FormButtonContainer>
+      <div className={'flex justify-end pt-2'}>
         <Button
           variant={'primary'}
-          color={'brand'}
+          color={'primary'}
           type={'submit'}
           loading={loading}
           endIcon={'add'}
         >
           Create Account
         </Button>
-      </FormButtonContainer>
-    </StyledForm>
+      </div>
+    </form>
   );
 }

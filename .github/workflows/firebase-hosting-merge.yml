@@ -2,7 +2,7 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
-'on':
+on:
   push:
     branches:
       - main
@@ -10,19 +10,18 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     env:
-      VITE_FIREBASE_APIKEY: '${{secrets.FIREBASE_APIKEY}}'
-      VITE_FIREBASE_AUTHDOMAIN: '${{secrets.FIREBASE_AUTHDOMAIN}}'
-      VITE_FIREBASE_PROJECTID: '${{secrets.FIREBASE_PROJECTID}}'
-      VITE_FIREBASE_STORAGEBUCKET: '${{secrets.FIREBASE_STORAGEBUCKET}}'
-      VITE_FIREBASE_MESSAGINGID: '${{secrets.FIREBASE_MESSAGINGID}}'
-      VITE_FIREBASE_APPID: '${{secrets.FIREBASE_APPID}}'
-      VITE_LOGGER_KEY: '${{secrets.LOGGER_KEY}}'
+      VITE_FIREBASE_APIKEY: '${{ secrets.FIREBASE_APIKEY }}'
+      VITE_FIREBASE_AUTHDOMAIN: '${{ secrets.FIREBASE_AUTHDOMAIN }}'
+      VITE_FIREBASE_PROJECTID: '${{ secrets.FIREBASE_PROJECTID }}'
+      VITE_FIREBASE_STORAGEBUCKET: '${{ secrets.FIREBASE_STORAGEBUCKET }}'
+      VITE_FIREBASE_MESSAGINGID: '${{ secrets.FIREBASE_MESSAGINGID }}'
+      VITE_FIREBASE_APPID: '${{ secrets.FIREBASE_APPID }}'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DND_HELPER_28999 }}'
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DUNGEON_MANAGER_BBF4E }}
           channelId: live
-          projectId: dnd-helper-28999
+          projectId: dungeon-manager-bbf4e

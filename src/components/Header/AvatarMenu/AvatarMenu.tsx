@@ -5,31 +5,45 @@ import { useReduxDispatch, useReduxSelector } from '@/hooks/reduxHooks';
 import { toggleTheme } from '@/stores/settingsSlice';
 import { MaterialIcon } from '@/components/Icon';
 import { THEMES } from '@/stores/SettingsState';
-
-import { AvatarButton, MenuContent, MenuItem } from './AvatarMenu.styles';
+import {
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@radix-ui/react-dropdown-menu';
+import { avatarStyles } from './AvatarMenu.styles';
 
 export function AvatarMenu(): JSX.Element {
   const dispatch = useReduxDispatch();
   const currentTheme = useReduxSelector((store) => store.settings.theme);
 
+  const { avatar, menuContent, menuItem, menuItemIcon } = avatarStyles();
+
   return (
     <DropdownMenu>
-      <AvatarButton>
+      <DropdownMenuTrigger className={avatar()}>
         <CurrentUserAvatar />
-      </AvatarButton>
-      <MenuContent>
-        <MenuItem onSelect={() => dispatch(toggleTheme())}>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className={menuContent()}>
+        <DropdownMenuItem
+          className={menuItem()}
+          onSelect={() => dispatch(toggleTheme())}
+        >
           <MaterialIcon
+            className={menuItemIcon()}
             name={currentTheme === THEMES.LIGHT ? 'dark_mode' : 'light_mode'}
             size={'sm'}
           />
           Change Theme
-        </MenuItem>
-        <MenuItem onSelect={() => signOut()}>
-          <MaterialIcon name={'logout'} size={'sm'} />
+        </DropdownMenuItem>
+        <DropdownMenuItem className={menuItem()} onSelect={() => signOut()}>
+          <MaterialIcon
+            className={menuItemIcon()}
+            name={'logout'}
+            size={'sm'}
+          />
           Logout
-        </MenuItem>
-      </MenuContent>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
     </DropdownMenu>
   );
 }

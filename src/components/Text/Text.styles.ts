@@ -1,145 +1,49 @@
-import { styled } from '@/config/theme';
+import { tv } from 'tailwind-variants';
 
-export const Text = styled('p', {
+export const textStyles = tv({
+  base: '',
   variants: {
     variant: {
-      body: {
-        fontSize: '$text-base',
-        lineHeight: '1.5rem',
-      },
-      caption: {
-        fontSize: '$text-sm',
-        lineHeight: '1.25rem',
-      },
-      h1: {
-        fontSize: '$text-6xl',
-        lineHeight: 1,
-        fontWeight: '$black',
-      },
-      h2: {
-        fontSize: '$text-4xl',
-        lineHeight: '2.5rem',
-        fontWeight: '$bold',
-      },
-      h3: {
-        fontSize: '$text-3xl',
-        lineHeight: '2.25rem',
-      },
-      h4: {
-        fontSize: '$text-xl',
-        lineHeight: '1.75rem',
-        fontWeight: '$semibold',
-      },
-      h5: {
-        fontSize: '$text-lg',
-        lineHeight: '1.75rem',
-        fontWeight: '$semibold',
-      },
-      h6: {
-        fontSize: '$text-base',
-        lineHeight: '1.5rem',
-        borderBottomWidth: '$1',
-        display: 'block',
-      },
-      subtitle: {
-        fontSize: '$text-base',
-        lineHeight: '1.5rem',
-      },
-      overline: {
-        fontSize: '$text-sm',
-        lineHeight: '1.25rem',
-        textTransform: 'uppercase',
-        fontWeight: '$semibold',
-        letterSpacing: '$tracking-wide',
-      },
-      label: {
-        fontSize: '$text-sm',
-        lineHeight: '1.25rem',
-        fontWeight: '$medium',
-      },
-      pageTitle: {
-        fontSize: '$text-base',
-        lineHeight: '1.5rem',
-        fontWeight: '$semibold',
-        textTransform: 'uppercase',
-        letterSpacing: '$tracking-wide',
-      },
+      body: 'text-base leading-6',
+      caption: 'text-sm leading-5',
+      h1: 'text-6xl leading-none font-black',
+      h2: 'text-4xl leading-10 font-bold',
+      h3: 'text-3xl leading-9',
+      h4: 'text-2xl leading-8 font-semibold',
+      h5: 'text-xl leading-7 font-semibold',
+      h6: 'text-base leading-6 font-semibold',
+      subtitle: 'text-base leading-6',
+      overline: 'text-sm leading-5 uppercase font-semibold tracking-wide',
+      label: 'text-sm leading-5 font-medium',
+      pageTitle: 'text-base leading-6 font-semibold uppercase tracking-wide',
     },
     textColor: {
-      textPrimary: {
-        color: '$text-gray-primary',
-      },
-      textSecondary: {
-        color: '$text-gray-secondary',
-      },
-      textTertiary: {
-        color: '$text-gray-tertiary',
-      },
-      brandPrimary: {
-        color: '$text-brand-primary',
-      },
-      brandSecondary: {
-        color: '$text-brand-secondary',
-      },
-      brandTertiary: {
-        color: '$text-brand-tertiary',
-      },
-      infoPrimary: {
-        color: '$text-info-primary',
-      },
-      infoSecondary: {
-        color: '$text-info-secondary',
-      },
-      infoTertiary: {
-        color: '$text-info-tertiary',
-      },
-      successPrimary: {
-        color: '$text-success-primary',
-      },
-      successSecondary: {
-        color: '$text-success-secondary',
-      },
-      successTertiary: {
-        color: '$text-success-tertiary',
-      },
-      warningPrimary: {
-        color: '$text-warning-primary',
-      },
-      warningSecondary: {
-        color: '$text-warning-secondary',
-      },
-      warningTertiary: {
-        color: '$text-warning-tertiary',
-      },
-      errorPrimary: {
-        color: '$text-error-primary',
-      },
-      errorSecondary: {
-        color: '$text-error-secondary',
-      },
-      errorTertiary: {
-        color: '$text-error-tertiary',
-      },
-      white: {
-        color: '#fff',
-      },
-      inherit: {
-        color: 'inherit',
-      },
+      textPrimary: 'text-gray-900 dark:text-white',
+      textSecondary: 'text-gray-700 dark:text-gray-200',
+      textTertiary: 'text-gray-500 dark:text-gray-400',
+      primary: 'text-primary-900 dark:text-primary-100',
+      secondary: 'text-primary-700 dark:text-primary-200',
+      tertiary: 'text-primary-500 dark:text-primary-400',
+      infoPrimary: 'text-blue-900 dark:text-blue-100',
+      infoSecondary: 'text-blue-700 dark:text-blue-200',
+      infoTertiary: 'text-blue-500 dark:text-blue-400',
+      successPrimary: 'text-green-900 dark:text-green-100',
+      successSecondary: 'text-green-700 dark:text-green-200',
+      successTertiary: 'text-green-500 dark:text-green-400',
+      warningPrimary: 'text-amber-900 dark:text-amber-100',
+      warningSecondary: 'text-amber-700 dark:text-amber-200',
+      warningTertiary: 'text-amber-500 dark:text-amber-400',
+      errorPrimary: 'text-red-900 dark:text-red-100',
+      errorSecondary: 'text-red-700 dark:text-red-200',
+      errorTertiary: 'text-red-500 dark:text-red-400',
+      white: 'text-white',
+      inherit: 'text-inherit',
     },
     textAlign: {
-      left: {
-        textAlign: 'left',
-      },
-      center: {
-        textAlign: 'center',
-      },
-      right: {
-        textAlign: 'right',
-      },
-      justify: {
-        textAlign: 'justify',
-      },
+      left: 'text-left',
+      center: 'text-center',
+      right: 'text-right',
+      justify: 'text-justify',
     },
   },
   defaultVariants: {

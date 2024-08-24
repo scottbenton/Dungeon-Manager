@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { loginEmailAndPasswordUser } from '../../api/authApiCalls';
-import { FormButtonContainer, StyledForm } from './Form.styles';
 
 const loginSchema = yup.object({
   email: yup.string().email().required(),
@@ -60,11 +59,11 @@ export function LoginForm() {
         title: 'Validation Failed',
         message: 'Please fix the errors noted below and try again.',
       });
-    }
+    },
   );
 
   return (
-    <StyledForm onSubmit={handleFormSubmit}>
+    <form className={'space-y-4'} onSubmit={handleFormSubmit}>
       {errorMessage && (
         <Alert
           variant={'error'}
@@ -82,17 +81,17 @@ export function LoginForm() {
         {...register('password')}
         error={errors.password?.message}
       />
-      <FormButtonContainer>
+      <div className={'flex justify-end pt-2'}>
         <Button
           variant={'primary'}
-          color={'brand'}
+          color={'primary'}
           type={'submit'}
           loading={loading}
           endIcon={'account_circle'}
         >
           Login
         </Button>
-      </FormButtonContainer>
-    </StyledForm>
+      </div>
+    </form>
   );
 }

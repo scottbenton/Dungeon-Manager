@@ -1,96 +1,21 @@
-import { Card } from '@/components/Card';
-import { MaterialIcon } from '@/components/Icon';
-import { styled } from '@/config/theme';
+import { tv } from 'tailwind-variants';
 
-export const StyledImageCard = styled(Card, {
-  display: 'flex',
-  flexDirection: 'column',
-
-  transitionProperty: 'box-shadow',
-  transitionDuration: '$transitions$duration-150',
-  transitionTimingFunction: '$transitions$ease-in-out',
-
-  '&>button': {
-    display: 'flex',
-    flexDirection: 'column',
+export const imageCardStyles = tv({
+  slots: {
+    card: 'flex flex-col transition-shadow duration-150 ease-in-out',
   },
-
   variants: {
     hovering: {
-      true: {
-        boxShadow: '$md',
-      },
-      false: {
-        boxShadow: 'none',
-      },
+      true: { card: 'shadow-md' },
+      false: { card: 'shadow-none' },
     },
     selected: {
-      true: {
-        borderColor: '$border-brand',
-        boxShadow: '0px 0px 0px 4px #9747FF80',
-      },
-      false: {
-        borderColor: '$border-neutral',
-        boxShadow: 'none',
-      },
+      true: { card: 'border-primary-500 shadow-md shadow-primary-500' },
+      false: { card: 'border-gray-400 dark:border-gray-600 shadow-none' },
     },
   },
-});
-
-export const ImageContainer = styled('div', {
-  aspectRatio: '16/9',
-  height: '100%',
-  width: '100%',
-  backgroundSize: 'cover',
-});
-
-export const SelectedCheckIcon = styled(MaterialIcon, {
-  color: '#fff',
-  margin: '$s-2',
-  float: 'right',
-});
-
-export const StyledInput = styled('input', {
-  fontSize: '$text-xl',
-  fontWeight: '$light',
-  paddingX: '$s-1',
-  paddingY: '$s-2',
-  borderBottomWidth: '$1',
-  height: 45,
-  '&:focus': {
-    outline: 'none',
-    borderColor: '$border-brand',
-    borderWidth: '$1',
-  },
-  backgroundColor: '$surface-foreground',
-  color: '$text-gray-secondary',
-});
-
-export const ButtonContainer = styled('div', {
-  display: 'flex',
-  '&>button': {
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight: '$light',
-    borderRadius: 0,
-    width: '50%',
-    '&::before': {
-      borderRadius: 0,
-    },
-    '&:nth-child(1)': {
-      borderBottomLeftRadius: '$xl',
-      borderRightWidth: '$1',
-    },
-    '&:nth-child(2)': {
-      borderBottomRightRadius: '$xl',
-    },
+  defaultVariants: {
+    selected: false,
+    hovering: false,
   },
 });
-
-// export const ActionButton = styled(Button, {
-//   borderRadius: 0,
-//   width: '50%',
-//   '&::before': {
-//     borderRadius: 0,
-//   },
-// });

@@ -1,12 +1,8 @@
-import { PageContent } from '../Layout/Layout.styles';
-import {
-  ErrorPageMessage,
-  ErrorPageTitle,
-  ErrorPageContainer,
-  CallToAction,
-} from './ErrorPage.styles';
-import { ButtonProps } from '../Button';
+import { pageStyles } from '../Layout/Layout.styles';
+import { errorPageStyles } from './ErrorPage.styles';
+import { Button, ButtonProps } from '../Button';
 import { MaterialIcon } from '../Icon';
+import clsx from 'clsx';
 
 export interface ErrorPageProps {
   title: string;
@@ -18,21 +14,33 @@ export interface ErrorPageProps {
 export function ErrorPage(props: ErrorPageProps): JSX.Element {
   const { title, message, buttonProps, fullscreen } = props;
 
+  const {
+    container,
+    title: titleClass,
+    message: messageClass,
+    callToAction,
+    icon,
+  } = errorPageStyles();
   return (
-    <PageContent centerContent fullscreen={fullscreen}>
-      <ErrorPageContainer>
-        <ErrorPageTitle>
-          <MaterialIcon name={'error'} size={'xl'} />
+    <div
+      className={pageStyles({
+        centerContent: true,
+        fullscreen: true,
+      }).pageContent()}
+    >
+      <div className={container()}>
+        <div className={titleClass()}>
+          <MaterialIcon name={'error'} size={'xl'} className={icon()} />
           {title}
-        </ErrorPageTitle>
-        <ErrorPageMessage>{message}</ErrorPageMessage>
-        <CallToAction {...buttonProps} />
-      </ErrorPageContainer>
-    </PageContent>
+        </div>
+        <p className={messageClass()}>{message}</p>
+        {buttonProps && (
+          <Button
+            {...buttonProps}
+            className={clsx(buttonProps?.className, callToAction())}
+          />
+        )}
+      </div>
+    </div>
   );
 }
-
-ErrorPage.defaultProps = {
-  buttonProps: undefined,
-  fullscreen: false,
-};

@@ -3,11 +3,6 @@ import { useReduxDispatch, useReduxSelector } from '@/hooks/reduxHooks';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { createImageViewerListenerThunk } from '../stores/imageSlice';
-import {
-  ImageLabelContainer,
-  ImageViewer,
-  ImageViewerContainer,
-} from './ImageViewerPage.styles';
 
 export default function ImageViewerPage() {
   const { uid } = useParams<{ uid: string }>();
@@ -31,15 +26,25 @@ export default function ImageViewerPage() {
   }, [uid, dispatch]);
 
   return (
-    <ImageViewerContainer>
-      <ImageViewer
-        css={item?.url ? { backgroundImage: `url(${item.url})` } : undefined}
+    <div
+      className={'bg-gray-950 flex-grow flex items-stretch justify-center p-4'}
+    >
+      <div
+        className={'flex-grow bg-cover bg-center bg-no-repeat rounded-xl'}
+        style={item?.url ? { backgroundImage: `url(${item.url})` } : undefined}
       />
-      <ImageLabelContainer>
-        <Text variant={'h4'} as={'h1'} textColor={'white'}>
+      <div
+        className={'absolute bottom-6 mx-auto bg-gray-950 rounded-xl px-6 py-4'}
+      >
+        <Text
+          variant={'h4'}
+          as={'h1'}
+          textColor={'white'}
+          className={'font-title font-black tracking-wide text-4xl'}
+        >
           {item ? item.label : 'Waiting for the user to select an image...'}
         </Text>
-      </ImageLabelContainer>
-    </ImageViewerContainer>
+      </div>
+    </div>
   );
 }

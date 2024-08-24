@@ -1,9 +1,9 @@
-import { CSS, VariantProps } from '@stitches/react';
 import clsx from 'clsx';
-import { StyledMaterialIcon } from './Icon.styles';
+import { iconStyles } from './Icon.styles';
 import { MATERIAL_ICON_VARIANTS } from './MaterialIcon.types';
+import { VariantProps } from 'tailwind-variants';
 
-export type IconSizes = VariantProps<typeof StyledMaterialIcon>['size'];
+export type IconSizes = VariantProps<typeof iconStyles>['size'];
 
 export interface MaterialIconProps {
   name: string;
@@ -11,7 +11,6 @@ export interface MaterialIconProps {
   filled?: boolean;
   size?: IconSizes;
   className?: string;
-  css?: CSS;
 }
 
 const classNames: { [key in MATERIAL_ICON_VARIANTS]: string } = {
@@ -21,28 +20,16 @@ const classNames: { [key in MATERIAL_ICON_VARIANTS]: string } = {
 };
 
 export function MaterialIcon(props: MaterialIconProps): JSX.Element {
-  const { name, variant, filled, size, className, css } = props;
-  console.debug(variant);
+  const { name, variant, filled, size, className } = props;
   return (
-    <StyledMaterialIcon
-      filled={filled}
-      size={size}
+    <span
       className={clsx(
-        'mui-icon',
+        iconStyles({ filled, size }),
         classNames[variant ?? MATERIAL_ICON_VARIANTS.ROUNDED],
-        className
+        className,
       )}
-      css={css}
     >
       {name}
-    </StyledMaterialIcon>
+    </span>
   );
 }
-
-MaterialIcon.defaultProps = {
-  variant: MATERIAL_ICON_VARIANTS.ROUNDED,
-  filled: true,
-  size: 'md',
-  className: undefined,
-  css: undefined,
-};

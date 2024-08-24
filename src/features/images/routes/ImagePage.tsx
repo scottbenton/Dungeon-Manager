@@ -10,7 +10,6 @@ import { constructImageViewerPath } from '@/config/routes';
 import { Link } from 'react-router-dom';
 import { createImageItem } from '../api/createImageItem';
 import { ImageList } from '../components/ImageList';
-import { ViewerLinkContainer } from './ImagePage.styles';
 
 export default function ImagePage() {
   const uid = useReduxSelector((state) => state.auth.user?.id);
@@ -21,7 +20,7 @@ export default function ImagePage() {
       imageOrder: state.images.imageOrderArray || [],
       isLoading: state.images.isLoading,
       selectedImageId: state.images.currentSelectedImageId,
-    })
+    }),
   );
 
   useEffect(() => {
@@ -53,28 +52,34 @@ export default function ImagePage() {
       <Text variant={'pageTitle'} as={'h1'}>
         Image Sharing
       </Text>
-      <Text as={'p'} textColor={'textSecondary'} css={{ marginY: '$s-4' }}>
+      <Text as={'p'} textColor={'textSecondary'} className={'my-4'}>
         Upload images here to share them with your group. Click an image to set
         it as active. <br />
         Best used with an extra screen to share character art & scenery with
         your players.
       </Text>
-      <ViewerLinkContainer>
-        <Link to={constructImageViewerPath(uid || '')} target={'_blank'}>
+      <div className={'flex'}>
+        <Link
+          className={
+            'flex items-center text-primary-700 dark:text-primary-200 hover:underline'
+          }
+          to={constructImageViewerPath(uid || '')}
+          target={'_blank'}
+        >
           Go to Viewer
           <MaterialIcon
             name={'open_in_new'}
             size={'sm'}
-            css={{ marginLeft: '$s-1' }}
+            className={'ml-2 w-5 text-primary-500 dark:text-primary-400'}
           />
         </Link>
-      </ViewerLinkContainer>
+      </div>
       <FileDropzone
         label={'Add Character or Scene Art'}
         getRootProps={getRootProps}
         getInputProps={getInputProps}
         isDragActive={isDragActive}
-        css={{ marginTop: '$s-8' }}
+        className={'mt-8'}
       />
       {isLoading ? (
         <></>

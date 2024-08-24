@@ -1,29 +1,10 @@
-import { darkTheme, styled } from '@/config/theme';
+import { tv } from 'tailwind-variants';
 
-export const EmptyStateContainer = styled('div', {
-  paddingX: '$s-2',
-  paddingY: '$s-4',
-  position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  height: '$s-72',
-  marginY: '$s-8',
-
-  '&>:not(span.mui-icon)': {
-    position: 'relative',
-    zIndex: '$10',
-  },
-  '&>span.mui-icon': {
-    position: 'absolute',
-    color: '$brand-100',
-    [`.${darkTheme} &`]: {
-      color: '$brand-900',
-      opacity: 0.5,
-    },
-  },
-  '&>button, &>a': {
-    marginTop: '$s-4',
+export const emptyStateClasses = tv({
+  slots: {
+    container: 'relative px-2 py-4 flex items-center justify-center h-72 my-8',
+    icon: 'absolute text-primary-100 dark:text-primary-900/50',
+    contents: 'flex items-center justify-center flex-col relative z-10',
+    actions: 'mt-4',
   },
 });

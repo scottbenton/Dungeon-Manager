@@ -1,35 +1,13 @@
-import { styled } from '@/config/theme';
-import { Button } from '../Button';
+import { tv } from 'tailwind-variants';
 
-export const ErrorPageContainer = styled('div', {
-  maxWidth: '$md',
-  width: '100%',
-  paddingX: '$s-4',
-  display: 'flex',
-  alignItems: 'center',
-  textAlign: 'center',
-  flexDirection: 'column',
-});
-
-export const ErrorPageTitle = styled('h1', {
-  '&>span.mui-icon': {
-    marginRight: '$s-4',
-    color: '$text-brand-tertiary',
+export const errorPageStyles = tv({
+  slots: {
+    container:
+      'max-w-md w-full px-4 flex items-center justify-center flex-col text-center',
+    title:
+      'flex items-center justify-center text-primary-900 dark:text-primary-100 font-black text-6xl whitespace-nowrap',
+    icon: 'mr-4 text-primary-500',
+    message: 'text-gray-700 dark:text-gray-200 mt-4',
+    callToAction: 'mt-6',
   },
-  display: 'flex',
-  alignItems: 'center',
-  color: '$text-brand-primary',
-  fontWeight: '$black',
-  fontSize: '$text-6xl',
-  whiteSpace: 'nowrap',
-  flexWrap: 'wrap',
-});
-
-export const ErrorPageMessage = styled('p', {
-  color: '$text-gray-secondary',
-  marginTop: '$s-4',
-});
-
-export const CallToAction = styled(Button, {
-  marginTop: '$s-6',
 });

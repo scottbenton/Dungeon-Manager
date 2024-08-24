@@ -1,44 +1,59 @@
 import DungeonManagerIcon from '@/assets/DungeonManagerIcon.svg';
 import { NavLink } from 'react-router-dom';
 
-import { Container, LogoContainer, Navigation, Surface } from './Header.styles';
+import { headerStyles } from './Header.styles';
 import { AvatarMenu } from './AvatarMenu';
 import { MaterialIcon } from '../Icon';
+import clsx from 'clsx';
 
 export function Header(): JSX.Element {
+  const {
+    surface,
+    container,
+    logoContainer,
+    logo,
+    appName,
+    navigation,
+    navLink,
+  } = headerStyles();
+
   return (
-    <Surface>
-      <Container>
-        <LogoContainer>
-          <img src={DungeonManagerIcon} alt={'Dungeon Manager Logo'} />
-          <span>Dungeon Manager</span>
-        </LogoContainer>
-        <Navigation>
+    <header className={surface()}>
+      <div className={container()}>
+        <div className={logoContainer()}>
+          <img
+            className={logo()}
+            src={DungeonManagerIcon}
+            alt={'Dungeon Manager Logo'}
+          />
+          <span className={appName()}>Dungeon Manager</span>
+        </div>
+        <nav className={navigation()}>
           <NavLink
             to={'/images'}
-            className={({ isActive }) => (isActive ? 'active' : undefined)}
+            className={({ isActive }) =>
+              isActive ? clsx('active', navLink()) : navLink()
+            }
           >
-            <MaterialIcon
-              name={'image'}
-              filled={false}
-              css={{ marginRight: '$s-2' }}
-            />
+            <MaterialIcon name={'image'} filled={false} className={'mr-2'} />
             <span className={'label'}>Images</span>
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to={'/music'}
-            className={({ isActive }) => (isActive ? 'active' : undefined)}
+            className={({ isActive }) =>
+              isActive ? clsx('active', navLink()) : navLink()
+            }
           >
             <MaterialIcon
               name={'music_note'}
               filled={false}
-              css={{ marginRight: '$s-2' }}
+              className={'mr-2'}
             />
             <span className={'label'}>Music</span>
-          </NavLink>
-        </Navigation>
+          </NavLink> */}
+        </nav>
         <AvatarMenu />
-      </Container>
-    </Surface>
+      </div>
+    </header>
   );
 }
