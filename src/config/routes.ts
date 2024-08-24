@@ -1,7 +1,6 @@
 export enum ROUTES {
   IMAGES = 'images',
   IMAGE_VIEWER = 'imageViewer',
-  // MUSIC = 'music',
   LOGIN = 'login',
   SIGN_UP = 'signUp',
   // SPOTIFY_CALLBACK = 'spotifyCallback',
