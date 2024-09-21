@@ -73,7 +73,11 @@ export default function CampaignPageLayout() {
               className={'underline cursor-pointer'}
               to={paths.campaignList}
             >
-              <Text as='span' textColor='textPrimary'>
+              <Text
+                as='span'
+                textColor='textPrimary'
+                className={'hover:underline'}
+              >
                 Campaigns
               </Text>
             </Link>

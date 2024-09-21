@@ -84,7 +84,7 @@ export function Sidebar(props: SidebarProps) {
       <Link
         to={paths.campaignSecondScreen(campaignId)}
         target='_blank'
-        className='mt-1 hover:underline'
+        className='mt-1 hover:underline text-gray-700 dark:text-gray-200'
       >
         Open Secondary Screen Link
       </Link>

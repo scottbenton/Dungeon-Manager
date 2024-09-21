@@ -74,14 +74,14 @@ export function CampaignItemSelectPage(props: CampaignItemPageProps) {
 
   return (
     <div>
-      <div className={'flex items-center justify-between mt-4'}>
-        <label className='rounded-xl bg-gray-100 text-gray-700 border overflow-hidden focus-within:border-primary-500'>
+      <div className={'flex items-center justify-end mt-4'}>
+        {/* <label className='rounded-xl bg-gray-100 text-gray-700 border overflow-hidden focus-within:border-primary-500'>
           <span className={'sr-only'}>Search {labels[itemType].plural}</span>
           <input
             placeholder={`Search ${labels[itemType].plural}`}
             className='bg-transparent px-4 py-2 focus:outline-none'
           />
-        </label>
+        </label> */}
         <Button
           color='primary'
           variant='primary'
