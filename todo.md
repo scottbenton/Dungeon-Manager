@@ -22,6 +22,8 @@
 
 # Future
 
+[] Add search to types
+[] Allow for field configuration
 [] Get spotify playback working & push
 [] Spotify Device List
 [] Lights

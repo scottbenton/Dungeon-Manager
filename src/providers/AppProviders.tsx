@@ -1,14 +1,14 @@
-import { PropsWithChildren } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from '@/stores/store';
+import { routes } from '@/routes';
 
-export function AppProviders(props: PropsWithChildren) {
-  const { children } = props;
+const router = createBrowserRouter(routes);
 
+export function AppProviders() {
   return (
     <ReduxProvider store={store}>
-      <BrowserRouter>{children}</BrowserRouter>
+      <RouterProvider router={router} />
     </ReduxProvider>
   );
 }

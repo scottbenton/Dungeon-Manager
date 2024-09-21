@@ -93,6 +93,7 @@ export const Button = forwardRef<
           onClick(evt);
         }
       }}
+      type={type}
       disabled={disabled || loading}
       className={clsx(base(), className)}
       ref={ref as MutableRefObject<HTMLButtonElement>}

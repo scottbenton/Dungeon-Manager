@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 export const pageStyles = tv({
   slots: {
     root: 'min-h-lvh w-full',
-    page: 'flex flex-col w-full min-h-screen bg-gray-100 dark:bg-gray-900 text-text-gray-primary',
+    page: 'flex flex-col w-full min-h-screen bg-white dark:bg-gray-800 text-text-gray-primary',
     pageContent: 'flex flex-col flex-grow relative',
   },
   variants: {

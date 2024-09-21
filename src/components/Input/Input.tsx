@@ -21,6 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       onBlur,
       id,
       hideLabel,
+      className,
       ...inputProps
     } = props;
 
@@ -30,14 +31,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       inputGroup,
       input,
       helperText: helperTextStyles,
-      inputButton,
     } = inputStyles({
       error: !!error,
       focused: isFocused,
     });
 
     return (
-      <div>
+      <div className={className}>
         <Text
           as={'label'}
           variant={'label'}
@@ -59,7 +59,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               }
             }}
             {...inputProps}
-            className={clsx(input(), inputProps.className)}
+            className={input()}
           />
           {inputDecorationEnd}
         </div>
