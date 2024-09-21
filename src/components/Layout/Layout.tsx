@@ -7,6 +7,7 @@ import { pageStyles } from './Layout.styles';
 import { ErrorBoundary } from '../ErrorBoundary';
 import clsx from 'clsx';
 import { VariantProps } from 'tailwind-variants';
+import { Outlet } from 'react-router-dom';
 
 export type LayoutProps = VariantProps<typeof pageStyles> & PropsWithChildren;
 
@@ -22,7 +23,9 @@ export function Layout(props: LayoutProps): JSX.Element {
       <div className={page()}>
         <ErrorBoundary>
           {!fullscreen && <Header />}
-          <div className={pageContent()}>{children}</div>
+          <div className={pageContent()}>
+            <Outlet />
+          </div>
         </ErrorBoundary>
       </div>
     </div>

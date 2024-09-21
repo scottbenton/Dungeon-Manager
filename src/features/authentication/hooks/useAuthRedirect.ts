@@ -1,5 +1,5 @@
-import { routePaths, ROUTES } from '@/config/routes';
 import { useReduxSelector } from '@/hooks/reduxHooks';
+import { paths } from '@/routes';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ export function useAuthRedirect() {
 
   useEffect(() => {
     if (user) {
-      navigate(routePaths[ROUTES.IMAGES]);
+      navigate(paths.campaignList);
     }
   }, [user, navigate]);
 }

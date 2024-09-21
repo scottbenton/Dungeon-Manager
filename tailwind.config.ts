@@ -8,7 +8,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: colors.emerald,
+        primary: colors.indigo,
       },
       fontFamily: {
         body: ['Inter Variable', ...fontFamily.sans],

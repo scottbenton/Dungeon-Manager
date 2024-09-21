@@ -1,6 +1,32 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+  	match /campaigns/{campaignId} {
+    	allow read: if true;
+      allow write: if request.auth.uid in resource.data.users
+      allow create: if request.auth != null;
+
+      function checkIsGM() {
+      	let campaign = get(/databases/$(database)/documents/campaigns/$(campaignId)).data;
+        return campaign.userRoles[request.auth.uid] == 'gm';
+      }
+      match /npcs/{npcId} {
+        allow read: if true;
+        allow write: if checkIsGM();
+      }
+      match /locations/{locationId} {
+        allow read: if true;
+        allow write: if checkIsGM();
+      }
+      match /lore/{loreId} {
+        allow read: if true;
+        allow write: if checkIsGM();
+      }
+      match /settings/settings {
+        allow read: if true;
+        allow write: if checkIsGM();
+      } 
+    }
   	match /images/{userId} {
     	allow read: if true;
     	allow write: if request.auth.uid == userId;
